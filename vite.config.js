@@ -20,9 +20,9 @@ export default defineConfig({
       includeAssets: ["/public/*"],
       prefer_related_applications: false,
       manifest: {
-        name: "Qwbw",
-        short_name: "qwbw",
-        description: "I am a simple pwa vite app",
+        name: "TaleTalk",
+        short_name: "taletalk",
+        description: "Learn to speak another language through stories",
         scope: "/",
         start_url: "/",
         background_color: "#2f4f4f",
