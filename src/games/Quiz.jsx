@@ -109,7 +109,10 @@ export const Quiz = ({ quiz, shuffleQuestions = false, timer = 0 }) => {
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [quizStatements, setQuizStatements] = useState(quiz.statements);
     const [textInput, setTextInput] = useState('');
-    const  { transcript, isListening, startListening, stopListening } = useSpeechToText({continuous: true})
+    const  { transcript, isListening, startListening, stopListening } = useSpeechToText({
+        // lang: 'en-US',
+        continuous: true
+    })
 
     const startStopListening = () => {
         isListening ? stopVoiceInput() : startListening();
