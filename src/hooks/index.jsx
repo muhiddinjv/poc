@@ -13,9 +13,9 @@ export const useSpeechToText = (options) => {
 
     recognitionRef.current = new window.webkitSpeechRecognition();
     const recognition = recognitionRef.current;
-    recognition.interimResults = options.interimResults || false;
-    recognition.lang = options.lang || 'en-US';
-    recognition.continuous = options.continuous || false;
+    recognition.interimResults = options?.interimResults || true;
+    recognition.lang = options?.lang || 'en-US';
+    recognition.continuous = options?.continuous || false;
 
     if("webkitGrammarList" in window) {
       const grammar = "#JSGF V1.0; grammar punctuation; public <punc > = . | , | ? | ! | ; | : ;";
