@@ -39,7 +39,7 @@ export const useSpeechRecognition = () => {
   return { transcript, isListening, startListening, stopListening, hasRecognitionSupport: !!recognition };
 };
 
-const useSpeechToText = (options) => {
+export const useSpeechToText = (options) => {
   const [isListening, setIsListening] = React.useState(false);
   const [transcript, setTranscript] = React.useState('');
   const recognitionRef = useRef(null);

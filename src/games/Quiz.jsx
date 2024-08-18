@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { useSpeechToText } from "../hooks";
 
 // Utility function to shuffle an array
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
@@ -107,6 +108,17 @@ export const Quiz = ({ quiz, shuffleQuestions = false, timer = 0 }) => {
     const [timeLeft, setTimeLeft] = useState(timer);
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [quizStatements, setQuizStatements] = useState(quiz.statements);
+    const [textInput, setTextInput] = useState('');
+    const  { transcript, isListening, startListening, stopListening } = useSpeechToText({continuous: true})
+
+    const startStopListening = () => {
+        isListening ? stopVoiceInput() : startListening();
+    }
+
+    const stopVoiceInput = () => {
+        setTextInput(prevValue => prevValue + (transcript.length ? (prevValue.length ? ' ' : '') + transcript : ''));
+        stopListening();
+    }
 
     // Calculate the total possible points
     const maxPoints = quiz.statements.reduce(
@@ -225,19 +237,26 @@ export const Quiz = ({ quiz, shuffleQuestions = false, timer = 0 }) => {
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-            <div className="h-screen bg-white shadow-lg max-w-lg w-full py-4 text-center">
+            <div className="min-h-screen bg-white shadow-lg max-w-lg w-full py-4 text-center">
             <h1 className="text-xl font-bold my-6">{quiz.quizTitle}</h1>
                 {timer > 0 && <Timer timeLeft={timeLeft} />}
                 <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
                 <h2 className="text-lg mb-2">
-                        Statement {currentStatementIndex + 1}/{quizStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
-                    </h2>
+                    Statement {currentStatementIndex + 1}/{quizStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
+                </h2>
                 <h2 className="text-lg font-semibold mb-4">{currentStatement.statement}</h2>
                 <div className="flex justify-center items-center py-4 bg-gray-50">
                 {currentStatement.image && (
                     <img src={currentStatement.image} alt="statement visual" className="w-72 h-72" />
                 )}
                 </div>
+                <div className="flex space-x-2 justify-center">
+                    <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Speak'}</button>
+                </div>
+                <textarea value={isListening ? textInput + (transcript.length ? (textInput.length ? '' : '') + transcript : '') : textInput} 
+                onChange={e => setTextInput(e.target.value)} className="w-3/4 h-24 border border-gray-300 rounded mt-4 p-2 m-2" placeholder="Enter your answer here"
+                disabled={isListening}
+                />
                 <Question
                     questionObj={currentQuestion}
                     handleAnswerClick={handleAnswerClick}
