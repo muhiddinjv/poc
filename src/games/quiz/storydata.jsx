@@ -1,4 +1,4 @@
-export const questions = {
+export const storydata = {
     quizTitle: "The Headless Horseman's Problem",
     quizSynopsis: "",
     statements: [
@@ -11,7 +11,7 @@ export const questions = {
             translation: "Bormi bir chavandoz?",
             answer: "yes",
             messageForCorrectAnswer: "Correct! There is a horseman",
-            messageForIncorrectAnswer: "There is a horseman",
+            messageForIncorrectAnswer: "Incorrect! There is a horseman",
             explanation: "Is there 'Bormi' degan manoni anglatadi",
             point: "20",
           },
@@ -20,7 +20,7 @@ export const questions = {
             translation: "Bormi bir chavandoz yoki bir student?",
             answer: "horseman",
             messageForCorrectAnswer: "Correct! There is a horseman.",
-            messageForIncorrectAnswer: "Incorrect!. There is not a student. There is a horseman.",
+            messageForIncorrectAnswer: "Incorrect! There is a horseman.",
             explanation: "There is a student 'bor bir student' degan manoni anglatadi",
             point: "20",
           },
