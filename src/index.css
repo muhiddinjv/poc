@@ -2,28 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-  }
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
 
-  .perspective {
-    perspective: 1000px;
-  }
-  
-  .transform-style-preserve-3d {
-    transform-style: preserve-3d;
-  }
-  
-  .rotateY-180 {
-    transform: rotateY(180deg);
-  }
-  
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-  
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotateY-180 {
+  transform: rotateY(180deg);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}

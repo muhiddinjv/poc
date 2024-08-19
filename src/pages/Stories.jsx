@@ -7,7 +7,7 @@ const stories = [
   // Add more stories here
 ];
 
-const StoriesPage = () => {
+const Stories = () => {
   const navigate = useNavigate();
 
   return (
@@ -32,4 +32,4 @@ const StoriesPage = () => {
   );
 };
 
-export default StoriesPage;
+export default Stories;
