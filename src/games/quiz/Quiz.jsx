@@ -105,8 +105,8 @@ export const Quiz = ({ shuffleQuestions = false }) => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
       <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
-        <div className="space-x-2 bg-gray-200 py-2">
-            <button onClick={() => navigate("/")} className="py-1 px-2 bg-gray-200 rounded">Home</button>
+        <div className="space-x-1 bg-gray-200 py-2">
+            <button onClick={() => navigate("/")} className="py-1 px-2 bg-gray-200 rounded font-bold">{'<'}</button>
             <button className="py-1 px-2 bg-gray-500 rounded text-white">Quiz</button>
             <button className="py-1 px-2 bg-gray-200 rounded">Gapfil</button>
             <button className="py-1 px-2 bg-gray-200 rounded">Number</button>
