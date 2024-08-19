@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Stories from "./pages/Stories";
 import NoPage from "./pages/NoPage";
 import Words from "./words/Main";
-import { Quiz } from "./games/quiz/Quiz";
+import Quiz from "./games/quiz/Quiz";
 import Story from "./pages/Story";
 
 function App() {
