@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
-export const Quiz = ({ shuffleQuestions = false }) => {
+const Quiz = ({ shuffleQuestions = false }) => {
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState({ correct: 0 });
@@ -146,3 +146,4 @@ export const Quiz = ({ shuffleQuestions = false }) => {
     </div>
   );
 };
+export default Quiz;

@@ -11,24 +11,24 @@ const Stories = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      <div className="space-y-4 h-screen bg-white shadow-lg max-w-lg w-full py-4">
-      <h1 className="px-4 text-center text-2xl font-bold mb-4">STORIES</h1>
-        {stories.map(story => (
-          <div key={story.id} className="flex items-center space-x-4 bg-gray-100 p-4">
-            <img src={story.img} alt={story.title} className="w-16 h-16 rounded"/>
-            <div className="flex-1">
-              <h2 className="text-xl font-semibold">{story.id} {story.title}</h2>
-              <div className="space-x-2 mt-2">
-                <button onClick={() => navigate(`/words/${story.id}`)} className="bg-blue-500 text-white px-3 py-1 rounded">Words</button>
-                <button onClick={() => navigate(`/games/${story.id}`)} className="bg-green-500 text-white px-3 py-1 rounded">Games</button>
-                <button onClick={() => alert('Story page not implemented yet')} className="bg-yellow-500 text-white px-3 py-1 rounded">Story</button>
-              </div>
-            </div>
+<div className="min-h-screen bg-gradient-to-r from-blue-50 to-gray-100 flex flex-col items-center p-4">
+  <h1 className="bg-white text-3xl font-bold text-gray-800 mb-8 p-4 rounded-lg">STORIES</h1>
+  <div className="w-full max-w-md">
+    {stories.map((story, index) => (
+      <div key={index} className="bg-white rounded-lg shadow-lg mb-6 p-4 flex items-center space-x-4">
+        <img src={story.img} alt={story.title} className="w-24 h-24 rounded-md object-cover" />
+        <div>
+          <h2 className="text-xl font-semibold text-gray-700">{index + 1} {story.title}</h2>
+          <div className="flex space-x-2 mt-2">
+            <button onClick={() => navigate(`/words/${story.id}`)} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">Words</button>
+            <button onClick={() => navigate(`/games/${story.id}`)} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">Games</button>
+            <button onClick={() => navigate(`/story/${story.id}`)} className="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-yellow-600">Story</button>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 };
 
