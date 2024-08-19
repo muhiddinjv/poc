@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const useSpeechToText = (options) => {
   const [isListening, setIsListening] = React.useState(false);
@@ -37,14 +37,20 @@ export const useSpeechToText = (options) => {
     };
 
     recognition.onend = () => {
+      console.log('Recognition ended.');
       setIsListening(false);
       setTranscript('');
+
+      if (options?.continuous && isListening) {
+        recognition.start();  // Restart recognition if it ended unexpectedly
+        setIsListening(true);
+      }
     };
 
     return () => {
       recognition.stop()
     }
-  }, []);
+  }, [options?.continuous]);
 
   const startListening = () => {
     if(recognitionRef.current && !isListening) {
@@ -62,3 +68,88 @@ export const useSpeechToText = (options) => {
 
   return { transcript, isListening, startListening, stopListening };
 }
+
+export const useSpeechRecognition = () => {
+  const [transcript, setTranscript] = React.useState('');
+  const [isListening, setIsListening] = React.useState(false);
+  let recognition = null;
+  console.log({transcript, isListening})
+
+  if ("webkitSpeechRecognition" in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true; 
+    recognition.lang = 'en-US';
+  }
+
+  useEffect(() => {
+    if(!recognition) return;
+
+    recognition.onresult = (event) => {
+      console.log('onresult even: ', event)
+      setTranscript(event.results[0][0].transcript);
+      recognition.stop();
+      setIsListening(false);
+    };
+  }, []);
+
+  const startListening = () => {
+      setTranscript('');
+      setIsListening(true);
+      recognition.start();
+  };
+
+  const stopListening = () => {
+      setIsListening(false);
+      recognition.stop();
+  };
+
+  return { transcript, isListening, startListening, stopListening, hasRecognitionSupport: !!recognition };
+};
+
+export const useSpeechToTexts = () => {
+  const [spokenTexts, setSpokenTexts] = useState([]);
+  const [transcript, setTranscript] = useState('');
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null); // useRef to hold the recognition instance
+
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognitionRef.current = new SpeechRecognition(); // Initialize the recognition instance
+    recognitionRef.current.continuous = false;
+    recognitionRef.current.lang = 'en-US';
+    recognitionRef.current.interimResults = false;
+    recognitionRef.current.maxAlternatives = 1;
+
+    const handleResult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setTranscript(transcript);
+      setSpokenTexts((prevTexts) => [...prevTexts, transcript]);
+    };
+
+    const handleError = (event) => {
+      console.error('Recognition error:', event.error);
+    };
+
+    recognitionRef.current.onresult = handleResult;
+    recognitionRef.current.onerror = handleError;
+    recognitionRef.current.onend = () => setIsListening(false); // Update the state when recognition ends
+
+    return () => {
+      recognitionRef.current.stop(); // Cleanup: Stop recognition when the component unmounts
+    };
+  }, []);
+
+  const startListening = () => {
+    setIsListening(true);
+    recognitionRef.current?.start(); // Safe check before starting recognition
+  };
+
+  const stopListening = () => {
+    setIsListening(false);
+    recognitionRef.current?.stop(); // Safe check before stopping recognition
+  };
+
+  return { spokenTexts, transcript, isListening, startListening, stopListening };
+};
