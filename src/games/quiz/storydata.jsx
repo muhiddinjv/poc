@@ -1,9 +1,11 @@
+import horseMan from '../../assets/img/headless_horseman.jpg';
+
 export const storydata = {
     quizTitle: "The Headless Horseman's Problem",
     quizSynopsis: "",
     statements: [
       {
-        image: "/src/assets/img/headless_horseman.jpg",
+        image: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
         statement: "There is a headless horseman",
         questions: [
           {
