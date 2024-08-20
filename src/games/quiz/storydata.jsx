@@ -7,6 +7,7 @@ export const storydata = {
       {
         image: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
         statement: "There is a headless horseman",
+        statement_audio: '/aud/001_001.mp3',
         questions: [
           {
             question: "Is there a horseman?",

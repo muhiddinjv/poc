@@ -83,6 +83,12 @@ const Quiz = ({ shuffleQuestions = false }) => {
     setQuizStatements(storydata.statements);
   };
 
+  const playStatementAudio = () => {
+    const audio = new Audio(quizStatements[currentStatementIndex].statement_audio);
+    // audio.playbackRate = 0.80;
+    audio.play();
+  };
+
   if (quizCompleted) {
     return (
       <QuizResults
@@ -113,11 +119,11 @@ const Quiz = ({ shuffleQuestions = false }) => {
         <div className="flex flex-col items-center py-2 bg-gray-50">
           <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
           {currentStatement.image && (
-            <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72" />
+            <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72 rounded" />
           )}
           <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
           <div className="flex space-x-2 justify-center mt-1 mb-2">
-            <button onClick={()=>{alert('listening')}} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Listen'}</button>
+            <button onClick={playStatementAudio} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Listen'}</button>
             <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Answer'}</button>
           </div>
         </div>

@@ -17,7 +17,7 @@ const Stories = () => {
         <img src={story.img} alt={story.title} className="w-24 h-24 rounded-md object-cover" />
         <div>
           <h2 className="text-xl font-semibold text-gray-700">{index + 1} {story.title}</h2>
-          <div className="flex space-x-2 mt-2">
+          <div className="flex space-x-2 mt-2 ">
             <Link to={`/words/${story.id}`} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">Words</Link>
             <Link to={`/games/${story.id}`} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">Games</Link>
             <Link to={`/story/${story.id}`} className="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-yellow-600">Story</Link>
