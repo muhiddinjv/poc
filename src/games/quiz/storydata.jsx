@@ -3,7 +3,7 @@ export const storydata = {
     quizSynopsis: "",
     statements: [
       {
-        image: "https://picsum.photos/500",
+        image: "/src/assets/img/headless_horseman.jpg",
         statement: "There is a headless horseman",
         questions: [
           {

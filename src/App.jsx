@@ -10,9 +10,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Stories />} />
-        <Route path="/words/:id" element={<Words />} />
-        <Route path="/games/:id" element={<Quiz />} />
-        <Route path="/story/:id" element={<Story />} />
+        <Route path="/words/1" element={<Words />} />
+        <Route path="/games/1" element={<Quiz />} />
+        <Route path="/story/1" element={<Story />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
