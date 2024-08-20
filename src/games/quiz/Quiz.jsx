@@ -5,6 +5,7 @@ import ProgressBar from "./ProgressBar";
 import QuizResults from "./QuizResults";
 import { storydata } from "./storydata";
 import { useNavigate } from "react-router-dom";
+import TopBar from "../../components/TopBar";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
@@ -105,14 +106,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
       <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
-        <div className="space-x-1 bg-gray-200 py-2">
-            <button onClick={() => navigate("/")} className="py-1 px-2 bg-gray-200 rounded font-bold">{'<'}</button>
-            <button className="py-1 px-2 bg-gray-500 rounded text-white">Quiz</button>
-            <button className="py-1 px-2 bg-gray-200 rounded">Gapfil</button>
-            <button className="py-1 px-2 bg-gray-200 rounded">Number</button>
-            <button className="py-1 px-2 bg-gray-200 rounded">Reorder</button>
-            <button className="py-1 px-2 bg-gray-200 rounded">Retell</button>
-        </div>
+        <TopBar />
         <h1 className="text-xl font-bold my-6">{storydata.quizTitle}</h1>
         <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
         <h2 className="text-lg mb-2">
