@@ -4,7 +4,6 @@ import Question from "./Question";
 import ProgressBar from "./ProgressBar";
 import QuizResults from "./QuizResults";
 import { storydata } from "./storydata";
-import { useNavigate } from "react-router-dom";
 import TopBar from "../../components/TopBar";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
@@ -19,8 +18,6 @@ const Quiz = ({ shuffleQuestions = false }) => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizStatements, setQuizStatements] = useState(storydata.statements);
   const { transcript, isListening, startListening, stopListening } = useSpeechToText();
-
-  const navigate = useNavigate();
 
   const startStopListening = useCallback(() => {
     isListening ? stopListening() : startListening();
@@ -109,18 +106,20 @@ const Quiz = ({ shuffleQuestions = false }) => {
         <TopBar />
         <h1 className="text-xl font-bold my-6">{storydata.quizTitle}</h1>
         <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
-        <h2 className="text-lg mb-2">
+        <h2 className="text-lg mb-2 hidden">
           Statement {currentStatementIndex + 1}/{quizStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
         </h2>
-        <h2 className="text-lg font-semibold mb-4">{currentStatement.statement}</h2>
-        <div className="flex justify-center items-center py-4 bg-gray-50">
+        <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
+        <div className="flex flex-col items-center py-2 bg-gray-50">
           {currentStatement.image && (
             <img src={currentStatement.image} alt="statement visual" className="w-72 h-72" />
           )}
+        <div className="flex space-x-2 justify-center my-4">
+          <button onClick={()=>{alert('listening')}} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Listen'}</button>
+          <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Answer'}</button>
         </div>
-        <div className="flex space-x-2 justify-center">
-          <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Speak'}</button>
         </div>
+
         <Question
           questionObj={currentQuestion}
           transcript={transcript}

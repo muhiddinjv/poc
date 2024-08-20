@@ -4,6 +4,7 @@ import seedData from "../db/seed";
 import db from "../db";
 import Streaks from "./Streaks";
 import { useNavigate } from "react-router-dom";
+import TopBar from "../components/TopBar";
 
 function Main() {
   const [decks, setDecks] = useState([]);
@@ -37,15 +38,10 @@ function Main() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-      <div className="h-screen bg-white shadow-lg max-w-lg w-full py-4">
+      <div className="text-center h-screen bg-white shadow-lg max-w-lg w-full">
+        <TopBar />
         {selectedDeck ? (
-          <div className="text-center">
-            <button
-              className="bg-slate-500 text-white px-4 py-2 rounded"
-              onClick={() => navigate(`/`)}
-            >
-              Stories
-            </button>
+          <div>
             <Streaks />
             <Review deck={selectedDeck} setDecks={setDecks} />
           </div>
