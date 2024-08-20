@@ -69,45 +69,6 @@ export const useSpeechToTexts = (options) => {
   return { transcript, isListening, startListening, stopListening };
 }
 
-export const useSpeechRecognition = () => {
-  const [transcript, setTranscript] = React.useState('');
-  const [isListening, setIsListening] = React.useState(false);
-  let recognition = null;
-  console.log({transcript, isListening})
-
-  if ("webkitSpeechRecognition" in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = true; 
-    recognition.lang = 'en-US';
-  }
-
-  useEffect(() => {
-    if(!recognition) return;
-
-    recognition.onresult = (event) => {
-      console.log('onresult even: ', event)
-      setTranscript(event.results[0][0].transcript);
-      recognition.stop();
-      setIsListening(false);
-    };
-  }, []);
-
-  const startListening = () => {
-      setTranscript('');
-      setIsListening(true);
-      recognition.start();
-  };
-
-  const stopListening = () => {
-      setIsListening(false);
-      recognition.stop();
-  };
-
-  return { transcript, isListening, startListening, stopListening, hasRecognitionSupport: !!recognition };
-};
-
 export const useSpeechToText = () => {
   const [spokenTexts, setSpokenTexts] = useState([]);
   const [transcript, setTranscript] = useState('');
