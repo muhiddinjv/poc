@@ -2,14 +2,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Question = ({ questionObj, transcript, selectedAnswer }) => {
-  const { statement, question, translation, answer, messageForCorrectAnswer, messageForIncorrectAnswer, explanation } = questionObj;
+  const { question, translation, answer, messageForAnswer, explanation } = questionObj;
 
   const isCorrect = selectedAnswer && selectedAnswer.toLowerCase() === answer.toLowerCase();
 
   return (
     <div className="my-2">
-      <p className="text-lg mb-2">{question}</p>
-      <p className="hidden text-lg mb-2">{translation}</p>
+      <h2 className="text-lg mb-2">{question}</h2>
+      <p className="hidden text-lg mb-6">{translation}</p>
       {selectedAnswer && (
         <div className="mt-6">
           <div
@@ -23,7 +23,7 @@ const Question = ({ questionObj, transcript, selectedAnswer }) => {
               <FontAwesomeIcon icon={faTimesCircle} />
             )}
             <p>
-              {isCorrect ? messageForCorrectAnswer : messageForIncorrectAnswer}
+              {isCorrect ? 'Correct! ' + messageForAnswer : 'Inorrect! ' + messageForAnswer}
             </p>
           </div>
           <p className="hidden m-4 text-lg">{explanation}</p>
