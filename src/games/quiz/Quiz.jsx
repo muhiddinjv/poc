@@ -104,20 +104,20 @@ const Quiz = ({ shuffleQuestions = false }) => {
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
       <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
         <TopBar />
-        <h1 className="text-xl font-bold my-6">{storydata.quizTitle}</h1>
-        <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
         <h2 className="text-lg mb-2 hidden">
           Statement {currentStatementIndex + 1}/{quizStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
         </h2>
-        <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
+        <h1 className="text-xl font-bold my-4">{storydata.quizTitle}</h1>
         <div className="flex flex-col items-center py-2 bg-gray-50">
-          {currentStatement.image && (
-            <img src={currentStatement.image} alt="statement visual" className="w-72 h-72" />
-          )}
-        <div className="flex space-x-2 justify-center my-4">
-          <button onClick={()=>{alert('listening')}} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Listen'}</button>
-          <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Answer'}</button>
-        </div>
+          <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
+            {currentStatement.image && (
+              <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72" />
+            )}
+          <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
+          <div className="flex space-x-2 justify-center mt-1 mb-2">
+            <button onClick={()=>{alert('listening')}} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Listen'}</button>
+            <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Answer'}</button>
+          </div>
         </div>
 
         <Question
