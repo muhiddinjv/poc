@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const stories = [
   { id: 1, title: "A Horseman's Problem", img: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg", words: [], games: [] },
@@ -8,11 +8,9 @@ const stories = [
 ];
 
 const Stories = () => {
-  const navigate = useNavigate();
-
   return (
 <div className="min-h-screen bg-gradient-to-r from-blue-50 to-gray-100 flex flex-col items-center p-4">
-  <h1 className="bg-white text-3xl font-bold text-gray-800 mb-8 p-4 rounded-lg border border-gray-300">TaleTalk</h1>
+  <h1 className="bg-white text-3xl font-bold text-gray-800 mb-4 p-4 rounded-lg border border-gray-300">TaleTalk</h1>
   <div className="w-full max-w-md">
     {stories.map((story, index) => (
       <div key={index} className="bg-white rounded-lg shadow-lg mb-6 p-4 flex items-center space-x-4">
@@ -20,9 +18,9 @@ const Stories = () => {
         <div>
           <h2 className="text-xl font-semibold text-gray-700">{index + 1} {story.title}</h2>
           <div className="flex space-x-2 mt-2">
-            <button onClick={() => navigate(`/words/${story.id}`)} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">Words</button>
-            <button onClick={() => navigate(`/games/${story.id}`)} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">Games</button>
-            <button onClick={() => navigate(`/story/${story.id}`)} className="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-yellow-600">Story</button>
+            <Link to={`/words/${story.id}`} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">Words</Link>
+            <Link to={`/games/${story.id}`} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">Games</Link>
+            <Link to={`/story/${story.id}`} className="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-yellow-600">Story</Link>
           </div>
         </div>
       </div>

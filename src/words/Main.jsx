@@ -3,13 +3,11 @@ import Review from "./Review";
 import seedData from "../db/seed";
 import db from "../db";
 import Streaks from "./Streaks";
-import { useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
 
 function Main() {
   const [decks, setDecks] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchDecks();
