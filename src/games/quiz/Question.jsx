@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeHigh, faMicrophone, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faVolumeUp, faVolumeMute, faVolumeXmark, faMicrophone, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useCallback, useEffect, useState } from 'react';
 
-const Question = ({ questionObj, selectedAnswer, transcript, isListening, startStopListening }) => {
+const Question = ({ questionObj, selectedAnswer, transcript, isListening, startStopListening, statementPlayed }) => {
   const { question, question_audio, answer, messageForAnswer, translation, explanation } = questionObj;
   const [messageForAnswerVisible, setMessageForAnswerVisible] = useState(false);
   const [questionVisible, setQuestionVisible] = useState(false);
@@ -15,17 +15,20 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
     }
   }, [transcript]);
 
-  const playQuestionAudio = useCallback(() => {
-    const audio = new Audio(question_audio);
-    audio.play();
-  }, [question_audio]);
+  const playQuestionAudio = () => {
+    if(statementPlayed){
+      const audio = new Audio(question_audio);
+      audio.play();
+    }
+  }
 
   const seeQuestion = () => {
-    setQuestionVisible(!questionVisible);
+    if(statementPlayed){
+      setQuestionVisible(!questionVisible);
+    }
   }
 
   const seeMessageForAnswer = () => {
-    console.log({transcript})
     setMessageForAnswerVisible(!messageForAnswerVisible);
   }
 
@@ -37,9 +40,9 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
             <p className="">{question}</p>
           </div>
         )}
-        <div className='flex gap-6 items-center justify-center bg-blue-500 text-white p-3 rounded-lg'>
-          <FontAwesomeIcon icon={faVolumeHigh} onClick={playQuestionAudio} className='cursor-pointer'/>
-          <FontAwesomeIcon icon={faEye} onClick={seeQuestion} className='cursor-pointer'/>
+        <div className={`flex gap-6 items-center justify-center ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'} text-white p-3 rounded-lg`}>
+          <FontAwesomeIcon icon={statementPlayed ? faVolumeUp : faVolumeMute} onClick={playQuestionAudio} className='cursor-pointer'/>
+          <FontAwesomeIcon icon={statementPlayed ? faEye : faEyeSlash} onClick={seeQuestion} className='cursor-pointer'/>
         </div>
         {(transcript && messageForAnswerVisible) && (
           <div onClick={seeMessageForAnswer}
@@ -51,8 +54,8 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
           </div>
         )}
         <div className={`flex gap-6 items-center justify-center ${transcript ? 'bg-pink-500' : 'bg-gray-500'} text-white p-3 rounded-lg`}>
-          <FontAwesomeIcon icon={faVolumeHigh} onClick={()=>{}} className='cursor-pointer'/>
-          <FontAwesomeIcon icon={faEye} onClick={seeMessageForAnswer} className='cursor-pointer'/>
+          <FontAwesomeIcon icon={transcript ? faVolumeUp : faVolumeMute} onClick={()=>{}} className='cursor-pointer'/>
+          <FontAwesomeIcon icon={transcript ? faEye : faEyeSlash} onClick={seeMessageForAnswer} className='cursor-pointer'/>
         </div>
       </div>
       <div className="flex justify-center items-center m-10">
