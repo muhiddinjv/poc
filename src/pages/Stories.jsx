@@ -10,7 +10,7 @@ const stories = [
 const Stories = () => {
   return (
 <div className="min-h-screen bg-purple-500 flex flex-col items-center p-4">
-  <h1 className="bg-white text-3xl font-bold text-gray-800 mb-4 p-3 rounded-lg border border-gray-300">TaleTalk</h1>
+  <h1 className="bg-white text-3xl font-bold text-purple-600 mb-4 p-3 rounded-lg border border-gray-300">TaleTalk</h1>
   <div className="w-full max-w-md">
     {stories.map((story, index) => (
       <div key={index} className="bg-white rounded-lg shadow-lg mb-4 p-2 flex items-center space-x-3">
