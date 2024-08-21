@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Review from "./Review";
+import Reviewed from "./Reviewed";
 import seedData from "../db/seed";
 import db from "../db";
 import Streaks from "./Streaks";
-import TopBar from "../components/TopBar";
 import { Link } from "react-router-dom";
 
 function Main() {
@@ -16,10 +15,8 @@ function Main() {
 
   const fetchDecks = async () => {
     await seedData();
-    // Fetch all decks
     const allDecks = await db.decks.toArray();
 
-    // Fetch cards for each deck and attach them
     const decksWithCards = await Promise.all(
       allDecks.map(async (deck) => {
         const cards = await db.cards.where("deckId").equals(deck.id).toArray();
@@ -29,9 +26,15 @@ function Main() {
 
     setDecks(decksWithCards);
 
-    //Automatically select the first deck for review
     if (decksWithCards.length > 0) {
       setSelectedDeck(decksWithCards[0]);
+    }
+  };
+
+  const handleRestart = async () => {
+    await fetchDecks(); // Re-fetch decks and cards
+    if (decks.length > 0) {
+      setSelectedDeck(decks[0]); // Set the first deck as selected for review
     }
   };
 
@@ -47,7 +50,7 @@ function Main() {
         {selectedDeck ? (
           <div>
             <Streaks />
-            <Review deck={selectedDeck} setDecks={setDecks} />
+            <Reviewed deck={selectedDeck} onRestart={handleRestart} />
           </div>
         ) : (
           <div>Loading...</div>

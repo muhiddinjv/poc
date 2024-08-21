@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faVolumeMute, faVolumeXmark, faMicrophone, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useEffect, useState } from 'react';
+import { faVolumeUp, faVolumeMute, faMicrophone, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from 'react';
 
 const Question = ({ questionObj, selectedAnswer, transcript, isListening, startStopListening, statementPlayed }) => {
   const { question, question_audio, answer, messageForAnswer, translation, explanation } = questionObj;
