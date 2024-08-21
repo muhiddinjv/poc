@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useSpeechToText } from "../../hooks";
 import Question from "./Question";
 import ProgressBar from "./ProgressBar";
 import QuizResults from "./QuizResults";
 import { storydata } from "./storydata";
 import TopBar from "../../components/TopBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
@@ -14,80 +16,91 @@ const Quiz = ({ shuffleQuestions = false }) => {
   const [score, setScore] = useState({ correct: 0 });
   const [totalPoints, setTotalPoints] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [finalTranscript, setFinalTranscript] = useState("");  // Final transcript state
+  const [transcriptLocked, setTranscriptLocked] = useState(false);  // Lock the transcript after finalization
   const [showNextButton, setShowNextButton] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [quizStatements, setQuizStatements] = useState(storydata.statements);
-  const { transcript, isListening, startListening, stopListening } = useSpeechToText();
+  const { transcript, isListening, startListening, stopListening } = useSpeechToText({ continuous: false });
 
-  const startStopListening = useCallback(() => {
-    isListening ? stopListening() : startListening();
-  }, [isListening, stopListening, startListening]);
+  const maxPoints = useMemo(() => {
+    return storydata.statements.reduce(
+      (total, statement) =>
+        total + statement.questions.reduce((qTotal, question) => qTotal + (parseInt(question.point, 10) || 0), 0),
+      0
+    );
+  }, []);
 
-  const maxPoints = storydata.statements.reduce(
-    (total, statement) =>
-      total + statement.questions.reduce((qTotal, question) => qTotal + (parseInt(question.point, 10) || 0), 0),
-    0
-  );
+  const totalQuestions = useMemo(() => {
+    return storydata.statements.reduce((total, statement) => total + statement.questions.length, 0);
+  }, []);
 
-  const totalQuestions = storydata.statements.reduce((total, statement) => total + statement.questions.length, 0);
-
-  useEffect(() => {
+  const shuffledStatements = useMemo(() => {
     if (shuffleQuestions) {
-      const shuffledStatements = storydata.statements.map(statement => ({
+      return storydata.statements.map(statement => ({
         ...statement,
         questions: shuffleArray([...statement.questions])
       }));
-      setQuizStatements(shuffledStatements);
     }
-  }, [shuffleQuestions, storydata.statements]);
+    return storydata.statements;
+  }, [shuffleQuestions]);
 
-  useEffect(() => {
-    if (transcript) {
-      handleAnswerClick(transcript.trim());
-    }
-  }, [transcript]);
+  const currentStatement = shuffledStatements[currentStatementIndex];
+  const currentQuestion = useMemo(() => currentStatement.questions[currentQuestionIndex], [currentStatement, currentQuestionIndex]);
 
-  const handleAnswerClick = (selectedAnswer) => {
-    setSelectedAnswer(selectedAnswer);
-    const correctAnswer = quizStatements[currentStatementIndex].questions[currentQuestionIndex].answer;
-    const points = parseInt(quizStatements[currentStatementIndex].questions[currentQuestionIndex].point, 10) || 0;
+  const handleAnswerClick = useCallback((answer) => {
+    setSelectedAnswer(answer);
+    const correctAnswer = currentQuestion.answer;
+    const points = parseInt(currentQuestion.point, 10) || 0;
 
-    if (selectedAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
       setScore(prevScore => ({ correct: prevScore.correct + 1 }));
       setTotalPoints(prevPoints => prevPoints + points);
     }
 
     setShowNextButton(true);
-  };
+    setTranscriptLocked(true);  // Lock the transcript to prevent further updates
+  }, [currentQuestion]);
 
-  const handleNextQuestion = () => {
+  useEffect(() => {
+    if (transcript && !transcriptLocked) {
+      const trimmedTranscript = transcript.trim();
+      setFinalTranscript(trimmedTranscript);
+      handleAnswerClick(trimmedTranscript);
+    }
+  }, [transcript, transcriptLocked, handleAnswerClick]);
+
+  const handleNextQuestion = useCallback(() => {
     setShowNextButton(false);
     setSelectedAnswer(null);
+    setFinalTranscript(""); // Clear the final transcript on next question
+    setTranscriptLocked(false); // Unlock the transcript for the next question
 
-    if (currentQuestionIndex < quizStatements[currentStatementIndex].questions.length - 1) {
+    if (currentQuestionIndex < currentStatement.questions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-    } else if (currentStatementIndex < quizStatements.length - 1) {
+    } else if (currentStatementIndex < shuffledStatements.length - 1) {
       setCurrentStatementIndex(prevIndex => prevIndex + 1);
       setCurrentQuestionIndex(0);
     } else {
       setQuizCompleted(true);
     }
-  };
+  }, [currentQuestionIndex, currentStatementIndex, currentStatement.questions.length, shuffledStatements.length]);
 
-  const handleTryAgain = () => {
+  const handleTryAgain = useCallback(() => {
     setCurrentStatementIndex(0);
     setCurrentQuestionIndex(0);
     setScore({ correct: 0 });
     setTotalPoints(0);
     setQuizCompleted(false);
-    setQuizStatements(storydata.statements);
-  };
+  }, []);
 
-  const playStatementAudio = () => {
-    const audio = new Audio(quizStatements[currentStatementIndex].statement_audio);
-    // audio.playbackRate = 0.80;
+  const playStatementAudio = useCallback(() => {
+    const audio = new Audio(currentStatement.statement_audio);
     audio.play();
-  };
+  }, [currentStatement]);
+
+  const startStopListening = useCallback(() => {
+    isListening ? stopListening() : startListening();
+  }, [isListening, stopListening, startListening]);
 
   if (quizCompleted) {
     return (
@@ -101,39 +114,38 @@ const Quiz = ({ shuffleQuestions = false }) => {
     );
   }
 
-  const currentStatement = quizStatements[currentStatementIndex];
-  const currentQuestion = currentStatement.questions[currentQuestionIndex];
-
-  const currentQuestionNumber = quizStatements.slice(0, currentStatementIndex).reduce((total, statement) => total + statement.questions.length, 0) + currentQuestionIndex + 1;
+  const currentQuestionNumber = shuffledStatements.slice(0, currentStatementIndex).reduce((total, statement) => total + statement.questions.length, 0) + currentQuestionIndex + 1;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+    <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex flex-col justify-center items-center">
       <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
         <TopBar />
         <div className="hidden">
           <h2 className="text-lg mb-2">
-            Statement {currentStatementIndex + 1}/{quizStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
+            Statement {currentStatementIndex + 1}/{shuffledStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
           </h2>
           <h1 className="text-xl font-bold my-4">{storydata.quizTitle}</h1>
         </div>
-        <div className="flex flex-col items-center py-2 bg-gray-50">
+        <div className="flex flex-col items-center py-2 bg-gray-50 border-b">
           <ProgressBar current={currentQuestionNumber} total={totalQuestions} />
           {currentStatement.image && (
             <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72 rounded" />
           )}
+          <div className="flex items-center">
+          <FontAwesomeIcon icon={faVolumeUp} onClick={playStatementAudio} className='cursor-pointer'/>
           <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
-          <div className="flex space-x-2 justify-center mt-1 mb-2">
-            <button onClick={playStatementAudio} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Listen'}</button>
-            <button onClick={startStopListening} className="bg-gray-300 px-3 py-1 rounded">{isListening ? 'Stop listening' : 'Answer'}</button>
           </div>
         </div>
 
         <Question
           questionObj={currentQuestion}
-          transcript={transcript}
+          transcript={finalTranscript} // Display final transcript
           selectedAnswer={selectedAnswer}
+          isListening={isListening}
+          startStopListening={startStopListening}
         />
-        <p>{transcript}</p>
+        {/* <p>{finalTranscript}</p>  */}
+        {/* Display the final transcript */}
         
         {showNextButton && (
           <button
@@ -147,4 +159,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
     </div>
   );
 };
+
 export default Quiz;
+
+

@@ -11,7 +11,7 @@ export const storydata = {
         questions: [
           {
             question: "Is there a horseman? Yes or no?",
-            question_audio: '/aud/story1_question1.mp3',
+            question_audio: '/aud/story1_question1.wav',
             translation: "Bormi bir chavandoz?",
             answer: "yes",
             messageForAnswer: "There is a horseman",

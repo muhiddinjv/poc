@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export const useSpeechToTexts = (options) => {
+export const useSpeechToText = (options) => {
   const [isListening, setIsListening] = React.useState(false);
   const [transcript, setTranscript] = React.useState('');
   const recognitionRef = useRef(null);
@@ -69,7 +69,7 @@ export const useSpeechToTexts = (options) => {
   return { transcript, isListening, startListening, stopListening };
 }
 
-export const useSpeechToText = () => {
+export const useSpeechToTexts = () => {
   const [spokenTexts, setSpokenTexts] = useState([]);
   const [transcript, setTranscript] = useState('');
   const [isListening, setIsListening] = useState(false);

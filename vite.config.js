@@ -21,7 +21,7 @@ export default defineConfig({
       prefer_related_applications: false,
       manifest: {
         name: "TaleTalk",
-        short_name: "taletalk",
+        short_name: "TaleTalk",
         description: "Learn to speak another language through stories",
         scope: "/",
         start_url: "/",
