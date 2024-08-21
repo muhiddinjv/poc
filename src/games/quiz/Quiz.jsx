@@ -131,27 +131,20 @@ const Quiz = ({ shuffleQuestions = false }) => {
           {currentStatement.image && (
             <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72 rounded" />
           )}
-          <div className="flex items-center">
-          <FontAwesomeIcon icon={faVolumeUp} onClick={playStatementAudio} className='cursor-pointer'/>
+          <div className="flex items-center text-blue-800">
+          <FontAwesomeIcon size="lg" icon={faVolumeUp} onClick={playStatementAudio} className='cursor-pointer'/>
           <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
           </div>
         </div>
-
         <Question
           questionObj={currentQuestion}
           transcript={finalTranscript} // Display final transcript
           selectedAnswer={selectedAnswer}
           isListening={isListening}
           startStopListening={startStopListening}
-        />
-        {/* <p>{finalTranscript}</p>  */}
-        {/* Display the final transcript */}
-        
+        />        
         {showNextButton && (
-          <button
-            onClick={handleNextQuestion}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 mt-6 transition-colors duration-300 ease-in-out"
-          >
+          <button onClick={handleNextQuestion} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors rounded-lg font-bold duration-300 ease-in-out">
             Next Question
           </button>
         )}

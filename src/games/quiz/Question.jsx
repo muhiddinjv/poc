@@ -31,48 +31,34 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
 
 
   return (
-    <div className="relative">
-      <div className='flex gap-2 justify-center text-lg'>
-        <div className="">
-          {questionVisible && (
-            <div onClick={seeQuestion} className="absolute top-0 left-1/2 -translate-x-1/2 bg-purple-500 text-white p-2 rounded shadow-md">
-              <p className="">{question}</p>
-            </div>
-          )}
-          <div className='flex gap-6 items-center justify-center bg-blue-500 text-white py-2 px-4 rounded'>
-            <FontAwesomeIcon icon={faVolumeHigh} onClick={playQuestionAudio} className='cursor-pointer'/>
-            <FontAwesomeIcon icon={faEye} onClick={seeQuestion} className='cursor-pointer'/>
+    <div className="relative mt-4">
+      <div className='flex gap-4 justify-center text-lg'>
+        {questionVisible && (
+          <div onClick={seeQuestion} className="absolute top-0 left-1/2 -translate-x-1/2 bg-purple-500 text-white p-2 rounded shadow-2xl">
+            <p className="">{question}</p>
           </div>
+        )}
+        <div className='flex gap-6 items-center justify-center bg-blue-500 text-white p-3 rounded-lg'>
+          <FontAwesomeIcon icon={faVolumeHigh} onClick={playQuestionAudio} className='cursor-pointer'/>
+          <FontAwesomeIcon icon={faEye} onClick={seeQuestion} className='cursor-pointer'/>
         </div>
-        <div className="">
-          {(selectedAnswer && messageForAnswerVisible) && (
-            <div onClick={seeMessageForAnswer} className="absolute top-0 left-1/2 -translate-x-1/2 bg-white text-white px-4 py-2 rounded shadow-lg">
-              <div
-                className={`flex gap-2 items-center justify-center ${
-                  isCorrect ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {isCorrect ? (
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                ) : (
-                  <FontAwesomeIcon icon={faTimesCircle} />
-                )}
-                <p>
-                  {isCorrect ? 'Correct! ' + messageForAnswer : 'Inorrect! ' + messageForAnswer}
-                </p>
-              </div>
-            </div>
-          )}
-          <div className={'flex gap-6 items-center justify-center bg-pink-500 text-white py-2 px-4 rounded'}>
-            <FontAwesomeIcon icon={faVolumeHigh} onClick={()=>{}} className='cursor-pointer'/>
-            <FontAwesomeIcon icon={faEye} onClick={seeMessageForAnswer} className='cursor-pointer'/>
+        {(selectedAnswer && messageForAnswerVisible) && (
+          <div onClick={seeMessageForAnswer}
+            className={`absolute top-0 left-1/2 -translate-x-1/2 text-white rounded shadow-2xl px-4 py-2 flex gap-2 items-center justify-center ${
+              isCorrect ? "bg-green-500" : "bg-red-500"
+            }`}
+          >
+            {isCorrect ? `${transcript} is correct! ${messageForAnswer}` : `${transcript} is inorrect! ${messageForAnswer}`}
           </div>
+        )}
+        <div className={`flex gap-6 items-center justify-center ${transcript ? 'bg-pink-500' : 'bg-gray-500'} text-white p-3 rounded-lg`}>
+          <FontAwesomeIcon icon={faVolumeHigh} onClick={()=>{}} className='cursor-pointer'/>
+          <FontAwesomeIcon icon={faEye} onClick={seeMessageForAnswer} className='cursor-pointer'/>
         </div>
       </div>
-      <p className='m-2 capitalize'>{transcript}</p>
-      <div className="flex justify-center items-center m-6">
-        <div className={`h-16 w-16 bg-red-400 rounded-full flex justify-center items-center ${isListening && 'animation-pulse'}`}>
-          <FontAwesomeIcon size='2x' className="cursor-pointer text-white" icon={faMicrophone} onClick={startStopListening} />
+      <div className="flex justify-center items-center m-10">
+        <div className={`h-20 w-20 bg-red-400 rounded-full flex justify-center items-center ${isListening && 'animation-pulse'}`}>
+          <FontAwesomeIcon size='3x' className="cursor-pointer text-white" icon={faMicrophone} onClick={startStopListening} />
         </div>
       </div>
     </div>
