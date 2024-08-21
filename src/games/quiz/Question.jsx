@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeHigh, faMicrophone, faEye } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const Question = ({ questionObj, selectedAnswer, transcript, isListening, startStopListening }) => {
   const { question, question_audio, answer, messageForAnswer, translation, explanation } = questionObj;
@@ -9,7 +9,11 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
 
   const isCorrect = selectedAnswer && selectedAnswer.toLowerCase() === answer.toLowerCase();
 
-  console.log({transcript})
+  useEffect(() => {
+    if (transcript) {
+      setMessageForAnswerVisible(true);
+    }
+  }, [transcript]);
 
   const playQuestionAudio = useCallback(() => {
     const audio = new Audio(question_audio);
@@ -21,9 +25,9 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
   }
 
   const seeMessageForAnswer = () => {
+    console.log({transcript})
     setMessageForAnswerVisible(!messageForAnswerVisible);
   }
-
 
   return (
     <div className="relative mt-4">
@@ -37,7 +41,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
           <FontAwesomeIcon icon={faVolumeHigh} onClick={playQuestionAudio} className='cursor-pointer'/>
           <FontAwesomeIcon icon={faEye} onClick={seeQuestion} className='cursor-pointer'/>
         </div>
-        {(selectedAnswer && messageForAnswerVisible) && (
+        {(transcript && messageForAnswerVisible) && (
           <div onClick={seeMessageForAnswer}
             className={`absolute top-0 left-1/2 -translate-x-1/2 text-white rounded shadow-2xl px-4 py-2 flex gap-2 items-center justify-center ${
               isCorrect ? "bg-green-500" : "bg-red-500"
