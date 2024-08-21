@@ -1,13 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle, faVolumeHigh, faMicrophone, faEye } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useEffect, useState } from 'react';
+import { faVolumeHigh, faMicrophone, faEye } from "@fortawesome/free-solid-svg-icons";
+import { useCallback, useState } from 'react';
 
 const Question = ({ questionObj, selectedAnswer, transcript, isListening, startStopListening }) => {
-  const { question, question_audio, translation, answer, messageForAnswer, explanation } = questionObj;
-  const [questionVisible, setQuestionVisible] = useState(false);
-  const [ messageVisible, setMessageVisible ] = useState(false);
+  const { question, question_audio, answer, messageForAnswer, translation, explanation } = questionObj;
   const [messageForAnswerVisible, setMessageForAnswerVisible] = useState(false);
-  const [transcriptVisible, setTranscriptVisible] = useState(false);
+  const [questionVisible, setQuestionVisible] = useState(false);
+
   const isCorrect = selectedAnswer && selectedAnswer.toLowerCase() === answer.toLowerCase();
 
   console.log({transcript})
@@ -19,10 +18,6 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
 
   const seeQuestion = () => {
     setQuestionVisible(!questionVisible);
-  }
-
-  const seeTranscript = () => {
-    setTranscriptVisible(!transcriptVisible);
   }
 
   const seeMessageForAnswer = () => {
