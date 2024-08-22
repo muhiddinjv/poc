@@ -3,7 +3,7 @@ import { faVolumeUp, faVolumeMute, faMicrophone, faEye, faEyeSlash } from "@fort
 import { useEffect, useState } from 'react';
 
 const Question = ({ questionObj, selectedAnswer, transcript, isListening, startStopListening, statementPlayed }) => {
-  const { question, question_audio, answer, messageForAnswer, translation, explanation } = questionObj;
+  const { question, question_audio, messageAudio, answer, messageForAnswer, translation, explanation } = questionObj;
   const [messageForAnswerVisible, setMessageForAnswerVisible] = useState(false);
   const [questionVisible, setQuestionVisible] = useState(false);
 
@@ -25,6 +25,13 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
   const seeQuestion = () => {
     if(statementPlayed){
       setQuestionVisible(!questionVisible);
+    }
+  }
+
+  const playAnswerAudio = () => {
+    if(transcript){
+      const audio = new Audio(messageAudio);
+      audio.play();
     }
   }
 
@@ -54,7 +61,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
           </div>
         )}
         <div className={`flex gap-2 items-center justify-center`}>
-          <FontAwesomeIcon icon={transcript ? faVolumeUp : faVolumeMute} onClick={()=>{}} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon icon={transcript ? faVolumeUp : faVolumeMute} onClick={playAnswerAudio} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
           <FontAwesomeIcon icon={transcript ? faEye : faEyeSlash} onClick={seeMessageForAnswer} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
         </div>
       </div>
