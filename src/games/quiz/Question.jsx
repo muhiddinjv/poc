@@ -41,8 +41,8 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
           </div>
         )}
         <div className="flex gap-2 items-center justify-center">
-          <FontAwesomeIcon size='lg' icon={statementPlayed ? faVolumeUp : faVolumeMute} onClick={playQuestionAudio} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
-          <FontAwesomeIcon size='lg' icon={statementPlayed ? faEye : faEyeSlash} onClick={seeQuestion} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon icon={statementPlayed ? faVolumeUp : faVolumeMute} onClick={playQuestionAudio} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon icon={statementPlayed ? faEye : faEyeSlash} onClick={seeQuestion} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
         </div>
         {(transcript && messageForAnswerVisible) && (
           <div onClick={seeMessageForAnswer}
@@ -54,8 +54,8 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
           </div>
         )}
         <div className={`flex gap-2 items-center justify-center`}>
-          <FontAwesomeIcon size='lg' icon={transcript ? faVolumeUp : faVolumeMute} onClick={()=>{}} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
-          <FontAwesomeIcon size='lg' icon={transcript ? faEye : faEyeSlash} onClick={seeMessageForAnswer} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon icon={transcript ? faVolumeUp : faVolumeMute} onClick={()=>{}} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon icon={transcript ? faEye : faEyeSlash} onClick={seeMessageForAnswer} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
         </div>
       </div>
       <div className="flex justify-center items-center m-10">

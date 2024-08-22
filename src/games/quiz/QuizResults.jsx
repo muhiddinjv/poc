@@ -10,7 +10,7 @@ const QuizResults = ({
   <div className="min-h-screen bg-gray-100 flex flex-col items-center">
     <div className="h-screen bg-white shadow-lg max-w-lg w-full text-center">
       <TopBar />
-      <h1 className="text-lg font-bold m-6">🎉 Quiz bajarildi!</h1>
+      <h1 className="text-lg font-bold m-6">🎉 Tabriklations!</h1>
       <p className="text-xl mb-4">
         To'gri javoblar: {score.correct} / {totalQuestions}
       </p>
