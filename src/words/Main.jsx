@@ -39,7 +39,7 @@ function Main() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+    <section className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
       <div className="px-4 py-2 bg-purple-500 text-white flex max-w-lg w-full">
         <Link to="/" className="py-1 px-2 bg-gray-500 rounded-lg font-bold bg-white text-gray-800">{'<'}</Link>
         <div className="w-full text-center">
@@ -56,7 +56,7 @@ function Main() {
           <div>Loading...</div>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 

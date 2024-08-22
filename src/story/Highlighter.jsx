@@ -51,10 +51,7 @@ const WordHighlighter = () => {
     return words.map((word, index) => {
       const isActive = index === currentWordIndex;
       return (
-        <span
-          key={index}
-          className={`mx-1 ${isActive ? 'bg-yellow-300' : ''}`}
-        >
+        <span key={index} className={`mx-1 ${isActive ? 'bg-yellow-300' : ''}`}>
           {word}
         </span>
       );
@@ -67,18 +64,10 @@ const WordHighlighter = () => {
       <audio ref={audioRef} src="/aud/story1.mp3" />
       <div className="mt-4 flex space-x-4">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          onClick={handlePlay}
-          disabled={isPlaying}
+          className={`${isPlaying ? 'bg-yellow-500' : 'bg-blue-500'} text-white px-4 py-2 rounded`}
+          onClick={isPlaying ? handlePause : handlePlay }
         >
-          Play
-        </button>
-        <button
-          className="bg-yellow-500 text-white px-4 py-2 rounded"
-          onClick={handlePause}
-          disabled={!isPlaying}
-        >
-          Pause
+          {isPlaying ? 'Pause' : 'Play'}
         </button>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded"

@@ -187,14 +187,5 @@ export const wordTimings = [
   { word: "headache.", start: 80.68, end: 81.06 },
 ];
 
-  
-
-export const story = `
-There is a man. He is a horseman. He is a headless horseman. He is in America. He is in New York City. Ha has a problem. He has a big problem. He goes to Washington. He goes to Bill Gates's house in Washington. Bill is a rich man. He has 123 billion dollars and he has a big house. The horseman says "I have a problem. Can you help me?". Bill says "No, I can not help you. Go to Elon Musk." 
-
-He goes to Texas. He goes to Elon Musk's house in Texas. Elon is a rich man. He has 196 billion dollars but he has a small house. The horseman says "I have a problem. Can you help me?". Elon says "No, I can not help you. Go to Doctor Dolittle." 
-
-He goes to California. He goes to Doctor Dolittle's house in California. Dolittle is a doctor. He has animals and he has a big house. The horseman says "I have a problem. Can you help me?". Dolittle says "Yes, I can help you. What's your problem?" 
-
-The headless horseman says "I have a headache."`;
-  
+export const story =
+  "There is a man. He is a horseman. He is a headless horseman. He is in America. He is in New York City. Ha has a problem. He has a big problem. He goes to Washington. He goes to Bill Gates's house in Washington. Bill is a rich man. He has 123 billion dollars and he has a big house. The horseman says 'I have a problem. Can you help me?'. Bill says 'No, I can not help you. Go to Elon Musk.' He goes to Texas. He goes to Elon Musk's house in Texas. Elon is a rich man. He has 196 billion dollars but he has a small house. The horseman says 'I have a problem. Can you help me?'. Elon says 'No, I can not help you. Go to Doctor Dolittle.' He goes to California. He goes to Doctor Dolittle's house in California. Dolittle is a doctor. He has animals and he has a big house. The horseman says 'I have a problem. Can you help me?'. Dolittle says 'Yes, I can help you. What's your problem?' The headless horseman says 'I have a headache.'";
