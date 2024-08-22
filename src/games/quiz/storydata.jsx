@@ -1,4 +1,4 @@
-export const storydata2 = {
+export const storydata = {
   quizTitle: "The Headless Horseman's Problem",
   quizSynopsis: "",
   statements: [
@@ -284,7 +284,7 @@ export const storydata2 = {
   },
 ]};
 
-export const storydata = {
+export const storydata1 = {
   quizTitle: "The Headless Horseman's Problem",
   quizSynopsis: "",
   statements: [
