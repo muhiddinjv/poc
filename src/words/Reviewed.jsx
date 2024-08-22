@@ -49,9 +49,9 @@ function Reviewed({ deck, onRestart }) {
   if (isReviewComplete || cardQueue.length === 0) {
     return (
       <div className="flex flex-col items-center">
-        <div className="text-2xl mb-4">Review Complete!</div>
+        <div className="text-2xl mb-4">Takrorlash tugadi!</div>
         <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleRestart}>
-          Restart
+          Qaytadan boshlash
         </button>
       </div>
     );
