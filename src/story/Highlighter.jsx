@@ -47,16 +47,28 @@ const WordHighlighter = () => {
   };
 
   const renderText = () => {
-    const words = story.split(' ');
-    return words.map((word, index) => {
-      const isActive = index === currentWordIndex;
+    const paragraphs = story.split('\n\n'); // Split the story into paragraphs
+  
+    return paragraphs.map((paragraph, paragraphIndex) => {
+      const words = paragraph.split(' '); // Split each paragraph into words
+  
       return (
-        <span key={index} className={`mx-1 ${isActive ? 'bg-yellow-300 text-gray-800' : ''}`}>
-          {word}
-        </span>
+        <p key={paragraphIndex} className="mb-4 flex flex-wrap">
+          {words.map((word, wordIndex) => {
+            const globalWordIndex = wordIndex + paragraphs.slice(0, paragraphIndex).reduce((acc, para) => acc + para.split(' ').length, 0);
+            const isActive = globalWordIndex === currentWordIndex;
+            
+            return (
+              <span key={globalWordIndex} className={`mx-1 ${isActive ? 'bg-yellow-300 text-gray-800' : ''}`}>
+                {word}
+              </span>
+            );
+          })}
+        </p>
       );
     });
   };
+  
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
