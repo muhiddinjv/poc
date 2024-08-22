@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const stories = [
-  { id: 1, title: "A Horseman's Problem", img: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg", words: [], games: [] },
-  { id: 2, title: "Mike Tyson's Barber", img: "https://picsum.photos/499", words: [], games: [] },
+  { id: 1, title: "Chavandoz Muammosi", img: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg", words: [], games: [] },
+  { id: 2, title: "Mike Tyson Sartaroshi", img: "https://picsum.photos/499", words: [], games: [] },
   // Add more stories here
 ];
 
@@ -18,9 +18,9 @@ const Stories = () => {
               <div className='flex flex-col justify-around items-between min-h-24'>
                 <h2 className="text-xl font-semibold text-gray-700">{index + 1} {story.title}</h2>
                 <div className="flex flex-wrap space-x-2">
-                  <Link to={`/words/${story.id}`} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">Words</Link>
-                  <Link to={`/games/${story.id}`} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">Games</Link>
-                  <Link to={`/story/${story.id}`} className="bg-pink-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-pink-600">Story</Link>
+                  <Link to={`/words/${story.id}`} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">So'zlar</Link>
+                  <Link to={`/games/${story.id}`} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">O'yinlar</Link>
+                  <Link to={`/story/${story.id}`} className="bg-pink-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-pink-600">Hikoya</Link>
                 </div>
               </div>
             </div>

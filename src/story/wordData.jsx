@@ -93,7 +93,7 @@ export const wordTimings = [
   { word: "house", start: 39.02, end: 39.24 },
   { word: "in", start: 39.24, end: 39.52 },
   { word: "Texas.", start: 39.52, end: 39.98 },
-    //MISMATCH BELOW
+    //THERE WAS A MISMATCH BELOW
   { word: "Elon", start: 39.98, end: 41.52 },
   { word: "is", start: 41.52, end: 41.7 },
   { word: "a", start: 41.7, end: 41.88 },

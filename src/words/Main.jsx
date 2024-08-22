@@ -44,7 +44,7 @@ function Main() {
       <div className="px-4 py-2 bg-purple-500 text-white flex max-w-lg w-full">
         <BackBtn textColor="text-white" />
         <div className="w-full text-center">
-          <div className="text-2xl">Word Review</div>
+          <div className="text-2xl">So'z o'rganish</div>
         </div>
       </div>
       <div className="text-center h-screen bg-white shadow-lg max-w-lg w-full">

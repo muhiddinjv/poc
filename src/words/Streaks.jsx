@@ -22,8 +22,8 @@ const Streaks = ({ onStreakUpdate }) => {
   }, []);
 
   return (
-    <div className="m-4">
-      <h2 className="text-xl">Streak: {streak} days</h2>
+    <div className="m-2">
+      <h2 className="text-lg">Shug'ullangan: {streak} kun</h2>
     </div>
   );
 };
