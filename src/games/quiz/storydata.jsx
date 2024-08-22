@@ -1,4 +1,7 @@
-export const storydata1 = [
+export const storydata = {
+  quizTitle: "The Headless Horseman's Problem",
+  quizSynopsis: "",
+  statements: [
   {
     image:
       "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
@@ -279,9 +282,9 @@ export const storydata1 = [
       },
     ],
   },
-];
+]};
 
-export const storydata = {
+export const storydata1 = {
   quizTitle: "The Headless Horseman's Problem",
   quizSynopsis: "",
   statements: [
