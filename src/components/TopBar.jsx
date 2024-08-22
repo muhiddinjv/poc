@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import BackBtn from './BackBtn';
 
 function TopBar() {
   return (
     <div className="flex justify-center items-center border-b space-x-1 py-4">
-      <Link to="/" className="py-1 px-3 bg-gray-500 rounded-lg text-white font-bold hover:bg-gray-600">{'<'}</Link>
+      <BackBtn textColor="text-purple-600" />
       <button className="py-1 px-2 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600">Quiz</button>
       <button className="py-1 px-2 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600">Gapfil</button>
       <button className="py-1 px-2 bg-yellow-500 rounded-lg text-white font-bold hover:bg-yellow-600">Number</button>

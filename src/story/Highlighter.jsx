@@ -51,7 +51,7 @@ const WordHighlighter = () => {
     return words.map((word, index) => {
       const isActive = index === currentWordIndex;
       return (
-        <span key={index} className={`mx-1 ${isActive ? 'bg-yellow-300' : ''}`}>
+        <span key={index} className={`mx-1 ${isActive ? 'bg-yellow-300 text-gray-800' : ''}`}>
           {word}
         </span>
       );
@@ -60,7 +60,7 @@ const WordHighlighter = () => {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <div className="mb-4 text-2xl border-b border-gray-200 break-all">{renderText()}</div>
+      <div className="mb-4 flex flex-wrap">{renderText()}</div>
       <audio ref={audioRef} src="/aud/story1.mp3" />
       <div className="mt-4 flex space-x-4">
         <button
