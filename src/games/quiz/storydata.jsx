@@ -56,7 +56,7 @@ export const storydata1 = [
   },
 
   {
-    image: "https://example.com/problem_image.jpg",
+    image: "https://picsum.photos/500",
     statement: "He has a problem.",
     statement_audio: "/aud/007_he_has_a_problem.mp3",
     questions: [
@@ -108,7 +108,7 @@ export const storydata1 = [
     ],
   },
   {
-    image: "https://example.com/doctor_image.jpg",
+    image: "https://picsum.photos/499",
     statement: "He goes to a doctor.",
     statement_audio: "/aud/013_he_goes_to_a_doctor.mp3",
     questions: [
@@ -160,7 +160,7 @@ export const storydata1 = [
     ],
   },
   {
-    image: "https://example.com/doctor_patient_image.jpg",
+    image: "https://picsum.photos/498",
     statement: 'The doctor asks, "What\'s your problem?"',
     statement_audio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
     questions: [
@@ -217,7 +217,7 @@ export const storydata1 = [
   },
 
   {
-    image: "https://example.com/headless_horseman_headache.jpg",
+    image: "https://picsum.photos/497",
     statement: 'The headless horseman says, "I have a headache."',
     statement_audio:
       "/aud/025_the_headless_horseman_says_i_have_a_headache.mp3",
