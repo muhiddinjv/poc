@@ -34,15 +34,15 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
 
   return (
     <div className="relative mt-4">
-      <div className='flex gap-4 justify-center text-lg'>
+      <div className='flex gap-6 justify-center text-lg'>
         {questionVisible && (
           <div onClick={seeQuestion} className="absolute top-0 left-1/2 -translate-x-1/2 bg-purple-500 text-white p-2 rounded shadow-2xl">
             <p className="">{question}</p>
           </div>
         )}
-        <div className={`flex gap-6 items-center justify-center ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'} text-white p-3 rounded-lg`}>
-          <FontAwesomeIcon icon={statementPlayed ? faVolumeUp : faVolumeMute} onClick={playQuestionAudio} className='cursor-pointer'/>
-          <FontAwesomeIcon icon={statementPlayed ? faEye : faEyeSlash} onClick={seeQuestion} className='cursor-pointer'/>
+        <div className="flex gap-2 items-center justify-center">
+          <FontAwesomeIcon size='lg' icon={statementPlayed ? faVolumeUp : faVolumeMute} onClick={playQuestionAudio} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon size='lg' icon={statementPlayed ? faEye : faEyeSlash} onClick={seeQuestion} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
         </div>
         {(transcript && messageForAnswerVisible) && (
           <div onClick={seeMessageForAnswer}
@@ -53,9 +53,9 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
             {isCorrect ? `${transcript} is correct! ${messageForAnswer}` : `${transcript} is inorrect! ${messageForAnswer}`}
           </div>
         )}
-        <div className={`flex gap-6 items-center justify-center ${transcript ? 'bg-pink-500' : 'bg-gray-500'} text-white p-3 rounded-lg`}>
-          <FontAwesomeIcon icon={transcript ? faVolumeUp : faVolumeMute} onClick={()=>{}} className='cursor-pointer'/>
-          <FontAwesomeIcon icon={transcript ? faEye : faEyeSlash} onClick={seeMessageForAnswer} className='cursor-pointer'/>
+        <div className={`flex gap-2 items-center justify-center`}>
+          <FontAwesomeIcon size='lg' icon={transcript ? faVolumeUp : faVolumeMute} onClick={()=>{}} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
+          <FontAwesomeIcon size='lg' icon={transcript ? faEye : faEyeSlash} onClick={seeMessageForAnswer} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
         </div>
       </div>
       <div className="flex justify-center items-center m-10">
