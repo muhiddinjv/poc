@@ -146,7 +146,6 @@ const seedData = async () => {
       easeFactor: 2.5,
       nextReviewDate: null,
     },
-    // Add all the cards and their timings here
     {
       front: "Katta",
       back: "Big",

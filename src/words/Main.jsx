@@ -3,7 +3,6 @@ import Reviewed from "./Reviewed";
 import seedData from "../db/seed";
 import db from "../db";
 import Streaks from "./Streaks";
-import { Link } from "react-router-dom";
 import BackBtn from "../components/BackBtn";
 
 function Main() {
