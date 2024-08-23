@@ -2,6 +2,7 @@ import React from 'react'
 import './index.css'
 import App from './App.jsx'
 import {createRoot} from 'react-dom/client'
+import { Analytics } from "@vercel/analytics/react";
 
 let container = null;
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     root.render(
       <React.StrictMode>
         <App/>
+        <Analytics />
       </React.StrictMode>
     )}
 });
