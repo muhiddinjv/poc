@@ -36,7 +36,7 @@ const Stories = () => {
           <h1 className="text-3xl font-bold text-purple-600 p-2 text-center w-full">TaleTalk</h1>
           {user && (
             <div className="flex items-center space-x-3 mr-2">
-              <img src={user.user_metadata.avatar_url || 'https://placehold.co/150'} alt="User Avatar" className="hidden w-10 h-10 rounded-full object-cover" />
+              {/* <img src={user.user_metadata.avatar_url || 'https://placehold.co/150'} alt="User Avatar" className="hidden w-10 h-10 rounded-full object-cover" /> */}
               <FontAwesomeIcon size='xl' icon={faSignOut} onClick={handleSignOut} className="p-1 text-purple-600 cursor-pointer hover:text-purple-700"/>
             </div>
           )}
