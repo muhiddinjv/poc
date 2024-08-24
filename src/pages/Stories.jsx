@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../api/supabaseClient';
-import { faSignOut, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const stories = [

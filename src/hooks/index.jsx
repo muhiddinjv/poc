@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export const useSpeechToText = (options) => {
   const [isListening, setIsListening] = React.useState(false);
@@ -114,3 +114,93 @@ export const useSpeechToTexts = () => {
 
   return { spokenTexts, transcript, isListening, startListening, stopListening };
 };
+
+export const useSpacedRepetition = () => {
+  const getDay = (forDate = Date.now()) => {
+    const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+    return Math.floor(forDate / DAY_IN_MILLISECONDS);
+  };
+
+  const computeNextRepetition = (card) => {
+    const today = getDay();
+    const lastReviewDay = getDay(new Date(card.nextReviewDate));
+
+    if (lastReviewDay >= today) {
+      return lastReviewDay;
+    }
+
+    let efactor = card.easeFactor;
+    if (card.repetition >= 1) {
+      efactor += 0.1 - (4 - card.easeFactor) * (0.08 + (4 - card.easeFactor) * 0.02);
+      efactor = Math.max(1.3, efactor);
+    }
+
+    return today + Math.ceil(card.interval * efactor);
+  };
+
+  const getDueCards = useCallback((cards) => {
+    const today = getDay();
+    return cards
+      .map((card) => [card, computeNextRepetition(card)])
+      .filter(([, nextRepetition]) => nextRepetition <= today);
+  }, [computeNextRepetition, getDay]);
+
+  return { getDueCards };
+};
+
+function supermemo(item, grade) {
+  let nextInterval, nextRepetition, nextEfactor;
+
+  if (grade >= 3) {
+    if (item.repetition === 0) {
+      nextInterval = 1;
+      nextRepetition = 1;
+    } else if (item.repetition === 1) {
+      nextInterval = 6;
+      nextRepetition = 2;
+    } else {
+      nextInterval = Math.round(item.interval * item.efactor);
+      nextRepetition = item.repetition + 1;
+    }
+  } else {
+    nextInterval = 1;
+    nextRepetition = 0;
+  }
+
+  nextEfactor =
+    item.efactor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02));
+
+  if (nextEfactor < 1.3) nextEfactor = 1.3;
+
+  return {
+    interval: nextInterval,
+    repetition: nextRepetition,
+    efactor: nextEfactor,
+  };
+}
+
+
+
+export const calculateNextReview = (card, difficulty) => {
+  const { interval, repetition, efactor } = card;
+
+  // Calculate new interval, repetition, and efactor using supermemo algorithm
+  const { interval: nextInterval, repetition: nextRepetition, efactor: nextEfactor } = supermemo(
+    { interval, repetition, efactor }, difficulty
+  );
+
+  // Compute the next review date based on the new interval
+  const nextReviewDate = new Date(Date.now() + nextInterval * 24 * 60 * 60 * 1000);
+
+  return {
+    ...card,
+    interval: nextInterval,
+    repetition: nextRepetition,
+    efactor: nextEfactor,
+    nextReviewDate,
+  };
+};
+
+
+
+

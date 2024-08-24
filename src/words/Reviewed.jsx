@@ -11,7 +11,7 @@ function Reviewed({ deck, onRestart }) {
     if (deck.cards && deck.cards.length > 0) {
       setCardQueue(deck.cards);
       setCurrentCardIndex(0); // Reset to the first card when the deck changes
-      setIsReviewComplete(false);
+      // setIsReviewComplete(false);
     }
   }, [deck]);
 
@@ -66,13 +66,13 @@ function Reviewed({ deck, onRestart }) {
   return (
     <div className="flex flex-col items-center">
       <div className="mb-2">
-        Kartalar {cardQueue.length}
+        Cards {cardQueue.length}
       </div>
-      <p className="mb-2 text-purple-700">Quyidagi so'zni Inglizchasini bilasizmi?</p>
+      <p className="mb-2 text-purple-700">Do you know the meaning of the word below?</p>
       <Card front={currentCard.front} back={currentCard.back} />
       <div className="mt-4 space-x-3">
-        <button className="bg-slate-500 text-white px-4 py-2 rounded" onClick={handleAgain}>Bilmayman</button>
-        <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={handleRemembered}>Bilaman</button>
+        <button className="bg-slate-500 text-white px-4 py-2 rounded" onClick={handleAgain}>I dont</button>
+        <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={handleRemembered}>I do</button>
       </div>
     </div>
   );
