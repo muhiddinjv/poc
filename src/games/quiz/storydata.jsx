@@ -12,7 +12,7 @@ export const storydata = {
           question: "¿Hay un jinete sin cabeza?",
           question_audio: "/aud/es/002_is_there.mp3",
           translation: "Bormi bir boshli chavandoz?",
-          answer: "si",
+          answer: "sí",
           messageForAnswer: "Hay un jinete sin cabeza.",
           messageAudio: "/aud/es/001_there_is.mp3",
           explanation:
@@ -67,7 +67,7 @@ export const storydata = {
           question: "¿Tiene un problema?",
           question_audio: "/aud/es/008_problem_yes.mp3",
           translation: "Uning muammosi bormi?",
-          answer: "si",
+          answer: "sí",
           messageForAnswer: "Él tiene un problema.",
           messageAudio: "/aud/es/007_problem.mp3",
           explanation:
@@ -120,7 +120,7 @@ export const storydata = {
           question: "¿Va al médico?",
           question_audio: "/aud/014_does_he_go_to_a_doctor.mp3",
           translation: "U shifokorga boradimi?",
-          answer: "si",
+          answer: "sí",
           messageForAnswer: "Él va al médico.",
           messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
           explanation:
@@ -174,7 +174,7 @@ export const storydata = {
           question_audio:
             "/aud/020_does_the_doctor_ask_what_s_your_problem.mp3",
           translation: 'Shifokor, "Sizning muammoingiz nima?" deb so‘raydimi?',
-          answer: "si",
+          answer: "sí",
           messageForAnswer:
             'El médico pregunta, "¿Cuál es tu problema?"',
           messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
