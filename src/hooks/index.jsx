@@ -13,7 +13,7 @@ export const useSpeechToText = (options) => {
     recognitionRef.current = new window.webkitSpeechRecognition();
     const recognition = recognitionRef.current;
     recognition.interimResults = options?.interimResults || true;
-    recognition.lang = options?.lang || 'en-ES';
+    recognition.lang = options?.lang || 'es-MX';
     recognition.continuous = options?.continuous || false;
 
     if("webkitGrammarList" in window) {
