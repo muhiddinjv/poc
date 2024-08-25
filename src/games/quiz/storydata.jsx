@@ -1,4 +1,234 @@
 export const storydata = {
+  quizTitle: "El Problema del Jinete Sin Cabeza",
+  quizSynopsis: "",
+  statements: [
+    {
+      image:
+        "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
+      statement: "Hay un jinete sin cabeza.",
+      statement_audio: "/aud/es/001_there_is.mp3",
+      questions: [
+        {
+          question: "¿Hay un jinete sin cabeza?",
+          question_audio: "/aud/es/002_is_there.mp3",
+          translation: "Bormi bir boshli chavandoz?",
+          answer: "sí",
+          messageForAnswer: "Hay un jinete sin cabeza.",
+          messageAudio: "/aud/es/001_there_is.mp3",
+          explanation:
+            "La pregunta es si hay un jinete sin cabeza, y la respuesta lo confirma.",
+          point: "20",
+        },
+        {
+          question: "¿Hay un jinete sin cabeza o un presidente?",
+          question_audio:
+            "/aud/es/003_or_president.mp3",
+          translation: "Bormi bir boshli chavandoz yoki bir prezident?",
+          answer: "jinete",
+          messageForAnswer: "Hay un jinete sin cabeza.",
+          messageAudio: "/aud/es/001_there_is.mp3",
+          explanation:
+            "La pregunta es si hay un jinete sin cabeza o un presidente. La respuesta confirma la presencia de un jinete sin cabeza.",
+          point: "20",
+        },
+        {
+          question: "¿Hay un presidente?",
+          question_audio: "/aud/es/004_president.mp3",
+          translation: "Bormi bir prezident?",
+          answer: "no",
+          messageForAnswer:
+            "No hay un presidente. Hay un jinete sin cabeza.",
+          messageAudio:
+            "/aud/es/005_no_president.mp3",
+          explanation:
+            "La pregunta es si hay un presidente, y la respuesta lo niega, confirmando la presencia de un jinete sin cabeza en su lugar.",
+          point: "20",
+        },
+        {
+          question: "¿Qué hay?",
+          question_audio: "/aud/es/006_what_is_there.mp3",
+          translation: "Nima bor?",
+          answer: "Hay un jinete sin cabeza.",
+          messageForAnswer: "Hay un jinete sin cabeza.",
+          messageAudio: "/aud/es/001_there_is.mp3",
+          explanation:
+            "La pregunta es qué está presente, y la respuesta confirma la presencia de un jinete sin cabeza.",
+          point: "20",
+        },
+      ],
+    },
+
+    {
+      image: "https://picsum.photos/500",
+      statement: "Él tiene un problema.",
+      statement_audio: "/aud/es/007_problem.mp3",
+      questions: [
+        {
+          question: "¿Tiene un problema?",
+          question_audio: "/aud/es/008_problem_yes.mp3",
+          translation: "Uning muammosi bormi?",
+          answer: "sí",
+          messageForAnswer: "Él tiene un problema.",
+          messageAudio: "/aud/es/007_problem.mp3",
+          explanation:
+            "La pregunta es si él tiene un problema, y la respuesta confirma que sí.",
+          point: "20",
+        },
+        {
+          question: "¿Tiene un problema o una solución?",
+          question_audio: "/aud/es/009_problem_or.mp3",
+          translation: "Uning muammosi yoki echimi bormi?",
+          answer: "problema",
+          messageForAnswer: "Él tiene un problema.",
+          messageAudio: "/aud/es/007_problem.mp3",
+          explanation:
+            "La pregunta es si él tiene un problema o una solución, y la respuesta confirma que tiene un problema.",
+          point: "20",
+        },
+        {
+          question: "¿Tiene una solución?",
+          question_audio: "/aud/es/010_solution_yes.mp3",
+          translation: "Uning echimi bormi?",
+          answer: "no",
+          messageForAnswer:
+            "Él no tiene una solución. Él tiene un problema.",
+          messageAudio:
+            "/aud/es/011_solution_no.mp3",
+          explanation:
+            "La pregunta es si él tiene una solución, y la respuesta confirma que no, pero que tiene un problema.",
+          point: "20",
+        },
+        {
+          question: "¿Qué tiene?",
+          question_audio: "/aud/es/012_what_does_he_have.mp3",
+          translation: "Uning nima bor?",
+          answer: "problema",
+          messageForAnswer: "Él tiene un problema.",
+          messageAudio: "/aud/es/007_problem.mp3",
+          explanation:
+            "La pregunta es qué tiene él, y la respuesta confirma que tiene un problema.",
+          point: "20",
+        },
+      ],
+    },
+    {
+      image: "https://picsum.photos/499",
+      statement: "Él va al médico.",
+      statement_audio: "/aud/013_he_goes_to_a_doctor.mp3",
+      questions: [
+        {
+          question: "¿Va al médico?",
+          question_audio: "/aud/014_does_he_go_to_a_doctor.mp3",
+          translation: "U shifokorga boradimi?",
+          answer: "sí",
+          messageForAnswer: "Él va al médico.",
+          messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
+          explanation:
+            "La pregunta es si él va al médico, y la respuesta confirma que sí.",
+          point: "20",
+        },
+        {
+          question: "¿Va al médico o al dentista?",
+          question_audio: "/aud/015_does_he_go_to_a_doctor_or_a_dentist.mp3",
+          translation: "U shifokorga yoki tish shifokoriga boradimi?",
+          answer: "médico",
+          messageForAnswer: "Él va al médico.",
+          messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
+          explanation:
+            "La pregunta es si él va al médico o al dentista, y la respuesta confirma que va al médico.",
+          point: "20",
+        },
+        {
+          question: "¿Va al dentista?",
+          question_audio: "/aud/016_does_he_go_to_a_dentist.mp3",
+          translation: "U tish shifokoriga boradimi?",
+          answer: "no",
+          messageForAnswer:
+            "Él no va al dentista. Él va al médico.",
+          messageAudio:
+            "/aud/017_he_does_not_go_to_a_dentist_he_goes_to_a_doctor.mp3",
+          explanation:
+            "La pregunta es si él va al dentista, y la respuesta confirma que no, sino que va al médico.",
+          point: "20",
+        },
+        {
+          question: "¿A dónde va?",
+          question_audio: "/aud/018_where_does_he_go.mp3",
+          translation: "U qayerga boradi?",
+          answer: "Él va al médico.",
+          messageForAnswer: "Él va al médico.",
+          messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
+          explanation:
+            "La pregunta es a dónde va él, y la respuesta confirma que va al médico.",
+          point: "20",
+        },
+      ],
+    },
+    {
+      image: "https://picsum.photos/498",
+      statement: 'El médico pregunta, "¿Cuál es tu problema?"',
+      statement_audio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+      questions: [
+        {
+          question: '¿El médico pregunta, "¿Cuál es tu problema?"?',
+          question_audio:
+            "/aud/020_does_the_doctor_ask_what_s_your_problem.mp3",
+          translation: 'Shifokor, "Sizning muammoingiz nima?" deb so‘raydimi?',
+          answer: "sí",
+          messageForAnswer:
+            'El médico pregunta, "¿Cuál es tu problema?"',
+          messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+          explanation:
+            "La pregunta es si el médico pregunta sobre el problema del paciente, y la respuesta lo confirma.",
+          point: "20",
+        },
+        {
+          question:
+            '¿El médico pregunta, "¿Cuál es tu problema?" o "¿Cómo estás?"',
+          question_audio:
+            "/aud/021_does_the_doctor_ask_what_s_your_problem_or_how_are_you.mp3",
+          translation:
+            'Shifokor, "Sizning muammoingiz nima?" yoki "Qalaysiz?" deb so‘raydimi?',
+          answer: '"¿Cuál es tu problema?"',
+          messageForAnswer:
+            'El médico pregunta, "¿Cuál es tu problema?"',
+          messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+          explanation:
+            "La pregunta contrasta entre dos posibles preguntas, y la respuesta confirma que el médico pregunta por el problema.",
+          point: "20",
+        },
+        {
+          question: '¿El médico pregunta, "¿Cómo estás?"',
+          question_audio: "/aud/022_does_the_doctor_ask_how_are_you.mp3",
+          translation: 'Shifokor, "Qalaysiz?" deb so‘raydimi?',
+          answer: "no",
+          messageForAnswer:
+            'El médico no pregunta, "¿Cómo estás?". El médico pregunta, "¿Cuál es tu problema?".',
+          messageAudio:
+            "/aud/023_the_doctor_does_not_ask_how_are_you_the_doctor_asks_what_s_your_problem.mp3",
+          explanation:
+            "La pregunta es si el médico pregunta sobre el estado general del paciente, y la respuesta lo niega, confirmando que el médico pregunta específicamente sobre el problema.",
+          point: "20",
+        },
+        {
+          question: '¿Qué pregunta el médico?',
+          question_audio: "/aud/024_what_does_the_doctor_ask.mp3",
+          translation: "Shifokor nima deb so'raydi?",
+          answer: 'El médico pregunta, "¿Cuál es tu problema?"',
+          messageForAnswer:
+            'El médico pregunta, "¿Cuál es tu problema?"',
+          messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+          explanation:
+            "La pregunta es sobre qué pregunta el médico, y la respuesta confirma que el médico pregunta sobre el problema.",
+          point: "20",
+        },
+      ],
+    },
+  ],
+};
+
+
+export const storydataEng = {
   quizTitle: "The Headless Horseman's Problem",
   quizSynopsis: "",
   statements: [
@@ -284,7 +514,7 @@ export const storydata = {
   },
 ]};
 
-export const storydata1 = {
+export const storydataTest = {
   quizTitle: "The Headless Horseman's Problem",
   quizSynopsis: "",
   statements: [

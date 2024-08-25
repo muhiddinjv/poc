@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-
 export const useSpeechToText = (options) => {
   const [isListening, setIsListening] = React.useState(false);
   const [transcript, setTranscript] = React.useState('');
@@ -14,7 +13,7 @@ export const useSpeechToText = (options) => {
     recognitionRef.current = new window.webkitSpeechRecognition();
     const recognition = recognitionRef.current;
     recognition.interimResults = options?.interimResults || true;
-    recognition.lang = options?.lang || 'en-US';
+    recognition.lang = options?.lang || 'en-ES';
     recognition.continuous = options?.continuous || false;
 
     if("webkitGrammarList" in window) {
@@ -178,8 +177,6 @@ function supermemo(item, grade) {
     efactor: nextEfactor,
   };
 }
-
-
 
 export const calculateNextReview = (card, difficulty) => {
   const { interval, repetition, efactor } = card;

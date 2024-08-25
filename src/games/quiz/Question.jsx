@@ -57,7 +57,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, isListening, startS
               isCorrect ? "bg-green-500" : "bg-red-500"
             }`}
           >
-            {isCorrect ? `${transcript} is correct! ${messageForAnswer}` : `${transcript} is inorrect! ${messageForAnswer}`}
+            {isCorrect ? `${transcript} es correcto! ${messageForAnswer}` : `${transcript} es incorrecto! ${messageForAnswer}`}
           </div>
         )}
         <div className={`flex gap-2 items-center justify-center`}>
