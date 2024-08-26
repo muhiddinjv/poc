@@ -48,7 +48,7 @@ export const storydata = {
           question: "¿Qué hay?",
           question_audio: "/aud/es/006_what_is_there.mp3",
           translation: "Nima bor?",
-          answer: "Hay un jinete sin cabeza.",
+          answer: "jinete",
           messageForAnswer: "Hay un jinete sin cabeza.",
           messageAudio: "/aud/es/001_there_is.mp3",
           explanation:
@@ -155,7 +155,7 @@ export const storydata = {
           question: "¿A dónde va?",
           question_audio: "/aud/018_where_does_he_go.mp3",
           translation: "U qayerga boradi?",
-          answer: "Él va al médico.",
+          answer: "médico",
           messageForAnswer: "Él va al médico.",
           messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
           explanation:
@@ -189,7 +189,7 @@ export const storydata = {
             "/aud/021_does_the_doctor_ask_what_s_your_problem_or_how_are_you.mp3",
           translation:
             'Shifokor, "Sizning muammoingiz nima?" yoki "Qalaysiz?" deb so‘raydimi?',
-          answer: '"¿Cuál es tu problema?"',
+          answer: 'Cuál es tu problema?',
           messageForAnswer:
             'El médico pregunta, "¿Cuál es tu problema?"',
           messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
@@ -214,7 +214,7 @@ export const storydata = {
           question: '¿Qué pregunta el médico?',
           question_audio: "/aud/024_what_does_the_doctor_ask.mp3",
           translation: "Shifokor nima deb so'raydi?",
-          answer: 'El médico pregunta, "¿Cuál es tu problema?"',
+          answer: 'El médico pregunta, "Cual es tu problema?"',
           messageForAnswer:
             'El médico pregunta, "¿Cuál es tu problema?"',
           messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
