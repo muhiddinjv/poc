@@ -114,6 +114,43 @@ export const useSpeechToTexts = () => {
   return { spokenTexts, transcript, isListening, startListening, stopListening };
 };
 
+export const useTextToSpeech = () => {
+  const [text, setText] = useState('');
+  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [speaking, setSpeaking] = useState(false);
+
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    const voices = synth.getVoices();
+    const googleEspanol = voices.find(voice => voice.name === 'Google español de Estados Unidos');
+    setSelectedVoice(googleEspanol);
+  }, []);
+
+  const speak = () => {
+    if (text !== '') {
+      const utterThis = new SpeechSynthesisUtterance(text);
+      utterThis.voice = selectedVoice;
+      utterThis.pitch = 1;
+      utterThis.rate = 1;
+      window.speechSynthesis.speak(utterThis);
+      setSpeaking(true);
+    }
+  };
+
+  const stopSpeaking = () => {
+    window.speechSynthesis.cancel();
+    setSpeaking(false);
+  };
+
+  return {
+    text,
+    setText,
+    speak,
+    stopSpeaking,
+    speaking,
+  };
+};
+
 export const useSpacedRepetition = () => {
   const getDay = (forDate = Date.now()) => {
     const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;

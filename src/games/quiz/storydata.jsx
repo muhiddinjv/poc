@@ -9,7 +9,7 @@ export const storydata = {
       statement_audio: "/aud/es/001_there_is.mp3",
       questions: [
         {
-          question: "¿Hay un jinete sin cabeza?",
+          question: "Hay un jinete sin cabeza?",
           question_audio: "/aud/es/002_is_there.mp3",
           translation: "Bormi bir boshli chavandoz?",
           answer: "sí",
@@ -32,7 +32,7 @@ export const storydata = {
           point: "20",
         },
         {
-          question: "¿Hay un presidente?",
+          question: "Hay un presidente?",
           question_audio: "/aud/es/004_president.mp3",
           translation: "Bormi bir prezident?",
           answer: "no",
@@ -100,7 +100,7 @@ export const storydata = {
         },
         {
           question: "¿Qué tiene?",
-          question_audio: "/aud/es/012_what_does_he_have.mp3",
+          question_audio: "/aud/es/012_problem_what.mp3",
           translation: "Uning nima bor?",
           answer: "problema",
           messageForAnswer: "Él tiene un problema.",
@@ -114,50 +114,50 @@ export const storydata = {
     {
       image: "https://picsum.photos/499",
       statement: "Él va al médico.",
-      statement_audio: "/aud/013_he_goes_to_a_doctor.mp3",
+      statement_audio: "/aud/013_to_doctor.mp3",
       questions: [
         {
           question: "¿Va al médico?",
-          question_audio: "/aud/014_does_he_go_to_a_doctor.mp3",
+          question_audio: "/aud/014_to_doctor_yes.mp3",
           translation: "U shifokorga boradimi?",
           answer: "sí",
           messageForAnswer: "Él va al médico.",
-          messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
+          messageAudio: "/aud/013_to_doctor.mp3",
           explanation:
             "La pregunta es si él va al médico, y la respuesta confirma que sí.",
           point: "20",
         },
         {
           question: "¿Va al médico o al dentista?",
-          question_audio: "/aud/015_does_he_go_to_a_doctor_or_a_dentist.mp3",
+          question_audio: "/aud/015_to_doctor_or.mp3",
           translation: "U shifokorga yoki tish shifokoriga boradimi?",
           answer: "médico",
           messageForAnswer: "Él va al médico.",
-          messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
+          messageAudio: "/aud/013_to_doctor.mp3",
           explanation:
             "La pregunta es si él va al médico o al dentista, y la respuesta confirma que va al médico.",
           point: "20",
         },
         {
           question: "¿Va al dentista?",
-          question_audio: "/aud/016_does_he_go_to_a_dentist.mp3",
+          question_audio: "/aud/016_to_doctor_no.mp3",
           translation: "U tish shifokoriga boradimi?",
           answer: "no",
           messageForAnswer:
             "Él no va al dentista. Él va al médico.",
           messageAudio:
-            "/aud/017_he_does_not_go_to_a_dentist_he_goes_to_a_doctor.mp3",
+            "/aud/017_to_doctor_no_yes.mp3",
           explanation:
             "La pregunta es si él va al dentista, y la respuesta confirma que no, sino que va al médico.",
           point: "20",
         },
         {
           question: "¿A dónde va?",
-          question_audio: "/aud/018_where_does_he_go.mp3",
+          question_audio: "/aud/018_to_doctor_wh.mp3",
           translation: "U qayerga boradi?",
           answer: "médico",
           messageForAnswer: "Él va al médico.",
-          messageAudio: "/aud/013_he_goes_to_a_doctor.mp3",
+          messageAudio: "/aud/013_to_doctor.mp3",
           explanation:
             "La pregunta es a dónde va él, y la respuesta confirma que va al médico.",
           point: "20",
@@ -167,17 +167,17 @@ export const storydata = {
     {
       image: "https://picsum.photos/498",
       statement: 'El médico pregunta, "¿Cuál es tu problema?"',
-      statement_audio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+      statement_audio: "/aud/019_doctor_ask.mp3",
       questions: [
         {
           question: '¿El médico pregunta, "¿Cuál es tu problema?"?',
           question_audio:
-            "/aud/020_does_the_doctor_ask_what_s_your_problem.mp3",
+            "/aud/020_doctor_ask_yes.mp3",
           translation: 'Shifokor, "Sizning muammoingiz nima?" deb so‘raydimi?',
           answer: "sí",
           messageForAnswer:
             'El médico pregunta, "¿Cuál es tu problema?"',
-          messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+          messageAudio: "/aud/019_doctor_ask.mp3",
           explanation:
             "La pregunta es si el médico pregunta sobre el problema del paciente, y la respuesta lo confirma.",
           point: "20",
@@ -186,38 +186,38 @@ export const storydata = {
           question:
             '¿El médico pregunta, "¿Cuál es tu problema?" o "¿Cómo estás?"',
           question_audio:
-            "/aud/021_does_the_doctor_ask_what_s_your_problem_or_how_are_you.mp3",
+            "/aud/021_doctor_ask_or.mp3",
           translation:
             'Shifokor, "Sizning muammoingiz nima?" yoki "Qalaysiz?" deb so‘raydimi?',
           answer: 'Cuál es tu problema?',
           messageForAnswer:
             'El médico pregunta, "¿Cuál es tu problema?"',
-          messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+          messageAudio: "/aud/019_doctor_ask.mp3",
           explanation:
             "La pregunta contrasta entre dos posibles preguntas, y la respuesta confirma que el médico pregunta por el problema.",
           point: "20",
         },
         {
           question: '¿El médico pregunta, "¿Cómo estás?"',
-          question_audio: "/aud/022_does_the_doctor_ask_how_are_you.mp3",
+          question_audio: "/aud/022_doctor_ask_no.mp3",
           translation: 'Shifokor, "Qalaysiz?" deb so‘raydimi?',
           answer: "no",
           messageForAnswer:
             'El médico no pregunta, "¿Cómo estás?". El médico pregunta, "¿Cuál es tu problema?".',
           messageAudio:
-            "/aud/023_the_doctor_does_not_ask_how_are_you_the_doctor_asks_what_s_your_problem.mp3",
+            "/aud/023_doctor_ask_no_yes.mp3",
           explanation:
             "La pregunta es si el médico pregunta sobre el estado general del paciente, y la respuesta lo niega, confirmando que el médico pregunta específicamente sobre el problema.",
           point: "20",
         },
         {
           question: '¿Qué pregunta el médico?',
-          question_audio: "/aud/024_what_does_the_doctor_ask.mp3",
+          question_audio: "/aud/024_doctor_ask_wh.mp3",
           translation: "Shifokor nima deb so'raydi?",
           answer: 'El médico pregunta, "Cual es tu problema?"',
           messageForAnswer:
             'El médico pregunta, "¿Cuál es tu problema?"',
-          messageAudio: "/aud/019_the_doctor_asks_what_s_your_problem.mp3",
+          messageAudio: "/aud/019_doctor_ask.mp3",
           explanation:
             "La pregunta es sobre qué pregunta el médico, y la respuesta confirma que el médico pregunta sobre el problema.",
           point: "20",

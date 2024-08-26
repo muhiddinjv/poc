@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import { supabase } from '../api/supabaseClient';
 import { Link } from 'react-router-dom';
 
+// import { AssemblyAI } from 'assemblyai'
+
+// const client = new AssemblyAI({
+//   apiKey: "478c3155c2384010bdd7ebbfc6b10844"
+// })
+
+// const audioUrl = 'https://storage.googleapis.com/aai-web-samples/5_common_sports_injuries.mp3'
+
+// const run = async () => {
+//   const transcript = await client.transcripts.transcribe({audio_url: audioUrl})
+//   console.log(transcript.text)
+// }
+
 export default function SignUp() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');

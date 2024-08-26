@@ -157,5 +157,3 @@ const Quiz = ({ shuffleQuestions = false }) => {
 };
 
 export default Quiz;
-
-
