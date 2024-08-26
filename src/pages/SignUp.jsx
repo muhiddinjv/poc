@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { supabase } from '../api/supabaseClient';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function SignUp() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [confirmMessage, setConfirmMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setMessage(''); // Clear any previous messages
+    //Clear any prev msgs
+    setConfirmMessage(''); 
+    setConfirmMessage('');
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -24,9 +26,13 @@ export default function SignUp() {
     });
 
     if (error) {
-      setMessage(error.message);
+      if(error.status === 429){
+        setErrorMessage('Please, sign up after 1 hour!');
+      } else {
+        setErrorMessage(error.message);
+      }
     } else {
-      setMessage('Please, check your email for the verification link!');
+      setConfirmMessage('Check your email for the verification link!');
     }
   };
 
@@ -72,7 +78,7 @@ export default function SignUp() {
             Sign Up
           </button>
         </form>
-        {message && <p className="mt-4 text-center text-red-500">{message}</p>}
+        {(confirmMessage || errorMessage) && <p className={`mt-4 text-center ${confirmMessage ? 'text-green-500':'text-red-500'}`}>{confirmMessage || errorMessage}</p>}
         <p className="mt-6 text-center text-gray-700">
           Already have an account?{' '}
           <Link to="/signin" className="text-purple-600 hover:underline">
