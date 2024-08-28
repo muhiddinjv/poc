@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.css'
-import TgmApp from './temp/TgmApp.jsx'
+import App from './App.jsx'
 import {createRoot} from 'react-dom/client'
 import { Analytics } from "@vercel/analytics/react";
 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const root = createRoot(container);
     root.render(
       <React.StrictMode>
-        <TgmApp/>
+        <App/>
         <Analytics />
       </React.StrictMode>
     )}
