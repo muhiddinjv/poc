@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../api/supabaseClient';
+import { supabase } from './api/supabaseClient';
 import { Link } from 'react-router-dom';
 
 // import { AssemblyAI } from 'assemblyai'

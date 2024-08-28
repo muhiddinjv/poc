@@ -4,9 +4,6 @@ import NoPage from "./pages/NoPage";
 import Words from "./words/Words";
 import Quiz from "./games/quiz/Quiz";
 import Story from "./pages/Story";
-// import SignUp from "./pages/SignUp";
-// import SignIn from "./pages/SignIn";
-// import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
