@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../api/supabaseClient';
-import { faSignOut } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const stories = [
   { id: 1, title: "Horseman's Problem", img: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg", words: [], games: [] },
@@ -11,35 +8,35 @@ const stories = [
 ];
 
 const Stories = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  // const [user, setUser] = useState(null);
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user || null);
-    };
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const { data: { session } } = await supabase.auth.getSession();
+  //     setUser(session?.user || null);
+  //   };
 
-    getUser();
-  }, []);
+  //   getUser();
+  // }, []);
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    navigate('/signin'); // Redirect to sign-in page after sign-out
-  };
+  // const handleSignOut = async () => {
+  //   await supabase.auth.signOut();
+  //   setUser(null);
+  //   navigate('/signin'); // Redirect to sign-in page after sign-out
+  // };
 
   return (
     <section className="min-h-screen bg-purple-500 flex flex-col items-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white flex justify-between items-center mb-4 rounded-md">
           <h1 className="text-3xl font-bold text-purple-600 p-2 text-center w-full">TaleTalk</h1>
-          {user && (
+          {/* {user && (
             <div className="flex items-center space-x-3 mr-2">
-              {/* <img src={user.user_metadata.avatar_url || 'https://placehold.co/150'} alt="User Avatar" className="hidden w-10 h-10 rounded-full object-cover" /> */}
+              <img src={user.user_metadata.avatar_url || 'https://placehold.co/150'} alt="User Avatar" className="hidden w-10 h-10 rounded-full object-cover" />
               <FontAwesomeIcon size='xl' icon={faSignOut} onClick={handleSignOut} className="p-1 text-purple-600 cursor-pointer hover:text-purple-700"/>
             </div>
-          )}
+          )} */}
         </div>
         {stories.map((story, index) => (
           <div key={index} className="bg-white rounded-lg shadow-lg mb-4 p-2 flex items-center space-x-3">
