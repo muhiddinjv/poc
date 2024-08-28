@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-route
 import { GoogleLogin, googleLogout, GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
-import Stories from "./pages/Stories";
-import NoPage from "./pages/NoPage";
-import Words from "./words/Words";
-import Quiz from "./games/quiz/Quiz";
-import Story from "./pages/Story";
+import Stories from "../pages/Stories";
+import NoPage from "../pages/NoPage";
+import Words from "../words/Words";
+import Quiz from "../games/quiz/Quiz";
+import Story from "../pages/Story";
 
 
 const ProtectedRoute = ({ children, user }) => {
@@ -19,7 +19,7 @@ const SignIn = ({ onLoginSuccess }) => {
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse?.credential);
-    console.log(decoded);
+    console.log({decoded});
     onLoginSuccess({
       name: decoded.name,
       picture: decoded.picture,

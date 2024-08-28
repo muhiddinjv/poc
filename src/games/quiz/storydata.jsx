@@ -57,7 +57,6 @@ export const storydata = {
         },
       ],
     },
-
     {
       image: "https://picsum.photos/500",
       statement: "Él tiene un problema.",

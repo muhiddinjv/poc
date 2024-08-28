@@ -39,6 +39,7 @@ export default function SignUp() {
     });
 
     if (error) {
+      console.log(error)
       if(error.status === 429){
         setErrorMessage('Please, sign up after 1 hour!');
       } else {
