@@ -1,22 +1,20 @@
 import React from "react";
-import { LoginButton } from '@telegram-auth/react';
 
 function TgmApp() {
+  const botName = "ReactAuthBot"; // Bot name from BotFather
+  const handleBot = (user) => {
+    console.log(user);
+  };
 
   return (
     <main className="flex justify-center items-center min-h-screen">
-        <LoginButton
-            botUsername="ReactAuthBot"
-            authCallbackUrl="https://taletalk.vercel.app/"
-            onAuthCallback={(data) => {
-                console.log(data);
-                // call your backend here to validate the data and sign in the user
-            }}
-            buttonSize="large" // "large" | "medium" | "small"
-            cornerRadius={5} // 0 - 20
-            showAvatar={true} // true | false
-            lang="en"
-        />
+      <TgmLoginBtn
+        botName={botName}
+        buttonSize="large" // "large" | "medium" | "small"
+        cornerRadius={3} // 0 - 20
+        usePic={true} // true | false
+        dataOnauth={handleBot}
+      />
     </main>
   );
 }
