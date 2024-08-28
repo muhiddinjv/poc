@@ -1,4 +1,5 @@
 import React from "react";
+import TgmLoginBtn from "./TgmLoginBtn";
 
 function TgmApp() {
   const botName = "ReactAuthBot"; // Bot name from BotFather
