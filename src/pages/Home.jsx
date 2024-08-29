@@ -7,7 +7,7 @@ const stories = [
   // Add more stories here
 ];
 
-const Stories = () => {
+const Home = () => {
   return (
     <section className="min-h-screen bg-purple-500 flex flex-col items-center p-4">
       <h1 className=" bg-white rounded-md mb-4 text-3xl font-bold text-purple-600 p-2 text-center">TaleTalk</h1>
@@ -30,4 +30,4 @@ const Stories = () => {
   );
 };
 
-export default Stories;
+export default Home;

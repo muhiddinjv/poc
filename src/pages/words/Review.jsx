@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import db from '../db';
+import db from '../../db';
 import Card from './Card';
-import { useSpacedRepetition, calculateNextReview } from '../hooks';
+import { useSpacedRepetition, calculateNextReview } from '../../hooks';
 
 function Review({ deck, setDecks }) {
   const { getDueCards } = useSpacedRepetition();

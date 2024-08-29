@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import db from '../db';
+import db from '../../db';
 import Review from './Review';
 import Streaks from './Streaks';
-import BackBtn from '../components/BackBtn';
-import seedData from '../db/seed';
+import BackBtn from '../../components/BackBtn';
+import seedData from '../../db/seed';
 
 function Words() {
   const [decks, setDecks] = useState([]);

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { useSpeechToText } from "../../hooks";
+import { useSpeechToText } from "../../../hooks";
 import Question from "./Question";
 import ProgressBar from "./ProgressBar";
 import QuizResults from "./QuizResults";
 import { storydata } from "./storydata";
-import TopBar from "../../components/TopBar";
+import TopBar from "../../../components/TopBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 

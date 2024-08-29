@@ -1,6 +1,6 @@
 import React from 'react'
-import WordHighlighter from '../story/Highlighter'
-import BackBtn from '../components/BackBtn'
+import WordHighlighter from './Highlighter'
+import BackBtn from '../../components/BackBtn'
 
 function Story() {
   return (
