@@ -48,7 +48,7 @@ export default defineConfig({
             src: faviconURL,
             sizes: "512x512",
             type: "image/png",
-            purpose: "favicon mask",
+            purpose: "any",
           },
         ],
       },
