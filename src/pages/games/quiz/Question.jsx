@@ -39,6 +39,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
             <div className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}>
               <Speech
                 text={question}
+                voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
                 lang="es-US"
                 stopBtn={false}
               />
@@ -64,6 +65,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
             <div className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-pink-500' : 'bg-gray-500'}`}>
               <Speech
                 text={isCorrect ? `${transcript} es correcto! ${messageForAnswer}` : `${transcript} es incorrecto! ${messageForAnswer}`}
+                voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
                 lang="es-US"
                 stopBtn={false}
               />

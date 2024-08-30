@@ -148,6 +148,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
               <Speech
                 text={currentStatement.statement}
                 lang="es-US"
+                voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
                 stopBtn={false}
               />
             </div>
