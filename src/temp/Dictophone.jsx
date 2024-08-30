@@ -58,7 +58,7 @@ const Dictaphone = () => {
           <p className="mr-2">Microphone: {listening ? 'on' : 'off'}</p>
           <button
             className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ${listening ? 'hidden' : ''}`}
-            onClick={SpeechRecognition.startListening}
+            onClick={()=>SpeechRecognition.startListening({ language: 'es-US' })}
           >
             Start
           </button>

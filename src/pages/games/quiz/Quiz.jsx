@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { useSpeechToText } from "../../../hooks";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import Question from "./Question";
 import ProgressBar from "./ProgressBar";
 import QuizResults from "./QuizResults";
@@ -21,7 +21,23 @@ const Quiz = ({ shuffleQuestions = false }) => {
   const [showNextButton, setShowNextButton] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [statementPlayed, setStatementPlayed] = useState(false);
-  const { transcript, isListening, startListening, stopListening } = useSpeechToText({ continuous: false });
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return (
+      <div className="bg-purple-500 min-h-screen flex flex-col justify-center items-center">
+        <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
+          <span>Browser doesn't support speech recognition.</span>
+        </div>
+      </div>
+    );
+  }
 
   const maxPoints = useMemo(() => {
     return storydata.statements.reduce(
@@ -75,6 +91,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
     setSelectedAnswer(null);
     setFinalTranscript(""); // Clear the final transcript on next question
     setTranscriptLocked(false); // Unlock the transcript for the next question
+    resetTranscript(); // Reset the transcript for the next question
 
     if (currentQuestionIndex < currentStatement.questions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
@@ -84,7 +101,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
     } else {
       setQuizCompleted(true);
     }
-  }, [currentQuestionIndex, currentStatementIndex, currentStatement.questions.length, shuffledStatements.length]);
+  }, [currentQuestionIndex, currentStatementIndex, currentStatement.questions.length, shuffledStatements.length, resetTranscript]);
 
   const handleTryAgain = useCallback(() => {
     setCurrentStatementIndex(0);
@@ -100,9 +117,9 @@ const Quiz = ({ shuffleQuestions = false }) => {
     setStatementPlayed(true);
   }, [currentStatement]);
 
-  const startStopListening = useCallback(() => {
-    isListening ? stopListening() : startListening();
-  }, [isListening, stopListening, startListening]);
+  const startStopListening = () => {
+    listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening({ language: 'es-US' });
+  };
 
   if (quizCompleted) {
     return (
@@ -142,7 +159,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
           questionObj={currentQuestion}
           transcript={finalTranscript} // Display final transcript
           selectedAnswer={selectedAnswer}
-          isListening={isListening}
+          listening={listening}
           startStopListening={startStopListening}
           statementPlayed={statementPlayed}
         />        
