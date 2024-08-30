@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faVolumeMute, faMicrophone, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faVolumeMute, faMicrophone, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from 'react';
+import Speech from "react-text-to-speech";
 
 const Question = ({ questionObj, selectedAnswer, transcript, listening, startStopListening, statementPlayed }) => {
-  const { question, question_audio, messageAudio, answer, messageForAnswer } = questionObj;
+  const { question, answer, messageForAnswer } = questionObj;
   const [messageForAnswerVisible, setMessageForAnswerVisible] = useState(false);
   const [questionVisible, setQuestionVisible] = useState(false);
 
@@ -15,29 +16,15 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
     }
   }, [transcript]);
 
-  const playQuestionAudio = () => {
-    if(statementPlayed){
-      const audio = new Audio(question_audio);
-      audio.play();
-    }
-  }
-
   const toggleQuestionVisibility = () => {
-    if(statementPlayed){
+    if (statementPlayed) {
       setQuestionVisible(!questionVisible);
     }
-  }
-
-  const playAnswerAudio = () => {
-    if(transcript){
-      const audio = new Audio(messageAudio);
-      audio.play();
-    }
-  }
+  };
 
   const toggleMessageForAnswerVisibility = () => {
     setMessageForAnswerVisible(!messageForAnswerVisible);
-  }
+  };
 
   return (
     <div className="relative mt-4">
@@ -48,8 +35,20 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
           </div>
         )}
         <div className="flex gap-2 items-center justify-center">
-          <FontAwesomeIcon icon={statementPlayed ? faVolumeUp : faVolumeMute} onClick={playQuestionAudio} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
-          <FontAwesomeIcon icon={statementPlayed ? faEye : faEyeSlash} onClick={toggleQuestionVisibility} className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}/>
+          {statementPlayed ? (
+            <div className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}>
+              <Speech
+                text={question}
+                lang="es-US"
+                stopBtn={false}
+              />
+            </div>
+          ) : <FontAwesomeIcon icon={faVolumeMute} className="cursor-pointer text-white p-3 rounded-lg bg-gray-500"/>}
+          <FontAwesomeIcon
+            icon={statementPlayed ? faEye : faEyeSlash}
+            onClick={toggleQuestionVisibility}
+            className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}
+          />
         </div>
         {(transcript && messageForAnswerVisible) && (
           <div onClick={toggleMessageForAnswerVisibility}
@@ -61,8 +60,20 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
           </div>
         )}
         <div className={`flex gap-2 items-center justify-center`}>
-          <FontAwesomeIcon icon={transcript ? faVolumeUp : faVolumeMute} onClick={playAnswerAudio} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
-          <FontAwesomeIcon icon={transcript ? faEye : faEyeSlash} onClick={toggleMessageForAnswerVisibility} className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}/>
+          {transcript ? (
+            <div className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-pink-500' : 'bg-gray-500'}`}>
+              <Speech
+                text={isCorrect ? `${transcript} es correcto! ${messageForAnswer}` : `${transcript} es incorrecto! ${messageForAnswer}`}
+                lang="es-US"
+                stopBtn={false}
+              />
+            </div>
+          ) : <FontAwesomeIcon icon={faVolumeMute} className="cursor-pointer text-white p-3 rounded-lg bg-gray-500"/>}
+          <FontAwesomeIcon
+            icon={transcript ? faEye : faEyeSlash}
+            onClick={toggleMessageForAnswerVisibility}
+            className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}
+          />
         </div>
       </div>
       <div className="flex justify-center items-center m-10">
@@ -73,6 +84,5 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
     </div>
   );
 };
-
 
 export default Question;

@@ -5,8 +5,7 @@ import ProgressBar from "./ProgressBar";
 import QuizResults from "./QuizResults";
 import { storydata } from "./storydata";
 import TopBar from "../../../components/TopBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import Speech from "react-text-to-speech";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
@@ -111,12 +110,6 @@ const Quiz = ({ shuffleQuestions = false }) => {
     setQuizCompleted(false);
   }, []);
 
-  const playStatementAudio = useCallback(() => {
-    const audio = new Audio(currentStatement.statement_audio);
-    audio.play();
-    setStatementPlayed(true);
-  }, [currentStatement]);
-
   const startStopListening = () => {
     listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening({ language: 'es-US' });
   };
@@ -151,7 +144,13 @@ const Quiz = ({ shuffleQuestions = false }) => {
             <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72 rounded" />
           )}
           <div className="flex items-center text-blue-800">
-            <FontAwesomeIcon size="lg" icon={faVolumeUp} onClick={playStatementAudio} className={`cursor-pointer p-1 rounded-full ${!statementPlayed && 'animation-pulse'}`}/>
+            <div onClick={()=>setStatementPlayed(true)} className={`cursor-pointer p-1 rounded-full ${!statementPlayed && 'animation-pulse'}`}>
+              <Speech
+                text={currentStatement.statement}
+                lang="es-US"
+                stopBtn={false}
+              />
+            </div>
             <h2 className="text-lg font-semibold m-2">{currentStatement.statement}</h2>
           </div>
         </div>
