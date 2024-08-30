@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import React from 'react'
 import './index.css'
 import App from './App.jsx'

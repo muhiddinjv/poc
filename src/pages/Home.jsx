@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Dictaphone from '../temp/Dictophone';
 
 const stories = [
   { id: 1, title: "Horseman's Problem", img: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg", words: [], games: [] },
@@ -26,6 +27,7 @@ const Home = () => {
           </div>
         ))}
       </div>
+      <Dictaphone />
     </section>
   );
 };
