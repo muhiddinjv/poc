@@ -41,6 +41,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
                 text={question}
                 voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
                 lang="es-US"
+                rate={0.8}
                 stopBtn={false}
               />
             </div>
@@ -67,6 +68,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
                 text={isCorrect ? `${transcript} es correcto! ${messageForAnswer}` : `${transcript} es incorrecto! ${messageForAnswer}`}
                 voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
                 lang="es-US"
+                rate={0.8}
                 stopBtn={false}
               />
             </div>
