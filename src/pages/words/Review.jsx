@@ -71,9 +71,7 @@ function Review({ deck, setDecks, state, setState, startTour }) {
   return (
     <div className="flex flex-col items-center">
       <div className="mb-2 flex items-center space-x-2">
-        
-          Cards left: {dueCards.length - currentCardIndex}
-        
+        Cards left: {dueCards.length - currentCardIndex}
       </div>
       <p className="mb-2 text-purple-700">Do you know what this word in Spanish?</p>
       {currentCard && <Card front={currentCard.front} back={currentCard.back} />}
