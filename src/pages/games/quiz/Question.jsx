@@ -31,12 +31,12 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
       <div className='flex gap-6 justify-center text-lg'>
         {questionVisible && (
           <div onClick={toggleQuestionVisibility} className="absolute top-0 left-1/2 -translate-x-1/2 bg-purple-500 text-white p-2 rounded shadow-2xl">
-            <p className="">{question}</p>
+            <p>{question}</p>
           </div>
         )}
         <div className="flex gap-2 items-center justify-center">
           {statementPlayed ? (
-            <div className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}>
+            <div id="play-question" className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}>
               <Speech
                 text={question}
                 voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
@@ -45,8 +45,9 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
                 stopBtn={false}
               />
             </div>
-          ) : <FontAwesomeIcon icon={faVolumeMute} className="cursor-pointer text-white p-3 rounded-lg bg-gray-500"/>}
+          ) : <FontAwesomeIcon id="play-question" icon={faVolumeMute} className="cursor-pointer text-white p-3 rounded-lg bg-gray-500"/>}
           <FontAwesomeIcon
+            id="reveal-question"
             icon={statementPlayed ? faEye : faEyeSlash}
             onClick={toggleQuestionVisibility}
             className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-blue-500' : 'bg-gray-500'}`}
@@ -63,7 +64,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
         )}
         <div className={`flex gap-2 items-center justify-center`}>
           {transcript ? (
-            <div className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-pink-500' : 'bg-gray-500'}`}>
+            <div id="play-answer" className={`cursor-pointer text-white p-3 rounded-lg ${statementPlayed ? 'bg-pink-500' : 'bg-gray-500'}`}>
               <Speech
                 text={isCorrect ? `${transcript} es correcto! ${messageForAnswer}` : `${transcript} es incorrecto! ${messageForAnswer}`}
                 voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
@@ -72,8 +73,9 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
                 stopBtn={false}
               />
             </div>
-          ) : <FontAwesomeIcon icon={faVolumeMute} className="cursor-pointer text-white p-3 rounded-lg bg-gray-500"/>}
+          ) : <FontAwesomeIcon id="play-answer" icon={faVolumeMute} className="cursor-pointer text-white p-3 rounded-lg bg-gray-500"/>}
           <FontAwesomeIcon
+            id="reveal-answer"
             icon={transcript ? faEye : faEyeSlash}
             onClick={toggleMessageForAnswerVisibility}
             className={`cursor-pointer text-white p-3 rounded-lg ${transcript ? 'bg-pink-500' : 'bg-gray-500'}`}
@@ -82,7 +84,7 @@ const Question = ({ questionObj, selectedAnswer, transcript, listening, startSto
       </div>
       <div className="flex justify-center items-center m-10">
         <div className={`h-20 w-20 bg-red-400 rounded-full flex justify-center items-center ${listening && 'animation-pulse'}`}>
-          <FontAwesomeIcon size='3x' className="cursor-pointer text-white" icon={faMicrophone} onClick={startStopListening} />
+          <FontAwesomeIcon id="say-answer" size='3x' className="cursor-pointer text-white" icon={faMicrophone} onClick={startStopListening} />
         </div>
       </div>
     </div>

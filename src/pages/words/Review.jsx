@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import db from '../../db';
 import Card from './Card';
 import { useSpacedRepetition, calculateNextReview } from '../../hooks';
+import Joyride from 'react-joyride';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Review({ deck, setDecks }) {
+function Review({ deck, setDecks, state, setState, startTour }) {
   const { getDueCards } = useSpacedRepetition();
   const [dueCards, setDueCards] = useState([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   useEffect(() => {
+    const wordsTourCompleted = localStorage.getItem('wordsTourCompleted');
+    
+    if (!wordsTourCompleted) {
+      setState((prevState) => ({ ...prevState, run: true }));
+    }
+
     if (deck && deck.cards) {
       const due = getDueCards(deck.cards);
       setDueCards(due);
@@ -44,6 +53,15 @@ function Review({ deck, setDecks }) {
     setDueCards(updatedQueue);
   };
 
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+
+    if (status === 'finished' || status === 'skipped') {
+      localStorage.setItem('wordsTourCompleted', 'true');
+      setState((prevState) => ({ ...prevState, run: false }));
+    }
+  };
+
   if (dueCards.length === 0) {
     return <div>No cards available for review.</div>;
   }
@@ -52,16 +70,32 @@ function Review({ deck, setDecks }) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="mb-2">
-        Cards left: {dueCards.length - currentCardIndex}
+      <div className="mb-2 flex items-center space-x-2">
+        
+          Cards left: {dueCards.length - currentCardIndex}
+        
       </div>
-      <p className="mb-2 text-purple-700">Do you know what this means?</p>
+      <p className="mb-2 text-purple-700">Do you know what this word in Spanish?</p>
       {currentCard && <Card front={currentCard.front} back={currentCard.back} />}
+      <Joyride
+        continuous
+        run={state.run}
+        steps={state.steps}
+        hideCloseButton
+        scrollToFirstStep
+        showSkipButton
+        showProgress
+        callback={handleJoyrideCallback}
+        locale={{
+          skip: <span className="bg-blue-500 text-white px-3 py-2 rounded">Skip</span>,
+          back: <span className="bg-purple-500 text-white px-3 py-2 rounded">Back</span>,
+        }}
+      />
       <div className="mt-4 space-x-3">
-        <button className="bg-slate-500 text-white px-4 py-2 rounded" onClick={() => handleReview(1)}>Again</button>
-        <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={() => handleReview(2)}>Hard</button>
-        <button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={() => handleReview(3)}>Good</button>
-        <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={() => handleReview(4)}>Easy</button>
+        <button id='again' className="bg-slate-500 text-white px-4 py-2 rounded" onClick={() => handleReview(1)}>Again</button>
+        <button id='hard' className="bg-red-500 text-white px-4 py-2 rounded" onClick={() => handleReview(2)}>Hard</button>
+        <button id='good' className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={() => handleReview(3)}>Good</button>
+        <button id='easy' className="bg-green-500 text-white px-4 py-2 rounded" onClick={() => handleReview(4)}>Easy</button>
       </div>
     </div>
   );

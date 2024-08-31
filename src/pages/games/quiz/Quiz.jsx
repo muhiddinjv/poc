@@ -6,10 +6,55 @@ import QuizResults from "./QuizResults";
 import { storydata } from "./storydata";
 import TopBar from "../../../components/TopBar";
 import Speech from "react-text-to-speech";
+import Joyride from "react-joyride";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
 const Quiz = ({ shuffleQuestions = false }) => {
+  const steps1 = [
+    {
+      content: <h2 className="text-xl">Let's answer some questions!</h2>,
+      placement: "center",
+      target: "body",
+    },
+    {
+      content: <h2>Listen to the statement as many times as you need to learn its pronunciation</h2>,
+      placement: "bottom",
+      target: "#play-statement",
+      title: "Step 1: Play the Statement",
+    },
+    {
+      content: <h2>Listen to the question to see if you can understand it without seeing it</h2>,
+      placement: "bottom",
+      target: "#play-question",
+      title: "Step 2: Play the Question",
+    },    {
+      content: <h2>See the question if you do not understand it while listening</h2>,
+      placement: "bottom",
+      target: "#reveal-question",
+      title: "Step 3: Reveal the Question",
+    },
+    {
+      content: <h2>You have only 3-5 seconds to say only 1 or 2 word answers like "Si", "No" or "Jinete"</h2>,
+      placement: "bottom",
+      target: "#say-answer",
+      title: "Step 4: Say the Answer",
+    },
+    {
+      content: <h2>Listen to the correct answer to see if your answer is correct</h2>,
+      placement: "bottom",
+      target: "#play-answer",
+      title: "Step 5: Play the Answer",
+    },
+    {
+      content: <h2>See the answer if you do not understand it while listening</h2>,
+      placement: "bottom",
+      target: "#reveal-answer",
+      title: "Step 6: Reveal the Answer",
+    },
+  ];
+
+  const [state, setState] = useState({ run: false, steps: steps1 });
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState({ correct: 0 });
@@ -78,12 +123,27 @@ const Quiz = ({ shuffleQuestions = false }) => {
   }, [currentQuestion]);
 
   useEffect(() => {
+    const quizTourCompleted = localStorage.getItem('quizTourCompleted');
+    
+    if (!quizTourCompleted) {
+      setState((prevState) => ({ ...prevState, run: true }));
+    }
+
     if (transcript && !transcriptLocked) {
       const trimmedTranscript = transcript.trim();
       setFinalTranscript(trimmedTranscript);
       handleAnswerClick(trimmedTranscript);
     }
   }, [transcript, transcriptLocked, handleAnswerClick]);
+
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+
+    if (status === 'finished' || status === 'skipped') {
+      localStorage.setItem('quizTourCompleted', 'true');
+      setState((prevState) => ({ ...prevState, run: false }));
+    }
+  };
 
   const handleNextQuestion = useCallback(() => {
     setShowNextButton(false);
@@ -126,12 +186,30 @@ const Quiz = ({ shuffleQuestions = false }) => {
     );
   }
 
+  const restartTour = () => {
+    setState((prevState) => ({ ...prevState, run: true }));
+  };
+
   const currentQuestionNumber = shuffledStatements.slice(0, currentStatementIndex).reduce((total, statement) => total + statement.questions.length, 0) + currentQuestionIndex + 1;
 
   return (
     <div className="bg-purple-500 min-h-screen flex flex-col justify-center items-center">
       <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
-        <TopBar />
+        <Joyride
+          continuous
+          run={state.run}
+          steps={state.steps}
+          hideCloseButton
+          scrollToFirstStep
+          showSkipButton
+          showProgress
+          callback={handleJoyrideCallback}
+          locale={{
+            skip: <span className="bg-blue-500 text-white px-3 py-2 rounded">Skip</span>,
+            back: <span className="bg-purple-500 text-white px-3 py-2 rounded">Back</span>,
+          }}
+        />
+        <TopBar restartTour={restartTour}/>
         <div className="hidden">
           <h2 className="text-lg mb-2">
             Statement {currentStatementIndex + 1}/{shuffledStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
@@ -143,8 +221,8 @@ const Quiz = ({ shuffleQuestions = false }) => {
           {currentStatement.image && (
             <img src={currentStatement.image} alt="statement visual" className="max-w-72 h-72 rounded" />
           )}
-          <div className="flex items-center text-blue-800">
-            <div onClick={()=>setStatementPlayed(true)} className={`cursor-pointer p-1 rounded-full ${!statementPlayed && 'animation-pulse'}`}>
+          <div className="flex items-center text-blue-700">
+            <div id="play-statement" onClick={()=>setStatementPlayed(true)} className="cursor-pointer p-1 rounded-full">
               <Speech
                 text={currentStatement.statement}
                 lang="es-US"
@@ -157,12 +235,12 @@ const Quiz = ({ shuffleQuestions = false }) => {
           </div>
         </div>
         <Question
-          questionObj={currentQuestion}
-          transcript={finalTranscript} // Display final transcript
-          selectedAnswer={selectedAnswer}
           listening={listening}
-          startStopListening={startStopListening}
+          transcript={finalTranscript}
+          questionObj={currentQuestion}
+          selectedAnswer={selectedAnswer}
           statementPlayed={statementPlayed}
+          startStopListening={startStopListening}
         />        
         {showNextButton && (
           <button onClick={handleNextQuestion} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors rounded-lg font-bold duration-300 ease-in-out">
