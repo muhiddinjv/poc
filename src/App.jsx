@@ -9,7 +9,6 @@ import {
   SignUp,
   SignedIn,
   SignedOut,
-  UserButton,
   RedirectToSignIn,
 } from "@clerk/clerk-react";
 
@@ -26,9 +25,6 @@ function PublicPages() {
 function PrivatePages() {
   return (
     <>
-      {/* <nav>
-        <UserButton />
-      </nav> */}
       <Routes>
         <Route index element={<Home />} />
         <Route path="/words/1" element={<Words />} />
