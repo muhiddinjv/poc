@@ -4,10 +4,27 @@ import NoPage from "./pages/NoPage";
 import Words from "./pages/words/Words";
 import Quiz from "./pages/games/quiz/Quiz";
 import Story from "./pages/story/Story";
+import {
+  SignIn,
+  SignUp,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
 
-function App() {
+function PublicPages() {
   return (
-    <BrowserRouter>
+    <Routes>
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="*" element={<RedirectToSignIn />} />
+    </Routes>
+  );
+}
+
+function PrivatePages() {
+  return (
+    <>
       <Routes>
         <Route index element={<Home />} />
         <Route path="/words/1" element={<Words />} />
@@ -15,6 +32,19 @@ function App() {
         <Route path="/story/1" element={<Story />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <SignedIn>
+        <PrivatePages />
+      </SignedIn>
+      <SignedOut>
+        <PublicPages />
+      </SignedOut>
     </BrowserRouter>
   );
 }
