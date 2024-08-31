@@ -5,6 +5,61 @@ export const storydata = {
     {
       image:
         "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
+      statement: "Hay un jinete",
+      statement_audio: "/aud/es/001_there_is.mp3",
+      questions: [
+        {
+          question: "Hay un jinete?",
+          question_audio: "/aud/es/002_is_there.mp3",
+          translation: "Bormi bir boshli chavandoz?",
+          answer: "sí",
+          messageForAnswer: "Hay un jinete.",
+          messageAudio: "/aud/es/001_there_is.mp3",
+          explanation:
+            "La pregunta es si hay un jinete sin cabeza, y la respuesta lo confirma.",
+          point: "20",
+        },
+        {
+          question: "¿Hay un jinete o un presidente?",
+          question_audio:
+            "/aud/es/003_or_president.mp3",
+          translation: "Bormi bir boshli chavandoz yoki bir prezident?",
+          answer: "jinete",
+          messageForAnswer: "Hay un jinete.",
+          messageAudio: "/aud/es/001_there_is.mp3",
+          explanation:
+            "La pregunta es si hay un jinete sin cabeza o un presidente. La respuesta confirma la presencia de un jinete sin cabeza.",
+          point: "20",
+        },
+        {
+          question: "Hay un presidente?",
+          question_audio: "/aud/es/004_president.mp3",
+          translation: "Bormi bir prezident?",
+          answer: "no",
+          messageForAnswer:
+            "No hay un presidente. Hay un jinete.",
+          messageAudio:
+            "/aud/es/005_no_president.mp3",
+          explanation:
+            "La pregunta es si hay un presidente, y la respuesta lo niega, confirmando la presencia de un jinete sin cabeza en su lugar.",
+          point: "20",
+        },
+        {
+          question: "¿Qué hay?",
+          question_audio: "/aud/es/006_what_is_there.mp3",
+          translation: "Nima bor?",
+          answer: "jinete",
+          messageForAnswer: "Hay un jinete.",
+          messageAudio: "/aud/es/001_there_is.mp3",
+          explanation:
+            "La pregunta es qué está presente, y la respuesta confirma la presencia de un jinete sin cabeza.",
+          point: "20",
+        },
+      ],
+    },
+    {
+      image:
+        "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
       statement: "Hay un jinete sin cabeza.",
       statement_audio: "/aud/es/001_there_is.mp3",
       questions: [
