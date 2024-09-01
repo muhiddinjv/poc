@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import Joyride from 'react-joyride';
+import { useSpacedRepetition, calculateNextReview } from '../../hooks';
 import db from '../../db';
 import Card from './Card';
-import { useSpacedRepetition, calculateNextReview } from '../../hooks';
-import Joyride from 'react-joyride';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Review({ deck, setDecks, state, setState, startTour }) {
+function Review({ deck, setDecks, state, setState }) {
   const { getDueCards } = useSpacedRepetition();
   const [dueCards, setDueCards] = useState([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -29,23 +27,28 @@ function Review({ deck, setDecks, state, setState, startTour }) {
     const currentCard = dueCards[currentCardIndex]?.[0];
   
     if (!currentCard) return;
-  
-    let updatedQueue = [...dueCards];
-  
+
     if (difficulty === 1) {
       // Move the current card to the end of the queue without updating its review date
+      const updatedQueue = [...dueCards];
       const [skippedCard] = updatedQueue.splice(currentCardIndex, 1);
       updatedQueue.push(skippedCard);
+
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
+      setDueCards(updatedQueue);
     } else {
       // Update the card based on the difficulty
       const updatedCard = calculateNextReview(currentCard, difficulty);
-  
+
       // Update the card in the database
       await db.cards.put(updatedCard);
-  
-      // Remove the current card from the queue
-      updatedQueue = updatedQueue.filter((_, index) => index !== currentCardIndex);
-  
+
+      // Update the card queue
+      const updatedQueue = dueCards.filter((_, index) => index !== currentCardIndex);
+
+      // Move to the next card
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
+
       // Update the deck state
       const updatedDeck = {
         ...deck,
@@ -53,17 +56,12 @@ function Review({ deck, setDecks, state, setState, startTour }) {
           card.id === currentCard.id ? updatedCard : card
         ),
       };
-  
+
       setDecks((decks) => decks.map((d) => (d.id === deck.id ? updatedDeck : d)));
+      setDueCards(updatedQueue);
     }
-  
-    // Update the currentCardIndex and dueCards in a synchronized manner
-    setDueCards(updatedQueue);
-    setCurrentCardIndex((prevIndex) => (prevIndex >= updatedQueue.length ? 0 : prevIndex));
   };
   
-  
-
   const handleJoyrideCallback = (data) => {
     const { status } = data;
 

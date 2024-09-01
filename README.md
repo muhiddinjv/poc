@@ -9,6 +9,7 @@ Currently, two official plugins are available:
 - [open_ai_pricing](https://openai.com/api/pricing/)
 - [supabase_10k_singups_hack](https://www.youtube.com/watch?v=5T0SpSvptQ0)
 - [web-speech-voices](https://github.com/HadrienGardeur/web-speech-recommended-voices?tab=readme-ov-file)
+- https://github.com/open-spaced-repetition/fsrs.js
 
 | English         | Emoji | Uzbek      |
 | --------------- | ----- | ---------- |
@@ -26,22 +27,4 @@ Currently, two official plugins are available:
 | He say(s)       | 💬    | u dey(di)  |
 | I have          | 🙋‍♂️    | menda bor  |
 
-<!-- google oauth user credentials -->
-```json
-{
-  "iss": "https://accounts.google.com",
-  "azp": "12345.apps.googleusercontent.com",
-  "aud": "815159178082-12345.apps.googleusercontent.com",
-  "sub": "108329191635592636862",
-  "email": "muhiddin001@gmail.com",
-  "email_verified": true,
-  "nbf": 1724740859,
-  "name": "muhiddin jv",
-  "picture": "https://lh3.googleusercontent.com/a/12345",
-  "given_name": "muhiddin",
-  "family_name": "jv",
-  "iat": 1724741159,
-  "exp": 1724744759,
-  "jti": "12345"
-}
-```
+
