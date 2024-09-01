@@ -2,7 +2,7 @@ import db from ".";
 
 const seedData = async () => {
   const existingStory1 = await db.decks.where("name").equals("Story1").first();
-  
+
   if (existingStory1) {
     console.log("Decks already exist. Skipping seeding.");
     return;
@@ -13,6 +13,27 @@ const seedData = async () => {
     deckId1 = await db.decks.add({ name: "Story1" });
 
     const story1cards = [
+      {
+        front: "Horseman",
+        back: "Jinete",
+        emoji: "🐴",
+        deckId: deckId1,
+        interval: 0,
+        repetition: 0,
+        easeFactor: 2.5,
+        nextReviewDate: null,
+      },
+
+      {
+        front: "Headless",
+        back: "Sin cabeza",
+        emoji: "💀",
+        deckId: deckId1,
+        interval: 0,
+        repetition: 0,
+        easeFactor: 2.5,
+        nextReviewDate: null,
+      },
       {
         front: "who",
         back: "Quién",
@@ -43,26 +64,7 @@ const seedData = async () => {
         easeFactor: 2.5,
         nextReviewDate: null,
       },
-      {
-        front: "Headless",
-        back: "Sin cabeza",
-        emoji: "💀",
-        deckId: deckId1,
-        interval: 0,
-        repetition: 0,
-        easeFactor: 2.5,
-        nextReviewDate: null,
-      },
-      {
-        front: "Horseman",
-        back: "Jinete",
-        emoji: "🐴",
-        deckId: deckId1,
-        interval: 0,
-        repetition: 0,
-        easeFactor: 2.5,
-        nextReviewDate: null,
-      },
+
       {
         front: "He has",
         back: "Él tiene",
@@ -244,7 +246,6 @@ const seedData = async () => {
         nextReviewDate: null,
       },
     ];
-    
 
     const story1cardsEnglish = [
       {
@@ -386,7 +387,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Uy",
         back: "House",
         emoji: "🙋‍♂️",
@@ -395,7 +397,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Boy",
         back: "Rich",
         emoji: "🙋‍♂️",
@@ -404,7 +407,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Odam, erkak",
         back: "Man",
         emoji: "🙋‍♂️",
@@ -413,7 +417,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Milliard",
         back: "Billion",
         emoji: "🙋‍♂️",
@@ -422,7 +427,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Yordam bera olasizmi menga?",
         back: "Can you help me?",
         emoji: "🙋‍♂️",
@@ -431,7 +437,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Yordam bera olmayman",
         back: "I cannot help",
         emoji: "🙋‍♂️",
@@ -440,7 +447,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Yordam bera olaman",
         back: "I can help",
         emoji: "🙋‍♂️",
@@ -459,7 +467,8 @@ const seedData = async () => {
         repetition: 0,
         easeFactor: 2.5,
         nextReviewDate: null,
-      },{
+      },
+      {
         front: "Hayvonlar",
         back: "Animals",
         emoji: "🙋‍♂️",
@@ -471,8 +480,8 @@ const seedData = async () => {
       },
     ];
 
-  await db.cards.bulkAdd(story1cards);
-}
+    await db.cards.bulkAdd(story1cards);
+  }
 
   console.log("Sample decks and cards added");
 };

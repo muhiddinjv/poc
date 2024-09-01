@@ -27,31 +27,43 @@ function Review({ deck, setDecks, state, setState, startTour }) {
 
   const handleReview = async (difficulty) => {
     const currentCard = dueCards[currentCardIndex]?.[0];
-
+  
     if (!currentCard) return;
-
-    const updatedCard = calculateNextReview(currentCard, difficulty);
-
-    // Update the card in the database
-    await db.cards.put(updatedCard);
-
-    // Update the card queue
-    const updatedQueue = dueCards.filter((_, index) => index !== currentCardIndex);
-
-    // Move to the next card
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
-
-    // Update the deck state
-    const updatedDeck = {
-      ...deck,
-      cards: deck.cards.map((card) =>
-        card.id === currentCard.id ? updatedCard : card
-      ),
-    };
-
-    setDecks((decks) => decks.map((d) => (d.id === deck.id ? updatedDeck : d)));
-    setDueCards(updatedQueue);
+  
+    if (difficulty === 1) {
+      // Move the current card to the end of the queue without updating its review date
+      const updatedQueue = [...dueCards];
+      const [skippedCard] = updatedQueue.splice(currentCardIndex, 1);
+      updatedQueue.push(skippedCard);
+  
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
+      setDueCards(updatedQueue);
+    } else {
+      // Update the card based on the difficulty
+      const updatedCard = calculateNextReview(currentCard, difficulty);
+  
+      // Update the card in the database
+      await db.cards.put(updatedCard);
+  
+      // Update the card queue
+      const updatedQueue = dueCards.filter((_, index) => index !== currentCardIndex);
+  
+      // Move to the next card
+      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
+  
+      // Update the deck state
+      const updatedDeck = {
+        ...deck,
+        cards: deck.cards.map((card) =>
+          card.id === currentCard.id ? updatedCard : card
+        ),
+      };
+  
+      setDecks((decks) => decks.map((d) => (d.id === deck.id ? updatedDeck : d)));
+      setDueCards(updatedQueue);
+    }
   };
+  
 
   const handleJoyrideCallback = (data) => {
     const { status } = data;
