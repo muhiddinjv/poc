@@ -30,14 +30,12 @@ function Review({ deck, setDecks, state, setState, startTour }) {
   
     if (!currentCard) return;
   
+    let updatedQueue = [...dueCards];
+  
     if (difficulty === 1) {
       // Move the current card to the end of the queue without updating its review date
-      const updatedQueue = [...dueCards];
       const [skippedCard] = updatedQueue.splice(currentCardIndex, 1);
       updatedQueue.push(skippedCard);
-  
-      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
-      setDueCards(updatedQueue);
     } else {
       // Update the card based on the difficulty
       const updatedCard = calculateNextReview(currentCard, difficulty);
@@ -45,11 +43,8 @@ function Review({ deck, setDecks, state, setState, startTour }) {
       // Update the card in the database
       await db.cards.put(updatedCard);
   
-      // Update the card queue
-      const updatedQueue = dueCards.filter((_, index) => index !== currentCardIndex);
-  
-      // Move to the next card
-      setCurrentCardIndex((prevIndex) => (prevIndex + 1) % updatedQueue.length);
+      // Remove the current card from the queue
+      updatedQueue = updatedQueue.filter((_, index) => index !== currentCardIndex);
   
       // Update the deck state
       const updatedDeck = {
@@ -60,9 +55,13 @@ function Review({ deck, setDecks, state, setState, startTour }) {
       };
   
       setDecks((decks) => decks.map((d) => (d.id === deck.id ? updatedDeck : d)));
-      setDueCards(updatedQueue);
     }
+  
+    // Update the currentCardIndex and dueCards in a synchronized manner
+    setDueCards(updatedQueue);
+    setCurrentCardIndex((prevIndex) => (prevIndex >= updatedQueue.length ? 0 : prevIndex));
   };
+  
   
 
   const handleJoyrideCallback = (data) => {
