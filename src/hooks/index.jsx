@@ -1,4 +1,21 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { FSRS } from 'ts-fsrs';
+
+export const useSpacedRepetition = () => {
+  const fsrs = new FSRS();
+
+  const getDueCards = (cards) => {
+    return cards.filter(card => fsrs.schedule(card).due <= new Date());
+  };
+
+  const calculateNextReview = (card, difficulty) => {
+    const reviewLog = new ReviewLog(card.id, difficulty, new Date());
+    const updatedCard = fsrs.update(card, reviewLog);
+    return updatedCard;
+  };
+
+  return { getDueCards, calculateNextReview };
+};
 export const useSpeechToText = (options) => {
   const [isListening, setIsListening] = React.useState(false);
   const [transcript, setTranscript] = React.useState('');
@@ -151,7 +168,7 @@ export const useTextToSpeech = () => {
   };
 };
 
-export const useSpacedRepetition = () => {
+export const useSpacedRepetition2 = () => {
   const getDay = (forDate = Date.now()) => {
     const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
     return Math.floor(forDate / DAY_IN_MILLISECONDS);

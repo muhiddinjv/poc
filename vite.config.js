@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 // import dotenv from "dotenv";
 // dotenv.config();
 
-let faviconURL = "/img/book.png";
+let faviconURL = "/img/logo.png";
 
 export default defineConfig({
   // build: {

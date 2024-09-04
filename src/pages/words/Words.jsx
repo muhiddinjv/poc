@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import db from '../../db';
-import Review from './Review';
-import Streaks from './Streaks';
+import React, { useState } from 'react';
 import BackBtn from '../../components/BackBtn';
-import seedData from '../../db/seed';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import SRMain from './SRMain';
 
 function Words() {
   const steps1 = [
@@ -38,65 +35,29 @@ function Words() {
       title: "Easy = I know it 100% of the time",
     },
   ];
-
   const [state, setState] = useState({ run: false, steps: steps1 });
-  const [decks, setDecks] = useState([]);
-  const [selectedDeck, setSelectedDeck] = useState(null);
-
-  useEffect(() => {
-    const fetchDecks = async () => {
-      try {
-        console.log('Fetching decks...');
-        await seedData();
-        const allDecks = await db.decks.toArray();
-
-        const decksWithCards = await Promise.all(
-          allDecks.map(async (deck) => {
-            const cards = await db.cards.where("deckId").equals(deck.id).toArray();
-            return { ...deck, cards };
-          })
-        );
-
-        setDecks(decksWithCards);
-
-        if (decksWithCards.length > 0) {
-          setSelectedDeck(decksWithCards[0]);
-        }
-      } catch (error) {
-        console.error('Error fetching decks:', error);
-      }
-    };
-
-    fetchDecks();
-  }, []);
 
   const startTour = () => {
-    setState((prevState) => ({ ...prevState, run: true }));
+    console.log('startTour function is called');
+    // setState((prevState) => ({ ...prevState, run: true }));
   };
 
   return (
-    <section className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-      <div className="px-4 py-2 bg-purple-500 text-white flex max-w-lg w-full">
-        <BackBtn textColor="text-white" />
+    <section className="h-screen bg-purple-500 flex flex-col justify-center items-center">
+      <div className="px-4 py-2 bg-white border-b border-slate-200 text-blue-500 flex max-w-lg w-full">
+        <BackBtn textColor="text-blue-500" />
         <div className="w-full text-center flex items-center justify-between px-2">
-          <div className="text-2xl text-center w-full">Word Review</div>
+          <div className="text-2xl font-bold text-center w-full">Word Review</div>
           <FontAwesomeIcon
             size="xl"
             onClick={startTour}
             icon={faQuestionCircle}
-            className="text-white cursor-pointer rounded-full"
+            className="text-blue-500 cursor-pointer rounded-full"
           />
         </div>
       </div>
-      <div className="text-center h-screen bg-white shadow-lg max-w-lg w-full">
-        {selectedDeck ? (
-          <div>
-            <Streaks />
-            <Review deck={selectedDeck} setDecks={setDecks} state={state} setState={setState} startTour={startTour}/>
-          </div>
-        ) : (
-          <div>Loading...</div>
-        )}
+      <div className="h-full bg-white text-center shadow-lg max-w-lg w-full">
+        <SRMain />
       </div>
     </section>
   );
