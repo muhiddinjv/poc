@@ -8,7 +8,7 @@ function Story() {
   const paragraphs = story.split("\n\n");
 
   useEffect(() => {
-    audioRef.current = new Audio("/aud/story1spanish.mp3");
+    audioRef.current = new Audio("/aud/story1spanish-woman.mp3");
 
     return () => {
       if (audioRef.current) {
@@ -45,7 +45,7 @@ function Story() {
       <div className="px-4 py-6 bg-white rounded-lg flex flex-col max-w-lg w-full">
         <div className="flex items-center w-full">
           <BackBtn textColor="text-purple-600" />
-          <span className="text-3xl text-center text-purple-600">
+          <span className="text-2xl  text-center text-purple-600">
             Problema del Jinete
           </span>
         </div>
