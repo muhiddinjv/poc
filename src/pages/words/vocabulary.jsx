@@ -121,7 +121,7 @@ export const story1words = [
   {
     id: 9,
     front: "Al doctor",
-    back: "To the doctor",
+    back: "The doctor",
     image: "/img/doctor.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
