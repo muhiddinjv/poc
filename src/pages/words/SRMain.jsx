@@ -109,7 +109,7 @@ const GradeButton = ({
       title={tip}
       aria-label={tip}
     >
-      {children} {interval}
+     {interval} {children} 
     </button>
   );
 };
@@ -147,7 +147,7 @@ const CardReview = ({
       </div>
       {showAnswer && (
         <div className="flex flex-col items-center">
-          <img src={currentCard.image} alt={currentCard.back} className="mt-4 text-center text-gray-700 w-11/12 border"/>
+          <img src={currentCard.image} alt={currentCard.back} className="mt-4 text-center text-gray-700 w-11/12 border rounded-lg"/>
           <div className="mt-4 text-center text-gray-700">
             {currentCard.back}
           </div>

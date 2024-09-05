@@ -46,7 +46,7 @@ function Story() {
         <div className="flex items-center w-full">
           <BackBtn textColor="text-purple-600" />
           <span className="text-3xl text-center text-purple-600">
-            Headless Horseman
+            Problema del Jinete
           </span>
         </div>
         <div className="p-4 max-w-2xl mx-auto">
