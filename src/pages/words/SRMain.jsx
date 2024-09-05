@@ -27,10 +27,10 @@ const Scheduler = {
     return {
       ...card,
       difficulty: result.card.difficulty,
-      due: result.card.due.toLocaleString(),
+      due: result.card.due.toISOString(), // Store as ISO string for consistency
       elapsed_days: result.card.elapsed_days,
       lapses: rating === Rating.Again ? card.lapses + 1 : card.lapses,
-      last_review: reviewDate.toLocaleString(),
+      last_review: reviewDate.toISOString(),
       reps: result.card.reps + 1,
       scheduled_days: result.card.scheduled_days,
       stability: result.card.stability,
@@ -43,7 +43,7 @@ const Scheduler = {
     const reviewDate = new Date();
     const schedulingResults = Scheduler.f.repeat(card, reviewDate);
     const result = schedulingResults[rating];
-    const diffMs = result.card.due - reviewDate;
+    const diffMs = new Date(result.card.due) - reviewDate;
     return Scheduler.formatInterval(diffMs);
   },
 
@@ -211,58 +211,63 @@ const GradeButtons = ({ handleGrade, intervals }) => (
 );
 
 const SRMain = () => {
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [cards, setCards] = useState(CardStorage.loadCards());
   const [reviewComplete, setReviewComplete] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [cards, setCards] = useState(CardStorage.loadCards());
+  const [currentCard, setCurrentCard] = useState(null);
+
+  // Function to get due cards sorted by due date
+  const getDueCards = (cards) => {
+    const now = new Date();
+    return cards
+      .filter((card) => new Date(card.due) <= now)
+      .sort((a, b) => new Date(a.due) - new Date(b.due));
+  };
 
   useEffect(() => {
     CardStorage.saveCards(cards);
-    const dueCards = cards.filter((card) => new Date(card.due) <= new Date());
-    setReviewComplete(dueCards.length === 0);
+    const dueCards = getDueCards(cards);
+    if (dueCards.length === 0) {
+      setReviewComplete(true);
+      setCurrentCard(null);
+    } else {
+      setReviewComplete(false);
+      setCurrentCard(dueCards[0]);
+    }
   }, [cards]);
 
   const handleGrade = (rating) => {
-    const currentCard = cards[currentCardIndex];
+    if (!currentCard) return;
 
     const updatedCard = Scheduler.scheduleCard(currentCard, rating);
-    const updatedCards = cards.map((card, index) =>
-      index === currentCardIndex ? updatedCard : card
+    const updatedCards = cards.map((card) =>
+      card.id === updatedCard.id ? updatedCard : card
     );
 
     setCards(updatedCards);
-    const dueCards = updatedCards.filter(
-      (card) => new Date(card.due) <= new Date()
-    );
-
-    if (dueCards.length > 0) {
-      setCurrentCardIndex((prevIndex) =>
-        prevIndex === updatedCards.length - 1 ? 0 : prevIndex + 1
-      );
-    }
-
     setShowAnswer(false);
   };
 
-  const currentCard = cards[currentCardIndex];
-  const intervals = {
-    [Rating.Again]: Scheduler.getNextReviewInterval(currentCard, Rating.Again),
-    [Rating.Hard]: Scheduler.getNextReviewInterval(currentCard, Rating.Hard),
-    [Rating.Good]: Scheduler.getNextReviewInterval(currentCard, Rating.Good),
-    [Rating.Easy]: Scheduler.getNextReviewInterval(currentCard, Rating.Easy),
-  };
+  // Recompute dueCards whenever cards change
+  const dueCards = getDueCards(cards);
+  const nextReviewDate = dueCards.length > 0 ? new Date(dueCards[0].due) : null;
 
-  // Find the earliest due date for the "Next review" section
-  const nextReviewDate = new Date(
-    Math.min(...cards.map((card) => new Date(card.due)))
-  );
+  // Calculate intervals for the current card
+  const intervals = currentCard
+    ? {
+        [Rating.Again]: Scheduler.getNextReviewInterval(currentCard, Rating.Again),
+        [Rating.Hard]: Scheduler.getNextReviewInterval(currentCard, Rating.Hard),
+        [Rating.Good]: Scheduler.getNextReviewInterval(currentCard, Rating.Good),
+        [Rating.Easy]: Scheduler.getNextReviewInterval(currentCard, Rating.Easy),
+      }
+    : {};
 
   return (
     <div className="flex flex-col items-center py-4 h-full">
       <StatusBar cards={cards} />
       {reviewComplete ? (
         <ReviewComplete nextReviewDate={nextReviewDate} />
-      ) : (
+      ) : currentCard ? (
         <CardReview
           currentCard={currentCard}
           showAnswer={showAnswer}
@@ -270,6 +275,8 @@ const SRMain = () => {
           handleGrade={handleGrade}
           intervals={intervals}
         />
+      ) : (
+        <div className="text-center">Loading...</div>
       )}
     </div>
   );
