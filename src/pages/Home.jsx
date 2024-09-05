@@ -100,7 +100,7 @@ const Home = () => {
       />
       <div className="bg-white rounded-md mb-4 flex items-center justify-center space-x-2 w-full max-w-md px-4">
         <div className='flex items-center w-full justify-center'>
-          <img src="/img/taletalk-logo-only.png" alt="Horseman" className="w-8 h-8 rounded-md object-cover" />
+          <img src="/img/logo-only.png" alt="Horseman" className="w-8 h-8 rounded-md object-cover" />
           <h1 className="bg-white rounded-md text-3xl font-bold text-purple-600 p-2 text-center">TaleTalk</h1>
         </div>
         <FontAwesomeIcon
