@@ -5,10 +5,9 @@ import Speech from "react-text-to-speech";
 
 function Skeleton() {
   return (
-    <div className="loading-skeleton w-full aspect-square mt-4 rounded-lg"/>
+    <div className="loading-skeleton w-11/12 aspect-square mt-4 rounded-lg"/>
   );
 }
-
 
 const CardStorage = {
   loadCards: () => {
@@ -140,7 +139,8 @@ const CardReview = ({
   handleGrade,
   intervals,
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false); // Track image loading state
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <div className="w-full h-full flex flex-col justify-between p-4">
@@ -157,14 +157,20 @@ const CardReview = ({
         </div>
         {showAnswer && (
           <div className="flex flex-col items-center">
-            {!imageLoaded && <Skeleton />}
-            {currentCard.image && (
+            {!imageLoaded && !imageError && <Skeleton />}
+
+            {currentCard.image && !imageError && (
               <img
                 src={currentCard.image}
                 alt={currentCard.back}
-                className={`mt-4 text-center text-gray-700 w-11/12 h-auto border rounded-lg ${!imageLoaded ? "hidden" : ""}`}
-                onLoad={() => setImageLoaded(true)}
+                className={`mt-4 text-center text-gray-700 object-fit w-11/12 border aspect-square rounded-lg ${!imageLoaded && "hidden"}`}
+                onLoad={()=>setImageLoaded(true)}
+                onError={()=>setImageError(true)}
               />
+            )}
+
+            {imageError && (
+              <div className="mt-4 text-center text-red-500">Image failed to load</div>
             )}
 
             <div className="mt-4 text-center text-gray-700">
