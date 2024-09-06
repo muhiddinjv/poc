@@ -3,6 +3,13 @@ import { Rating, State, generatorParameters, fsrs } from "ts-fsrs";
 import { story1words } from "./vocabulary";
 import Speech from "react-text-to-speech";
 
+function Skeleton() {
+  return (
+    <div className="loading-skeleton w-full aspect-square mt-4 rounded-lg"/>
+  );
+}
+
+
 const CardStorage = {
   loadCards: () => {
     const storedCards = localStorage.getItem("cards");
@@ -132,42 +139,56 @@ const CardReview = ({
   setShowAnswer,
   handleGrade,
   intervals,
-}) => (
-  <div className="w-full h-full flex flex-col justify-between p-4">
-    <div>
-      <div className="text-lg text-blue-500 font-semibold flex justify-center items-center">
-        <Speech
-          text={currentCard.front}
-          voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
-          lang="es-US"
-          rate={0.8}
-          stopBtn={false}
-        />
-        <span className="ml-2">{currentCard.front}</span>
-      </div>
-      {showAnswer && (
-        <div className="flex flex-col items-center">
-          <img src={currentCard.image} alt={currentCard.back} className="mt-4 text-center text-gray-700 w-11/12 border rounded-lg"/>
-          <div className="mt-4 text-center text-gray-700">
-            {currentCard.back}
-          </div>
+}) => {
+  const [imageLoaded, setImageLoaded] = useState(false); // Track image loading state
+
+  return (
+    <div className="w-full h-full flex flex-col justify-between p-4">
+      <div>
+        <div className="text-lg text-blue-500 font-semibold flex justify-center items-center">
+          <Speech
+            text={currentCard.front}
+            voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
+            lang="es-US"
+            rate={0.8}
+            stopBtn={false}
+          />
+          <span className="ml-2">{currentCard.front}</span>
         </div>
-      )}
+        {showAnswer && (
+          <div className="flex flex-col items-center">
+            {!imageLoaded && <Skeleton />}
+            {currentCard.image && (
+              <img
+                src={currentCard.image}
+                alt={currentCard.back}
+                className={`mt-4 text-center text-gray-700 w-11/12 h-auto border rounded-lg ${!imageLoaded ? "hidden" : ""}`}
+                onLoad={() => setImageLoaded(true)}
+              />
+            )}
+
+            <div className="mt-4 text-center text-gray-700">
+              {currentCard.back}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="mt-4 flex justify-center">
+        {!showAnswer ? (
+          <button
+            onClick={() => setShowAnswer(true)}
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+          >
+            Show Answer
+          </button>
+        ) : (
+          <GradeButtons handleGrade={handleGrade} intervals={intervals} />
+        )}
+      </div>
     </div>
-    <div className="mt-4 flex justify-center">
-      {!showAnswer ? (
-        <button
-          onClick={() => setShowAnswer(true)}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Show Answer
-        </button>
-      ) : (
-        <GradeButtons handleGrade={handleGrade} intervals={intervals} />
-      )}
-    </div>
-  </div>
-);
+  );
+};
+
 
 const GradeButtons = ({ handleGrade, intervals }) => (
   <div className="flex justify-center w-full gap-2">
