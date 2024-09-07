@@ -163,7 +163,7 @@ const CardReview = ({
               <img
                 src={currentCard.image}
                 alt={currentCard.back}
-                className={`mt-4 text-center text-gray-700 object-fit w-11/12 border aspect-square rounded-lg ${!imageLoaded && "hidden"}`}
+                className={`bg-gray-200 mt-4 text-center text-gray-700 object-fit w-11/12 aspect-square rounded-lg ${!imageLoaded && "hidden"}`}
                 onLoad={()=>setImageLoaded(true)}
                 onError={()=>setImageError(true)}
               />
