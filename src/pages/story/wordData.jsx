@@ -188,7 +188,15 @@ export const wordTimings = [
   { word: "headache.", start: 80.58, end: 81.06 },
 ];
 
-export const story = `Hay un hombre. Es un jinete. Es un jinete sin cabeza. Está en América. Está en la ciudad de Nueva York. Tiene un problema. Tiene un gran problema. \n\nVa a Washington. Va a la casa de Bill Gates en Washington. Bill es un hombre rico. Tiene ciento veinte tres (123) mil millones (billion) de dólares y una gran casa. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Bill dice: "No, no puedo ayudarte. Ve a ver a Elon Musk". \n\nVa a Texas. Va a la casa de Elon Musk en Texas. Elon es un hombre rico. Tiene ciento noventa y seis (196) mil millones de dólares, pero tiene una casa pequeña. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Elon dice: "No, no puedo ayudarte. Ve a ver al Doctor Dolittle". \n\nVa a California. Va a la casa del Doctor Dolittle en California. Dolittle es un doctor. Tiene animales y tiene una gran casa. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Dolittle dice: "Sí, puedo ayudarte. ¿Cuál es tu problema?". \n\nEl jinete sin cabeza dice: "Tengo un dolor de cabeza".`;
+export const story = `Hay un hombre. Es un jinete. Es un jinete sin cabeza. Está en América. Está en la ciudad de Nueva York. Tiene un problema. Tiene un gran problema. 
+
+Va a Washington. Va a la casa de Bill Gates en Washington. Bill es un hombre rico. Tiene ciento veinte tres (123) mil millones (billion) de dólares y una gran casa. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Bill dice: "No, no puedo ayudarte. Ve a ver a Elon Musk". 
+
+Va a Texas. Va a la casa de Elon Musk en Texas. Elon es un hombre rico. Tiene ciento noventa y seis (196) mil millones de dólares, pero tiene una casa pequeña. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Elon dice: "No, no puedo ayudarte. Ve a ver al Doctor Dolittle". 
+
+Va a California. Va a la casa del Doctor Dolittle en California. Dolittle es un doctor. Tiene animales y tiene una gran casa. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Dolittle dice: "Sí, puedo ayudarte. ¿Cuál es tu problema?". 
+
+El jinete sin cabeza dice: "Tengo un dolor de cabeza".`;
 
 /*
 Hay un hombre. Es un jinete. Es un jinete sin cabeza. Está en América. Está en la ciudad de Nueva York. Tiene un problema. Tiene un gran problema. Va a Washington. Va a la casa de Bill Gates en Washington. Bill es un hombre rico. Tiene 123 mil millones de dólares y una gran casa. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Bill dice: "No, no puedo ayudarte. Ve a ver a Elon Musk". Va a Texas. Va a la casa de Elon Musk en Texas. Elon es un hombre rico. Tiene 196 mil millones de dólares, pero tiene una casa pequeña. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Elon dice: "No, no puedo ayudarte. Ve a ver al Doctor Dolittle". Va a California. Va a la casa del Doctor Dolittle en California. Dolittle es un doctor. Tiene animales y tiene una gran casa. El jinete dice: "Tengo un problema. ¿Puedes ayudarme?". Dolittle dice: "Sí, puedo ayudarte. ¿Cuál es tu problema?". El jinete sin cabeza dice: "Tengo un dolor de cabeza".

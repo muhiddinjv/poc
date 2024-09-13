@@ -73,7 +73,6 @@ const Scheduler = {
   },
 };
 
-// StatusBar component
 const StatusBar = ({ cards }) => {
   const newCount = cards.filter((card) => card.state === State.New).length;
   const learningCount = cards.filter(
@@ -120,7 +119,6 @@ const GradeButton = ({
   );
 };
 
-// ReviewComplete component
 const ReviewComplete = ({ nextReviewDate }) => (
   <div>
     <div className="text-center text-2xl font-semibold text-green-600">

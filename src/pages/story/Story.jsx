@@ -1,74 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { useSpeech } from "react-text-to-speech";
 import BackBtn from "../../components/BackBtn";
 import { story } from "./wordData";
 
-function Story() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
-  const paragraphs = story.split("\n\n");
+export default function Story() {
+  const [highlightText, setHighlightText] = useState(true);
 
-  useEffect(() => {
-    audioRef.current = new Audio("/aud/story1spanish-woman.mp3");
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    };
-  }, []);
-
-  const handlePlay = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePause = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
-
-  const handleStop = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      setIsPlaying(false);
-    }
-  };
+  const { Text, speechStatus, start, stop } = useSpeech({
+    highlightText,
+    text: story,
+    lang: "es-US",
+    rate: 0.8,
+    voiceURI: "Microsoft Paloma Online (Natural) - Spanish (United States)",
+    highlightProps: {
+      style: { color: "white", backgroundColor: "purple" },
+    },
+  });
 
   return (
     <section className="min-h-screen bg-purple-500 flex flex-col items-center p-4">
       <div className="px-4 py-6 bg-white rounded-lg flex flex-col max-w-lg w-full">
         <div className="flex items-center w-full">
           <BackBtn textColor="text-purple-600" />
-          <span className="text-2xl  text-center text-purple-600">
+          <span className="text-2xl text-center text-purple-600">
             Problema del Jinete
           </span>
         </div>
-        <div className="p-4 max-w-2xl mx-auto">
-          {paragraphs.map((paragraph, index) => (
-            <p key={index} className="mb-4">
-              {paragraph}
-            </p>
-          ))}
-          <div className="mt-4 flex space-x-4">
-            <button
-              className={`${
-                isPlaying ? "bg-yellow-500" : "bg-blue-500"
-              } text-white px-4 py-2 rounded`}
-              onClick={isPlaying ? handlePause : handlePlay}
-            >
-              {isPlaying ? "Pause" : "Play"}
+        <div className="p-4 max-w-2xl mx-auto whitespace-pre-wrap">
+          <Text />
+          <div className="mt-8 flex space-x-4">
+            <button onClick={speechStatus === "started" ? stop : start} className={`bg-${speechStatus === "started" ? 'yellow' : 'blue'}-500 text-white px-4 py-2 rounded`}>
+              {speechStatus === "started" ? "Stop" : "Start"}
             </button>
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={handleStop}
+              className={`bg-${highlightText ? 'purple' : 'slate'}-500 text-white px-4 py-2 rounded`}
+              onClick={() => setHighlightText(!highlightText)}
             >
-              Stop
+              Highlight
             </button>
           </div>
         </div>
@@ -76,5 +44,3 @@ function Story() {
     </section>
   );
 }
-
-export default Story;
