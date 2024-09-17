@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import SRMain from './SRMain';
 
-function Words() {
+export default function WordsPage(){
   const steps1 = [
     {
       content: <h2 className="text-xl">Let's learn new words!</h2>,
@@ -62,5 +62,3 @@ function Words() {
     </section>
   );
 }
-
-export default Words;

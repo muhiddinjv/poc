@@ -3,7 +3,7 @@ import { useSpeech } from "react-text-to-speech";
 import BackBtn from "../../components/BackBtn";
 import { story } from "./wordData";
 
-export default function Story() {
+export default function StoryPage() {
   const [highlightText, setHighlightText] = useState(true);
 
   const { Text, speechStatus, start, stop } = useSpeech({

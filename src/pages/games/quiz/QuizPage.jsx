@@ -7,7 +7,7 @@ import TopBar from "../../../components/TopBar";
 import { useQuizState } from "./QuizState";
 import { steps1, storydata } from "./storydata";
 
-const QuizPage = ({ shuffleQuestions = false }) => {
+export default function QuizPage({ shuffleQuestions = false }){
   const [state, setState] = useState({ run: false, steps: steps1 });
   const quizState = useQuizState(shuffleQuestions);
   const {
@@ -171,5 +171,3 @@ const QuizPage = ({ shuffleQuestions = false }) => {
     </div>
   );
 };
-
-export default QuizPage;
