@@ -655,6 +655,67 @@ export const storydataEng = {
 };
 
 // PROD data below
+export const storydata1 = {
+  quizTitle: "El Problema del Jinete Sin Cabeza",
+  quizSynopsis: "",
+  statements: [
+    {
+      image:
+        "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
+      statement: "Hay un jinete",
+      questions: [
+        {
+          question: "Hay un jinete?",
+          translation: "Is there a horseman?",
+          answer: "sí",
+          message: "Hay un jinete.",
+          explanation: "'Hay' means 'There is'",
+          point: "20",
+        },
+        {
+          question: "¿Hay un chico?",
+          translation: "Is there a boy?",
+          answer: "No",
+          message: "No hay un chico. Hay un jinete.",
+          explanation: "'Un' is the word 'a' in English",
+          point: "20",
+        },
+        {
+          question: "¿Hay una chica?",
+          translation: "Is there a girl?",
+          answer: "No",
+          message: "No hay una chica. Hay un jinete.",
+          explanation: "'Una' too is the word 'a'",
+          point: "20",
+        },
+      ],
+    },
+    {
+      image:
+        "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg",
+      statement: "Hay un jinete sin cabeza.",
+      questions: [
+        {
+          question: "Hay un jinete sin cabeza?",
+          translation: "Is there a horseman without a head?",
+          answer: "sí",
+          message: "Hay un jinete sin cabeza.",
+          explanation: "'sin' means 'without' in English",
+          point: "20",
+        },
+        {
+          question: "¿Hay un jinete sin cabeza o con cabeza?",
+          translation: "Is there a horseman without a head or with a head?",
+          answer: "sin cabeza",
+          message: "Hay un jinete sin cabeza.",
+          explanation: "'con' means 'with' in English",
+          point: "20",
+        },
+      ],
+    },
+  ],
+};
+
 export const storydata = {
   quizTitle: "El Problema del Jinete Sin Cabeza",
   quizSynopsis: "",
