@@ -18,7 +18,7 @@ const QuizResults = ({
         Total: {totalPoints} / {maxPoints}
       </p>
       <div className='flex justify-center'>
-        <img src="https://media1.tenor.com/m/Yj1zfwe6KckAAAAC/leonardo-dicaprio-clapping.gif" alt="leonardo-dicaprio-clapping" className="max-w-64 rounded-lg" />
+        <img src="https://media1.tenor.com/m/Yj1zfwe6KckAAAAC/leonardo-dicaprio-clapping.gif" alt="leonardo-dicaprio-clapping" className="max-w-64 rounded-lg aspect-square" />
       </div>
       <button
         onClick={handleTryAgain}

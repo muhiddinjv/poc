@@ -218,7 +218,7 @@ const Quiz = ({ shuffleQuestions = false }) => {
           <h2 className="text-lg mb-2">
             Statement {currentStatementIndex + 1}/{shuffledStatements.length}, Question {currentQuestionNumber}/{totalQuestions}
           </h2>
-          <h1 className="text-xl font-bold my-4">{storydata.quizTitle}</h1>
+          <h1 className="text-xl font-bold my-4">{storydata.storyTitle}</h1>
         </div>
         <div className="flex flex-col items-center py-2 bg-gray-50 border-b">
           <ProgressBar current={currentQuestionNumber} total={totalQuestions} />

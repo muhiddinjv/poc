@@ -59,7 +59,7 @@ const Question = ({
       setCurrentView('question');
     } else if (currentView === 'question') {
       speak(currentQuestion.question);
-      SpeechRecognition.startListening({ continuous: true, language: 'es-US' });
+      SpeechRecognition.startListening({ language: 'es-US' });
     } else if (currentView === 'answer') {
       speak(`${isCorrect ? `${userAnswer} es correcto! ${message}` : `${userAnswer} es incorrecto! ${message}`}`);
       setShowNextButton(true);

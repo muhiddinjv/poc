@@ -17,7 +17,7 @@ export const story1words = [
   {
     id: 2,
     front: "Con cabeza",
-    back: "with a head / headless",
+    back: "with a head",
     image: "/img/headless-small.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),

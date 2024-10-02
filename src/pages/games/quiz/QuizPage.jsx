@@ -1,114 +1,75 @@
-import React, { useState, useEffect, useMemo } from "react";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import React, { useState, useMemo, useEffect } from "react";
 import Question from "./Question";
 import Progress from "./Progress";
 import QuizResults from "./QuizResults";
 import TopBar from "../../../components/TopBar";
 import { useQuizState } from "./QuizState";
-import { steps1, storydata } from "./storydata";
+import { story1Statements, story1Questions } from "./storydata";
 
-export default function QuizPage({ shuffleQuestions = false }){
-  const [state, setState] = useState({ run: false, steps: steps1 });
+export default function QuizPage({ shuffleQuestions = false }) {
   const quizState = useQuizState(shuffleQuestions);
   const {
-    currentStatementIndex,
-    setCurrentStatementIndex,
-    currentQuestionIndex,
-    setCurrentQuestionIndex,
     score,
     setScore,
     totalPoints,
     setTotalPoints,
     selectedAnswer,
     setSelectedAnswer,
-    finalTranscript,
-    setFinalTranscript,
-    transcriptLocked,
-    setTranscriptLocked,
-    showNextButton,
-    setShowNextButton,
     quizCompleted,
     setQuizCompleted,
-    statementPlayed,
-    setStatementPlayed,
-    shuffledStatements
+    currentStatementIndex,
+    setCurrentStatementIndex,
+    currentQuestionIndex,
+    setCurrentQuestionIndex,
+    transcriptLocked,
+    setTranscriptLocked
   } = quizState;
 
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
-
-  if (!browserSupportsSpeechRecognition) {
-    return <div>Browser doesn't support speech recognition.</div>;
-  }
+  const [showStatement, setShowStatement] = useState(true);
 
   const maxPoints = useMemo(() => {
-    return storydata.statements.reduce(
-      (total, statement) =>
-        total + statement.questions.reduce((qTotal, question) => qTotal + (parseInt(question.point, 10) || 0), 0),
-      0
-    );
+    return story1Questions.reduce((total, question) => total + (parseInt(question.point, 10) || 0), 0);
   }, []);
 
-  const totalQuestions = useMemo(() => {
-    return storydata.statements.reduce((total, statement) => total + statement.questions.length, 0);
-  }, []);
+  const totalQuestions = story1Questions.length;
 
-  const currentStatement = shuffledStatements[currentStatementIndex];
-  const currentQuestion = currentStatement.questions[currentQuestionIndex];
+  const currentStatement = story1Statements[currentStatementIndex];
+  const currentQuestions = useMemo(() => 
+    story1Questions.filter(q => q.statementId === currentStatement.id),
+    [currentStatement.id]
+  );
+  const currentQuestion = currentQuestions[currentQuestionIndex];
 
-  const handleAnswerClick = (answer) => {
+  const overallQuestionIndex = useMemo(() => {
+    return story1Questions.findIndex(q => q.id === currentQuestion.id);
+  }, [currentQuestion.id]);
+
+  useEffect(() => {
+    if (currentQuestionIndex === 0) {
+      setShowStatement(true);
+    }
+  }, [currentStatementIndex, currentQuestionIndex]);
+
+  const handleQuestionAnswered = (answer) => {
     setSelectedAnswer(answer);
     const correctAnswer = currentQuestion.answer;
     const points = parseInt(currentQuestion.point, 10) || 0;
 
-    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+    if (answer.toLowerCase().trim() === correctAnswer.toLowerCase().trim()) {
       setScore(prevScore => ({ correct: prevScore.correct + 1 }));
       setTotalPoints(prevPoints => prevPoints + points);
-    }
-
-    setShowNextButton(true);
-    setTranscriptLocked(true);
-  };
-
-  useEffect(() => {
-    const quizTourCompleted = localStorage.getItem('quizTourCompleted');
-    
-    if (!quizTourCompleted) {
-      setState((prevState) => ({ ...prevState, run: true }));
-    }
-
-    if (transcript && !transcriptLocked) {
-      const trimmedTranscript = transcript.trim();
-      setFinalTranscript(trimmedTranscript);
-      handleAnswerClick(trimmedTranscript);
-    }
-  }, [transcript, transcriptLocked]);
-
-  const handleJoyrideCallback = (data) => {
-    const { status } = data;
-
-    if (status === 'finished' || status === 'skipped') {
-      localStorage.setItem('quizTourCompleted', 'true');
-      setState((prevState) => ({ ...prevState, run: false }));
     }
   };
 
   const handleNextQuestion = () => {
-    setShowNextButton(false);
     setSelectedAnswer(null);
-    setFinalTranscript(""); 
-    setTranscriptLocked(false); 
-    resetTranscript();
-
-    if (currentQuestionIndex < currentStatement.questions.length - 1) {
+    if (currentQuestionIndex < currentQuestions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-    } else if (currentStatementIndex < shuffledStatements.length - 1) {
+      setShowStatement(false);
+    } else if (currentStatementIndex < story1Statements.length - 1) {
       setCurrentStatementIndex(prevIndex => prevIndex + 1);
       setCurrentQuestionIndex(0);
+      setShowStatement(true);
     } else {
       setQuizCompleted(true);
     }
@@ -120,10 +81,7 @@ export default function QuizPage({ shuffleQuestions = false }){
     setScore({ correct: 0 });
     setTotalPoints(0);
     setQuizCompleted(false);
-  };
-
-  const startStopListening = () => {
-    listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening({ language: 'es-US'});
+    setShowStatement(true);
   };
 
   if (quizCompleted) {
@@ -138,36 +96,25 @@ export default function QuizPage({ shuffleQuestions = false }){
     );
   }
 
-  const restartTour = () => {
-    setState((prevState) => ({ ...prevState, run: true }));
-  };
-
-  const currentQuestionNumber = shuffledStatements.slice(0, currentStatementIndex).reduce((total, statement) => total + statement.questions.length, 0) + currentQuestionIndex + 1;
-
   return (
     <div className="bg-purple-500 min-h-screen flex flex-col justify-center items-center">
       <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
-        <TopBar restartTour={restartTour}/>
-        <Progress current={currentQuestionNumber} total={totalQuestions} />
+        <TopBar/>
+        <Progress current={overallQuestionIndex + 1} total={totalQuestions} />
         <Question
-          state={state}
-          setState={setState}
-          listening={listening}
-          transcript={finalTranscript}
+          statementObj={currentStatement}
           questionObj={currentQuestion}
           selectedAnswer={selectedAnswer}
-          statementPlayed={statementPlayed}
-          startStopListening={startStopListening}
-          statement={currentStatement.statement}
-          image={currentStatement.image}
-          setStatementPlayed={setStatementPlayed}
-        />        
-        {showNextButton && (
-          <button onClick={handleNextQuestion} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors rounded-lg font-bold duration-300 ease-in-out">
-            Next Question
-          </button>
-        )}
+          simage={currentStatement.image}
+          qimage={currentQuestion.image}
+          onNextQuestion={handleNextQuestion}
+          onQuestionAnswered={handleQuestionAnswered}
+          showStatement={showStatement}
+          setShowStatement={setShowStatement}
+          transcriptLocked={transcriptLocked}
+          setTranscriptLocked={setTranscriptLocked}
+        />
       </div>
     </div>
   );
-};
+}

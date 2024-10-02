@@ -29,7 +29,7 @@ const TOUR_STEPS = [
 const INITIAL_STATE = {
   key: new Date(), // This field makes the tour to re-render when we restart the tour
   run: false,
-  continuous: true,
+   
   loading: false,
   stepIndex: 0,
   steps: TOUR_STEPS,

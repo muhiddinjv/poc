@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { storydata } from "./storydata";
+// import { storydata } from "./storydata";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 export const useQuizState = (shuffleQuestions) => {
@@ -15,13 +15,13 @@ export const useQuizState = (shuffleQuestions) => {
   const [statementPlayed, setStatementPlayed] = useState(false);
 
   const shuffledStatements = useMemo(() => {
-    if (shuffleQuestions) {
-      return storydata.statements.map(statement => ({
-        ...statement,
-        questions: shuffleArray([...statement.questions])
-      }));
-    }
-    return storydata.statements;
+    // if (shuffleQuestions) {
+    //   return storydata.statements.map(statement => ({
+    //     ...statement,
+    //     questions: shuffleArray([...statement.questions])
+    //   }));
+    // }
+    // return storydata.statements;
   }, [shuffleQuestions]);
 
   return {

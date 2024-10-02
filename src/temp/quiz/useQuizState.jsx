@@ -83,7 +83,7 @@ const useQuizState = (transcript, resetTranscript, shuffleQuestions, listening) 
   }, []);
 
   const startStopListening = () => {
-    listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening({ language: "es-US", continuous: true, interimResults: true });
+    listening ? SpeechRecognition.stopListening() : SpeechRecognition.startListening({ language: "es-US",   interimResults: true });
   };
 
   return {
