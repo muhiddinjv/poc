@@ -5,7 +5,7 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const stories = [
-  { id: 1, title: "Problema del Jinete", img: "https://raw.githubusercontent.com/muhiddinjv/poc/main/src/assets/img/headless_horseman.jpg", words: [], games: [] },
+  { id: 1, title: "Problema del Jinete", img: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headless_horseman.jpg", words: [], games: [] },
   { id: 2, title: "El Barbero de Tyson", img: "https://picsum.photos/499", words: [], games: [] },
   // Add more stories here
 ];
