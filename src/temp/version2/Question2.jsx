@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faEye, faEyeSlash, faMicrophoneSlash, faVolumeUp, faVolumeMute, faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { list } from 'postcss';
 
 const Question = ({ 
   simage,
@@ -22,7 +23,12 @@ const Question = ({
   const [userAnswer, setUserAnswer] = useState('');
   const [textVisible, setTextVisible] = useState(true);
 
-  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
 
   const { question, answer, feedback, qtranslation } = questionObj;
   const { statement, stranslation } = statementObj;
@@ -42,7 +48,7 @@ const Question = ({
 
   useEffect(() => {
     if (shouldStartListening && !isPlaying) {
-      SpeechRecognition.startListening({ continuous: true, language: 'es-US' });
+      SpeechRecognition.startListening({ continuous: true, language: 'es-US' });//ar-AE
       setShouldStartListening(false);
     }
   }, [shouldStartListening, isPlaying]);
@@ -51,40 +57,43 @@ const Question = ({
     return <span>Your browser does not support speech recognition! Try MS Edge, maybe?</span>;
   }
 
-  const speak = (text, onEnd) => {
+  const speak = (text) => {
     setIsPlaying(true);
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es-US';
     utterance.rate = 0.8;
     utterance.onend = () => {
       setIsPlaying(false);
-      if (onEnd) onEnd();
+      if (currentView === 'statement') {
+        setCurrentView('question');
+        setShowStatement(false);
+      }
+      if (currentView === 'question') {
+        setShouldStartListening(true);
+      }
     };
     speechSynthesis.speak(utterance);
   };
 
   const handlePlay = () => {
     if (currentView === 'statement') {
-      speak(statement, () => {
-        setCurrentView('question');
-        setShowStatement(false);
-      });
+      speak(statement);
     } else if (currentView === 'question') { 
-      speak(question, () => setShouldStartListening(true));
+      speak(question);
+    } else if (currentView === 'answer') {
+      speak(`${isCorrect ? `${userAnswer} es correcto! ${feedback}` : `${userAnswer} es incorrecto! ${feedback}`}`);
     }
   };
 
   const handleMicrophoneClick = () => {
     if (listening) {
-      // Stop listening and lock the transcript to prevent further speech input
       SpeechRecognition.stopListening();
       setTranscriptLocked(true);
       onQuestionAnswered(userAnswer);
       setCurrentView('answer');
-      const isCorrect = userAnswer.toLowerCase() === answer.toLowerCase();
-      // Automatically trigger feedback speech
-      const feedbackText = isCorrect ? `${userAnswer} es correcto! ${feedback}` : `${userAnswer} es incorrecto! ${feedback}`;
-      speak(feedbackText, handleNext);  // After feedback speech, move to next question
+    } else if (!isPlaying) {
+      SpeechRecognition.startListening({ continuous: true, language: 'es-US' });//continuous: true,
+      setTranscriptLocked(false);
     }
   };
 
@@ -95,11 +104,11 @@ const Question = ({
     setCurrentView(showStatement ? 'statement' : 'question');
     setTranscriptLocked(false);
   };
-
+  
   return (
     <>
       <div className="flex flex-col items-center pb-2 bg-gray-50 border-b min-h-80">
-      <img src={currentView === 'statement' ? simage : qimage} alt="question visual" className="h-72 max-w-72 rounded" />
+        <img src={currentView === 'statement' ? simage : qimage} alt="question visual" className="h-72 max-w-72 rounded" />
         <span className={`${!textVisible && 'invisible'}`}>
           <h2 className="text-lg font-semibold m-2 text-blue-700 max-w-72">
             {currentView === 'statement' && statement}
@@ -117,21 +126,19 @@ const Question = ({
       <div className='flex items-center justify-center mt-6'>
         <FontAwesomeIcon 
           onClick={handlePlay}
-          icon={isPlaying ? faVolumeMute : faVolumeUp} 
-          className="cursor-pointer rounded-full text-blue-500 mr-6 text-4xl"
+          icon={isPlaying || listening ? faVolumeMute : faVolumeUp} 
+          className={`${isPlaying | listening && 'text-gray-400 pointer-events-none'} cursor-pointer rounded-full text-blue-500 mr-6 text-4xl`}
         />
         <FontAwesomeIcon 
           onClick={()=> setTextVisible(!textVisible)}
           icon={!textVisible ? faEyeSlash : faEye} 
-          className="cursor-pointer rounded-full text-blue-500 text-4xl"
+          className="cursor-pointer rounded-full text-blue-500 mr-6 text-4xl"
         />
-        {/* <button disabled={currentView !== 'answer'}>
-          <FontAwesomeIcon 
-            onClick={handleNext}
-            icon={faCircleArrowRight} 
-            className={`${currentView === 'answer' ? 'text-blue-500': 'text-gray-400'} text-4xl cursor-pointer ml-6`}
-          />
-        </button> */}
+        <FontAwesomeIcon 
+          onClick={handleNext}
+          icon={faCircleArrowRight} 
+          className={`${currentView === 'answer' ? 'text-blue-500': 'text-gray-400 pointer-events-none'} text-4xl cursor-pointer`}
+        />
       </div>
       <div className="flex justify-center items-center m-10">
         <div className={`h-20 w-20 ${listening ? 'bg-red-400':'bg-gray-400'} rounded-full flex justify-center items-center ${listening && 'animate-pulse'}`}>
