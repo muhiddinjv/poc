@@ -108,12 +108,12 @@ export const story1Statements = [
     statement: "El jinete tiene un problema.",
     stranslation: "The horseman has a problem.",
   },
-  // {
-  //   id: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
-  //   image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/problem.jpg", 
-  //   statement: "Él va a un doctor.",
-  //   stranslation: "He goes to a doctor.",
-  // },
+  {
+    id: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/problem.jpg", 
+    statement: "Él va al doctor.",
+    stranslation: "He goes to a doctor.",
+  },
   // {
   //   id: "f1a9f37d-e919-4046-a754-f5d17d8679cd",
   //   image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/problem.jpg", 
@@ -548,12 +548,78 @@ export const story1Questions = [
     point: 20,
   },
   {
-    id: "64715dff-d19a-44e3-b27c-d8077dbf1d41",
+    id: "13a3b249-2351-41b8-a646-37c3ef19f427",
     statementId: "73d94834-3309-4114-bbd7-b1c9bac22e17",
     question: "¿Qué tiene Enrique?",
     qtranslation: "What does Enrique have?",
     answer: "micrófono",
     feedback: "Tiene un micrófono",
+    explanation: "",
+    point: 20,
+  },
+  // Va al doctor ------------------------------------------
+  /*
+    * ¿Él va a doctor?
+    * Sí, va a doctor.
+    * ¿Él va a doctor o a presidente?
+    * a doctor
+    * ¿Él va a presidente?
+    * No, no va a presidente. Va a doctor.
+    * ¿Va Enrique a un concierto?
+    * Sí. Va a un concierto.
+    * ¿Va el jinete a un concierto?
+    * No, no va a un concierto. Va a doctor.
+    * ¿Él va a doctor?
+    * Sí
+    * ¿Él va a presidente?
+    * No, no va a presidente. Va a doctor.
+    * ¿Va Enrique a un concierto?
+    * Sí. Va a un concierto.
+    * ¿Él va a un concierto o a presidente?
+    * Va a un concierto.
+    * ¿Va Enrique a doctor o va el jinete a doctor?
+    * El jinete va a doctor.
+    * ¿Va el jinete a doctor o a un concierto?
+    * Va a doctor.
+    * ¿Quién va a doctor?
+    * ¿Quién va a un concierto?
+    * ¿A dónde va el jinete?
+    * ¿A dónde va Enrique?
+    * ----------------------------
+    * ¿Él va al doctor?
+      Sí, va al doctor.
+      ¿Él va al doctor o al presidente?
+      Al doctor.
+      ¿Él va al presidente?
+      No, no va al presidente. Va al doctor.
+      ¿Va Enrique a un concierto?
+      Sí, va a un concierto.
+      ¿Va el jinete a un concierto?
+      No, no va a un concierto. Va al doctor.
+      ¿Él va al doctor?
+      Sí.
+      ¿Él va al presidente?
+      No, no va al presidente. Va al doctor.
+      ¿Va Enrique a un concierto?
+      Sí, va a un concierto.
+      ¿Él va a un concierto o al presidente?
+      Va a un concierto.
+      ¿Va Enrique al doctor o va el jinete al doctor?
+      El jinete va al doctor.
+      ¿Va el jinete al doctor o a un concierto?
+      Va al doctor.
+      ¿Quién va al doctor?
+      ¿Quién va a un concierto?
+      ¿A dónde va el jinete?
+      ¿A dónde va Enrique?
+  */
+  {
+    id: "28604354-94f0-475e-9faf-c704108250e1",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Él va al doctor?",
+    qtranslation: "Does he go to a doctor?",
+    answer: "sí",
+    feedback: "Va al doctor",
     explanation: "",
     point: 20,
   },
