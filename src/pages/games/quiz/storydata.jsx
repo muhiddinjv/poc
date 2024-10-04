@@ -112,7 +112,7 @@ export const story1Statements = [
     id: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
     image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/problem.jpg", 
     statement: "Él va al doctor.",
-    stranslation: "He goes to a doctor.",
+    stranslation: "He goes to the doctor.",
   },
   // {
   //   id: "f1a9f37d-e919-4046-a754-f5d17d8679cd",
@@ -558,73 +558,157 @@ export const story1Questions = [
     point: 20,
   },
   // Va al doctor ------------------------------------------
-  /*
-    * ¿Él va a doctor?
-    * Sí, va a doctor.
-    * ¿Él va a doctor o a presidente?
-    * a doctor
-    * ¿Él va a presidente?
-    * No, no va a presidente. Va a doctor.
-    * ¿Va Enrique a un concierto?
-    * Sí. Va a un concierto.
-    * ¿Va el jinete a un concierto?
-    * No, no va a un concierto. Va a doctor.
-    * ¿Él va a doctor?
-    * Sí
-    * ¿Él va a presidente?
-    * No, no va a presidente. Va a doctor.
-    * ¿Va Enrique a un concierto?
-    * Sí. Va a un concierto.
-    * ¿Él va a un concierto o a presidente?
-    * Va a un concierto.
-    * ¿Va Enrique a doctor o va el jinete a doctor?
-    * El jinete va a doctor.
-    * ¿Va el jinete a doctor o a un concierto?
-    * Va a doctor.
-    * ¿Quién va a doctor?
-    * ¿Quién va a un concierto?
-    * ¿A dónde va el jinete?
-    * ¿A dónde va Enrique?
-    * ----------------------------
-    * ¿Él va al doctor?
-      Sí, va al doctor.
-      ¿Él va al doctor o al presidente?
-      Al doctor.
-      ¿Él va al presidente?
-      No, no va al presidente. Va al doctor.
-      ¿Va Enrique a un concierto?
-      Sí, va a un concierto.
-      ¿Va el jinete a un concierto?
-      No, no va a un concierto. Va al doctor.
-      ¿Él va al doctor?
-      Sí.
-      ¿Él va al presidente?
-      No, no va al presidente. Va al doctor.
-      ¿Va Enrique a un concierto?
-      Sí, va a un concierto.
-      ¿Él va a un concierto o al presidente?
-      Va a un concierto.
-      ¿Va Enrique al doctor o va el jinete al doctor?
-      El jinete va al doctor.
-      ¿Va el jinete al doctor o a un concierto?
-      Va al doctor.
-      ¿Quién va al doctor?
-      ¿Quién va a un concierto?
-      ¿A dónde va el jinete?
-      ¿A dónde va Enrique?
-  */
   {
     id: "28604354-94f0-475e-9faf-c704108250e1",
     statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
     question: "¿Él va al doctor?",
-    qtranslation: "Does he go to a doctor?",
+    qtranslation: "Does he go to the doctor?",
     answer: "sí",
+    feedback: "Va al doctor",
+    explanation: "'Él va' literally means 'he he goes' in English so you can leave out the 'Él' if you want",
+    point: 20,
+  },
+  {
+    id: "41048d12-b9d5-46eb-87a3-ec6fb836962d",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Él va al doctor o al presidente?",
+    qtranslation: "Does he go to the doctor or the president?",
+    answer: "doctor",
     feedback: "Va al doctor",
     explanation: "",
     point: 20,
   },
+  {
+    id: "2737bf73-f202-4bbb-9d6a-e13e05bd5cfe",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Él va al presidente?",
+    qtranslation: "Does he go to the president?",
+    answer: "no",
+    feedback: "No va al presidente. Va al doctor",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "7fa6a59b-eff2-49ea-9922-2122d7bcb19f",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Va Enrique a un concierto?",
+    qtranslation: "Does Enrique go to a concert?",
+    answer: "sí",
+    feedback: "Va a un concierto.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "954917ef-a920-4d97-8815-a4bb4390c31c",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Va el jinete a un concierto?",
+    qtranslation: "Does the horseman go to a concert?",
+    answer: "no",
+    feedback: "No va a un concierto. Va al doctor.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "9bde76e3-c428-4b75-aecc-32c111e5f6fc",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Él va al doctor?",
+    qtranslation: "Does he go to the doctor?",
+    answer: "sí",
+    feedback: "Va al doctor.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "7bd01ff3-42ff-47ec-b200-30473fe79624",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Él va al presidente?",
+    qtranslation: "Does he go to the president?",
+    answer: "no",
+    feedback: "No va al presidente. Va al doctor",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "6b8e0a85-dab6-454e-b3c7-0c71d1889bad",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Va Enrique a un concierto?",
+    qtranslation: "Does Enrique go to a concert?",
+    answer: "sí",
+    feedback: "Va a un concierto.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "018ddf5f-0742-4ded-a8b1-8d3a085af513",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Él va a un concierto o al doctor?",
+    qtranslation: "Does he go to a concert or the doctor?",
+    answer: "concierto",
+    feedback: "Va a un concierto.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "bf1784f5-f293-47a2-ac8c-8da8a3772c11",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Va Enrique al doctor o va el jinete al doctor?",
+    qtranslation: "Does Enrique go to the doctor or does the horseman go to the doctor?",
+    answer: "jinete",
+    feedback: "El jinete va al doctor.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "a9887e63-be15-468c-b9a0-239f4e75245f",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Va el jinete al doctor o a un concierto?",
+    qtranslation: "Does the horseman go to the doctor or does he go to a concert?",
+    answer: "doctor",
+    feedback: "El jinete va al doctor.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "a8e5f8cf-2de8-4983-9f4b-5135040754cc",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Quién va al doctor?",
+    qtranslation: "Who goes to the doctor?",
+    answer: "jinete",
+    feedback: "El jinete va al doctor.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "6de1018a-536c-467b-ba20-b3d455c14232",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿Quién va a un concierto?",
+    qtranslation: "Who goes to a concert?",
+    answer: "Enrique",
+    feedback: "Enrique va a un concierto.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "8d9ed5b0-42e5-4f7b-aa50-a1df01ccfe44",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿A dónde va el jinete?",
+    qtranslation: "Where does the horseman go?",
+    answer: "doctor",
+    feedback: "Va al doctor.",
+    explanation: "",
+    point: 20,
+  },
+  {
+    id: "a9c24863-3caa-47b7-9be3-00e9915613c2",
+    statementId: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
+    question: "¿A dónde va Enrique?",
+    qtranslation: "Where does Enrique go?",
+    answer: "concierto",
+    feedback: "Va a un concierto.",
+    explanation: "",
+    point: 20,
+  },
 ]
-
 
 export const TPRS_2_0 = {
   storyTitle: "El Problema del Chico",
