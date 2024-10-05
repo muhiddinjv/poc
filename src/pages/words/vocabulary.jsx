@@ -286,6 +286,21 @@ export const story1words = [
   },
   {
     id: 19,
+    front: "Dolor de",
+    back: "Pain of",
+    image: "/img/i_have.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+  {
+    id: 20,
     front: "Grande",
     back: "Big",
     image: "/img/big.jpg",
@@ -300,7 +315,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 20,
+    id: 21,
     front: "Casa",
     back: "House",
     image: "/img/house.jpg",
@@ -315,7 +330,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 21,
+    id: 22,
     front: "Hombre rico",
     back: "Rich man",
     image: "/img/rich_man.jpg",
@@ -330,7 +345,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 22,
+    id: 23,
     front: "Mil millones",
     back: "Billion",
     image: "/img/billion.jpg",
@@ -345,7 +360,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 23,
+    id: 24,
     front: "¿Puedes ayudarme?",
     back: "Can you help me?",
     image: "/img/you.jpg",
@@ -360,7 +375,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 24,
+    id: 25,
     front: "No puedo ayudar",
     back: "I cannot help",
     image: "/img/i_cant_help.jpg",
@@ -375,7 +390,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 25,
+    id: 26,
     front: "Puedo ayudar",
     back: "I can help",
     image: "/img/help.jpg",
@@ -390,7 +405,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 26,
+    id: 27,
     front: "Pequeño",
     back: "Small",
     image: "/img/small.jpg",
@@ -405,7 +420,7 @@ export const story1words = [
     state: 0,
   },
   {
-    id: 27,
+    id: 28,
     front: "Animales",
     back: "Animals",
     image: "/img/animals.jpg",
