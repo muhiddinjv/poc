@@ -3,51 +3,16 @@ import Joyride from 'react-joyride';
 import { Link } from 'react-router-dom';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const stories = [
-  { id: 1, title: "Problema del Jinete", img: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headless_horseman.jpg", words: [], games: [] },
-  { id: 2, title: "El Barbero de Tyson", img: "https://picsum.photos/499", words: [], games: [] },
-  // Add more stories here
-];
+import { stories, stepsHome } from "../data";
 
 const Home = () => {
-  const steps1 = [
-    {
-      content: <h2 className="text-xl">Let's begin our journey!</h2>,
-      placement: "center",
-      target: "body",
-    },
-    {
-      content: <h2>Here you can learn all the words for the story! Please, do not skip this step!</h2>,
-      placement: "bottom",
-      target: "#learn-1",
-      title: "First step: Learn the words",
-    },
-    {
-      content: <h2>Here you can answer questions about the story! Please, answer all the questions!</h2>,
-      placement: "bottom",
-      target: "#play-1",
-      title: "Second step: Answer the questions",
-    },
-    {
-      content: <h2>Read the full story to see how much you've learned & to enjoy your progress!</h2>,
-      placement: "bottom",
-      target: "#read-1",
-      title: "Third step: Read the story",
-    },
-  ];
-
-  const [state, setState] = useState({
-    run: false,
-    steps: steps1,
-  });
-
+  const [state, setState] = useState({run: false, steps: stepsHome});
   const [showAnimation, setShowAnimation] = useState(false);
+  const [language, setLanguage] = useState('es');
   const audioRef = useRef(null);
 
   useEffect(() => {
     const homeTourCompleted = localStorage.getItem('homeTourCompleted');
-    
     if (!homeTourCompleted) {
       setShowAnimation(true);
     }
@@ -55,7 +20,6 @@ const Home = () => {
 
   const handleJoyrideCallback = (data) => {
     const { status } = data;
-
     if (status === 'finished' || status === 'skipped') {
       localStorage.setItem('homeTourCompleted', 'true');
       setState((prevState) => ({ ...prevState, run: false }));
@@ -113,9 +77,9 @@ const Home = () => {
       <div className="w-full max-w-md">
         {stories.map((story) => (
           <div key={story.id} className="bg-white rounded-lg shadow-lg mb-4 p-2 flex items-center space-x-3">
-            <img src={story.img} alt={story.title} className="w-24 h-24 rounded-md object-cover" />
+            <img src={story.img} alt={story.title[language]} className="w-24 h-24 rounded-md object-cover" />
             <div className="flex flex-col justify-around items-between min-h-24">
-              <h2 className="text-xl font-semibold text-gray-700">{story.id} {story.title}</h2>
+              <h2 className="text-xl font-semibold text-gray-700">{story.id} {story.title[language]}</h2>
               <div className="flex flex-wrap space-x-2">
                 <Link id={`learn-${story.id}`} to={`/words/${story.id}`} className="bg-blue-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-blue-600">Learn</Link>
                 <Link id={`play-${story.id}`} to={`/games/${story.id}`} className="bg-green-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-green-600">Speak</Link>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faEye, faEyeSlash, faMicrophoneSlash, faVolumeUp, faVolumeMute, faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faMicrophone, faEye, faEyeSlash, faMicrophoneSlash, faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const Question = ({ 
@@ -24,10 +24,10 @@ const Question = ({
 
   const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
-  const { question, answer, feedback, qtranslation } = questionObj;
-  const { statement, stranslation } = statementObj;
+  const { question, answer, feedback } = questionObj;
+  const { statement } = statementObj;
 
-  const isCorrect = selectedAnswer && selectedAnswer.toLowerCase() === answer.toLowerCase();
+  const isCorrect = selectedAnswer && selectedAnswer.toLowerCase() === answer.es.toLowerCase();
 
   useEffect(() => {
     setCurrentView(showStatement ? 'statement' : 'question');
@@ -65,12 +65,12 @@ const Question = ({
 
   const handlePlay = () => {
     if (currentView === 'statement') {
-      speak(statement, () => {
+      speak(statement.es, () => { 
         setCurrentView('question');
         setShowStatement(false);
       });
     } else if (currentView === 'question') { 
-      speak(question, () => setShouldStartListening(true));
+      speak(question.es, () => setShouldStartListening(true));
     }
   };
 
@@ -81,9 +81,9 @@ const Question = ({
       setTranscriptLocked(true);
       onQuestionAnswered(userAnswer);
       setCurrentView('answer');
-      const isCorrect = userAnswer.toLowerCase() === answer.toLowerCase();
+      const isCorrect = userAnswer.toLowerCase() === answer.es.toLowerCase();
       // Automatically trigger feedback speech
-      const feedbackText = isCorrect ? `${userAnswer} es correcto! ${feedback}` : `${userAnswer} es incorrecto! ${feedback}`;
+      const feedbackText = isCorrect ? `${userAnswer} es correcto! ${feedback.es}` : `${userAnswer} es incorrecto! ${feedback.es}`;
       speak(feedbackText, handleNext);  // After feedback speech, move to next question
     }
   };
@@ -99,19 +99,19 @@ const Question = ({
   return (
     <>
       <div className="flex flex-col items-center pb-2 bg-gray-50 border-b min-h-80">
-      <img src={currentView === 'statement' ? simage : qimage} alt="question visual" className="h-72 max-w-72 rounded" />
-        <span className={`${!textVisible && 'invisible'}`}>
-          <h2 className="text-lg font-semibold m-2 text-blue-700 max-w-72">
-            {currentView === 'statement' && statement}
-            {currentView === 'question' && (userAnswer || question)}
+        <img src={currentView === 'statement' ? simage : qimage} alt="question visual" className="h-72 max-w-72 rounded" />
+        <span className={`${!textVisible && 'invisible'} max-w-72`}>
+          <h2 className="text-lg font-semibold m-2 text-blue-700">
+            {currentView === 'statement' && statement.es}
+            {currentView === 'question' && (userAnswer || question.es)}
             {currentView === 'answer' && (
               <span className={isCorrect ? "text-green-500" : "text-red-500"}>
-                {`${userAnswer} ${isCorrect ? 'es correcto!' : 'es incorrecto!'} ${feedback}`}
+                {`${userAnswer} ${isCorrect ? 'es correcto!' : 'es incorrecto!'} ${feedback.es}`}
               </span>
             )}
           </h2>
-          {currentView === 'statement' && <p className="text-sm text-gray-500">{stranslation}</p>}
-          {currentView === 'question' && <p className="text-sm text-gray-500">{qtranslation}</p>}
+          {currentView === 'statement' && <p className="text-sm text-gray-500">{statement.en}</p>}
+          {currentView === 'question' && <p className="text-sm text-gray-500">{question.en}</p>}
         </span>
       </div>
       <div className='flex items-center justify-center mt-6'>

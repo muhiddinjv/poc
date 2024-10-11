@@ -4,9 +4,21 @@ import Progress from "./Progress";
 import QuizResults from "./QuizResults";
 import TopBar from "../../../components/TopBar";
 import { useQuizState } from "./QuizState";
-import { story1Statements, story1Questions } from "./storydata";
+import { lessons, statements, questions } from "../../../data";
+import { useParams } from "react-router-dom";
 
 export default function QuizPage({ shuffleQuestions = false }) {
+  const { lessonId } = useParams();
+  
+  // Find the lesson by id
+  const { statementIds } = lessons.find(
+    (lesson) => lesson.id === parseInt(lessonId, 10)
+  );
+
+  // Filter statements and questions based on the lesson's statementIds
+  const filteredStatements = statements.filter((statement) => statementIds.includes(statement.id));
+  const filteredQuestions = questions.filter((question) => statementIds.includes(question.statementId));
+
   const quizState = useQuizState(shuffleQuestions);
   const {
     score,
@@ -27,22 +39,25 @@ export default function QuizPage({ shuffleQuestions = false }) {
 
   const [showStatement, setShowStatement] = useState(true);
 
+  // Calculate total points for the lesson
   const maxPoints = useMemo(() => {
-    return story1Questions.reduce((total, question) => total + (parseInt(question.point, 10) || 0), 0);
-  }, []);
+    return filteredQuestions.reduce((total, question) => total + (parseInt(question.point, 10) || 0), 0);
+  }, [filteredQuestions]);
 
-  const totalQuestions = story1Questions.length;
+  const totalQuestions = filteredQuestions.length;
 
-  const currentStatement = story1Statements[currentStatementIndex];
+  // Get the current statement and questions for the current statement
+  const currentStatement = filteredStatements[currentStatementIndex];
   const currentQuestions = useMemo(() => 
-    story1Questions.filter(q => q.statementId === currentStatement.id),
-    [currentStatement.id]
+    filteredQuestions.filter(q => q.statementId === currentStatement.id),
+    [currentStatement.id, filteredQuestions]
   );
   const currentQuestion = currentQuestions[currentQuestionIndex];
 
+  // Overall question index for progress
   const overallQuestionIndex = useMemo(() => {
-    return story1Questions.findIndex(q => q.id === currentQuestion.id);
-  }, [currentQuestion.id]);
+    return filteredQuestions.findIndex(q => q.id === currentQuestion.id);
+  }, [currentQuestion.id, filteredQuestions]);
 
   useEffect(() => {
     if (currentQuestionIndex === 0) {
@@ -52,22 +67,22 @@ export default function QuizPage({ shuffleQuestions = false }) {
 
   const handleQuestionAnswered = (answer) => {
     setSelectedAnswer(answer);
-    const correctAnswer = currentQuestion.answer;
+    const correctAnswer = currentQuestion.answer.es;
     const points = parseInt(currentQuestion.point, 10) || 0;
 
     if (answer.toLowerCase().trim() === correctAnswer.toLowerCase().trim()) {
-      setScore(prevScore => ({ correct: prevScore.correct + 1 }));
-      setTotalPoints(prevPoints => prevPoints + points);
+      setScore((prevScore) => ({ correct: prevScore.correct + 1 }));
+      setTotalPoints((prevPoints) => prevPoints + points);
     }
   };
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
     if (currentQuestionIndex < currentQuestions.length - 1) {
-      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setShowStatement(false);
-    } else if (currentStatementIndex < story1Statements.length - 1) {
-      setCurrentStatementIndex(prevIndex => prevIndex + 1);
+    } else if (currentStatementIndex < filteredStatements.length - 1) {
+      setCurrentStatementIndex((prevIndex) => prevIndex + 1);
       setCurrentQuestionIndex(0);
       setShowStatement(true);
     } else {
@@ -97,9 +112,9 @@ export default function QuizPage({ shuffleQuestions = false }) {
   }
 
   return (
-    <div className="bg-purple-500 min-h-screen flex flex-col justify-center items-center">
-      <div className="min-h-screen bg-white shadow-lg max-w-lg w-full text-center pb-8">
-        <TopBar/>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-purple-500">
+      <div className="w-full max-w-lg min-h-screen pb-8 text-center bg-white shadow-lg">
+        <TopBar />
         <Progress current={overallQuestionIndex + 1} total={totalQuestions} />
         <Question
           statementObj={currentStatement}

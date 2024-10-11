@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Rating, State, generatorParameters, fsrs } from "ts-fsrs";
-import { story1words } from "./vocabulary";
+import { story1words } from "../../data";
 import Speech from "react-text-to-speech";
 
 function Skeleton() {
