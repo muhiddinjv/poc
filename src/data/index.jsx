@@ -1912,7 +1912,7 @@ export const questions = [
       es: "no",
     },
     feedback:{
-      es:  "El Enrique no dice: 'Tengo un dolor de cabeza.'. El jinete dice: 'Tengo un dolor de cabeza.'",
+      es:  "Enrique no dice: 'Tengo un dolor de cabeza.'. El jinete dice: 'Tengo un dolor de cabeza.'",
     },
     explanation:{
       en: "",
@@ -1931,7 +1931,7 @@ export const questions = [
       es: "jinete",
     },
     feedback:{
-      es:  "El Enrique no dice: 'Tengo un dolor de cabeza.'. El jinete dice: 'Tengo un dolor de cabeza.'",
+      es:  "Enrique no dice: 'Tengo un dolor de cabeza.'. El jinete dice: 'Tengo un dolor de cabeza.'",
     },
     explanation:{
       en: "",
