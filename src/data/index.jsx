@@ -2041,6 +2041,32 @@ export const steps1 = [
   },
 ];
 
+export const stepsHome = [
+  {
+    content: <h2 className="text-xl">Let's begin our journey!</h2>,
+    placement: "center",
+    target: "body",
+  },
+  {
+    content: <h2>Here you can learn all the words for the story! Please, do not skip this step!</h2>,
+    placement: "bottom",
+    target: "#learn-1",
+    title: "First step: Learn the words",
+  },
+  {
+    content: <h2>Here you can answer questions about the story! Please, answer all the questions!</h2>,
+    placement: "bottom",
+    target: "#play-1",
+    title: "Second step: Answer the questions",
+  },
+  {
+    content: <h2>Read the full story to see how much you've learned & to enjoy your progress!</h2>,
+    placement: "bottom",
+    target: "#read-1",
+    title: "Third step: Read the story",
+  },
+];
+
 export const stepsWords = [
   {
     content: <h2 className="text-xl">Let's learn new words!</h2>,
@@ -2072,81 +2098,7 @@ export const stepsWords = [
   },
 ];
 
-export const stepsHome = [
-  {
-    content: <h2 className="text-xl">Let's begin our journey!</h2>,
-    placement: "center",
-    target: "body",
-  },
-  {
-    content: <h2>Here you can learn all the words for the story! Please, do not skip this step!</h2>,
-    placement: "bottom",
-    target: "#learn-1",
-    title: "First step: Learn the words",
-  },
-  {
-    content: <h2>Here you can answer questions about the story! Please, answer all the questions!</h2>,
-    placement: "bottom",
-    target: "#play-1",
-    title: "Second step: Answer the questions",
-  },
-  {
-    content: <h2>Read the full story to see how much you've learned & to enjoy your progress!</h2>,
-    placement: "bottom",
-    target: "#read-1",
-    title: "Third step: Read the story",
-  },
-];
-
 export const story1words = [
-  {
-    id: 1,
-    front: "Sin cabeza",
-    back: "without head / headless",
-    image: "/img/headless-small.jpg",
-    difficulty: 0,
-    due: new Date().toLocaleString(),
-    elapsed_days: 0,
-    lapses: 0,
-    last_review: null,
-    reps: 0,
-    scheduled_days: 0,
-    stability: 0,
-    state: 0,
-  },
-  {
-    id: 2,
-    front: "Con cabeza",
-    back: "with a head",
-    image: "/img/headless-small.jpg",
-    difficulty: 0,
-    due: new Date().toLocaleString(),
-    elapsed_days: 0,
-    lapses: 0,
-    last_review: null,
-    reps: 0,
-    scheduled_days: 0,
-    stability: 0,
-    state: 0,
-  },
-  {
-    id: 3,
-    front: "Yo soy",
-    back: "I am",
-    image: "/img/horseman.jpg",
-    difficulty: 0,
-    due: new Date().toLocaleString(),
-    elapsed_days: 0,
-    lapses: 0,
-    last_review: null,
-    reps: 0,
-    scheduled_days: 0,
-    stability: 0,
-    state: 0,
-  },
-];
-
-export const story1words1 = [
   {
     id: 1,
     front: "Sin cabeza",
@@ -2572,6 +2524,54 @@ export const story1words1 = [
     front: "Animales",
     back: "Animals",
     image: "/img/animals.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+];
+
+export const story1wordsTest = [
+  {
+    id: 1,
+    front: "Sin cabeza",
+    back: "without head / headless",
+    image: "/img/headless-small.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+  {
+    id: 2,
+    front: "Con cabeza",
+    back: "with a head",
+    image: "/img/headless-small.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+  {
+    id: 3,
+    front: "Yo soy",
+    back: "I am",
+    image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
     elapsed_days: 0,
