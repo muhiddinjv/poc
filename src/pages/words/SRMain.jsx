@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Rating, State, generatorParameters, fsrs } from "ts-fsrs";
 import { story1words } from "../../data";
 import Speech from "react-text-to-speech";
+import moment from "moment";
 
 function Skeleton() {
   return (
@@ -26,17 +27,17 @@ const Scheduler = {
   f: fsrs(generatorParameters({ initial_stability: 0.5 })),
 
   scheduleCard: (card, rating) => {
-    const reviewDate = new Date();
-    const schedulingResults = Scheduler.f.repeat(card, reviewDate);
+    const reviewDate = moment();
+    const schedulingResults = Scheduler.f.repeat(card, reviewDate.toDate());
     const result = schedulingResults[rating];
 
     return {
       ...card,
       difficulty: result.card.difficulty,
-      due: result.card.due.toISOString(), // Store as ISO string for consistency
+      due: moment(result.card.due).valueOf(),
       elapsed_days: result.card.elapsed_days,
       lapses: rating === Rating.Again ? card.lapses + 1 : card.lapses,
-      last_review: reviewDate.toISOString(),
+      last_review: reviewDate.valueOf(),
       reps: result.card.reps + 1,
       scheduled_days: result.card.scheduled_days,
       stability: result.card.stability,
@@ -44,32 +45,23 @@ const Scheduler = {
     };
   },
 
-  // Function to get the interval until the next review
   getNextReviewInterval: (card, rating) => {
-    const reviewDate = new Date();
-    const schedulingResults = Scheduler.f.repeat(card, reviewDate);
+    const reviewDate = moment();
+    const schedulingResults = Scheduler.f.repeat(card, reviewDate.toDate());
     const result = schedulingResults[rating];
-    const diffMs = new Date(result.card.due) - reviewDate;
+    const diffMs = moment(result.card.due).diff(reviewDate);
     return Scheduler.formatInterval(diffMs);
   },
 
-  // Format the interval as a human-readable string
   formatInterval: (ms) => {
-    const seconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(days / 365);
-
-    if (years > 0) return `${years}y`;
-    if (months > 0) return `${months}mo`;
-    if (weeks > 0) return `${weeks}w`;
-    if (days > 0) return `${days}d`;
-    if (hours > 0) return `${hours}h`;
-    if (minutes > 0) return `${minutes}m`;
-    return `${seconds}s`;
+    const duration = moment.duration(ms);
+    if (duration.asYears() >= 1) return `${Math.floor(duration.asYears())}y`;
+    if (duration.asMonths() >= 1) return `${Math.floor(duration.asMonths())}mo`;
+    if (duration.asWeeks() >= 1) return `${Math.floor(duration.asWeeks())}w`;
+    if (duration.asDays() >= 1) return `${Math.floor(duration.asDays())}d`;
+    if (duration.asHours() >= 1) return `${Math.floor(duration.asHours())}h`;
+    if (duration.asMinutes() >= 1) return `${Math.floor(duration.asMinutes())}m`;
+    return `${Math.floor(duration.asSeconds())}s`;
   },
 };
 
@@ -120,12 +112,12 @@ const GradeButton = ({
 };
 
 const ReviewComplete = ({ nextReviewDate }) => (
-  <div>
+  <div className="my-6">
     <div className="text-center text-2xl font-semibold text-green-600">
       Review Complete!
     </div>
-    <div className="pt-4 text-center">
-      Next review: {nextReviewDate.toLocaleString()}
+    <div className="pt-2 text-center">
+      Next review: {nextReviewDate ? moment(nextReviewDate).format('HH:mm:ss, MMM Do YYYY') : 'No upcoming reviews'}
     </div>
   </div>
 );
@@ -193,7 +185,6 @@ const CardReview = ({
   );
 };
 
-
 const GradeButtons = ({ handleGrade, intervals }) => (
   <div className="flex justify-center w-full gap-2">
     <GradeButton
@@ -241,12 +232,15 @@ const SRMain = () => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
 
-  // Function to get due cards sorted by due date
   const getDueCards = (cards) => {
-    const now = new Date();
+    const now = moment();
     return cards
-      .filter((card) => new Date(card.due) <= now)
-      .sort((a, b) => new Date(a.due) - new Date(b.due));
+      .filter((card) => moment(card.due).isSameOrBefore(now))
+      .sort((a, b) => moment(a.due).diff(moment(b.due)));
+  };
+
+  const getAllCardsSortedByDueDate = (cards) => {
+    return cards.sort((a, b) => moment(a.due).diff(moment(b.due)));
   };
 
   useEffect(() => {
@@ -273,11 +267,9 @@ const SRMain = () => {
     setShowAnswer(false);
   };
 
-  // Recompute dueCards whenever cards change
-  const dueCards = getDueCards(cards);
-  const nextReviewDate = dueCards.length > 0 ? new Date(dueCards[0].due) : null;
+  const allCardsSorted = getAllCardsSortedByDueDate(cards);
+  const nextReviewDate = allCardsSorted.length > 0 ? moment(allCardsSorted[0].due).valueOf() : null;
 
-  // Calculate intervals for the current card
   const intervals = currentCard
     ? {
         [Rating.Again]: Scheduler.getNextReviewInterval(currentCard, Rating.Again),

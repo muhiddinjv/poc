@@ -547,7 +547,7 @@ export const stories = [
     },
     cefrLevel: 1,
     availableLanguages: ["en", "es", "ar", "ru", "uz"],
-    img: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headless_horseman.jpg",
+    img: "/img/headless_horseman.jpg",
     defaultLanguage: "en",
     order: 1
   },
@@ -638,56 +638,56 @@ export const statements = [
   {
     id: "8c126070-6cda-4b76-8ddc-dfee953a2dff",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/horseman.jpg",
+    image: "/img/horseman.jpg",
     statement: {es: "Hay un jinete", en: "There is a horseman",},
     order: 1
   },
   {
     id: "3d3a5fe2-2308-4e35-aa7c-70a4916cb9ee",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headless_horseman.jpg", 
+    image: "/img/headless_horseman.jpg", 
     statement: {es: "Hay un jinete sin cabeza", en: "There is a horseman without head",},
     order: 2
   },
   {
     id: "540d7cfe-7351-4d79-9739-f51722b796f3",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headless_horseman.jpg", 
+    image: "/img/headless_horseman.jpg", 
     statement: {es: "El jinete es famoso", en: "The horseman is famous",},
     order: 3
   },
   {
     id: "3ebda685-1915-4748-a1aa-259550e00e92",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headless_horseman_eseech.jpg", 
+    image: "/img/headless_horseman_eseech.jpg", 
     statement: {es: "Yo soy el jinete", en: "I am the horseman",},
     order: 4
   },
   {
     id: "73d94834-3309-4114-bbd7-b1c9bac22e17",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/problem.jpg", 
+    image: "/img/problem.jpg", 
     statement: {es: "El jinete tiene un problema.", en: "The horseman has a problem.",},
     order: 5
   },
   {
     id: "0b8e3531-300a-4fcb-8d59-549bdeb82a7b",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/he_goes.jpg", 
+    image: "/img/he_goes.jpg", 
     statement: {es: "Él va al doctor.", en: "He goes to the doctor.",},
     order: 6
   },
   {
     id: "f1a9f37d-e919-4046-a754-f5d17d8679cd",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/doctor.jpg", 
+    image: "/img/doctor.jpg", 
     statement: {es: "El doctor dice: '¿Qué es tu problema?'", en: "The doctor says, 'Whats your problem?'",},
     order: 7
   },
   {
     id: "6fe0021a-07cf-4439-ab45-9bbb56748068",
     storyId: 1,
-    image: "https://raw.githubusercontent.com/muhiddinjv/poc/refs/heads/main/public/img/headache.jpg", 
+    image: "/img/headache.jpg", 
     statement: {es: "El jinete sin cabeza dice: 'Tengo un dolor de cabeza.'", en: "The headless horseman says, 'I have a headache.'",},
     order: 8
   },
@@ -2041,6 +2041,37 @@ export const steps1 = [
   },
 ];
 
+export const stepsWords = [
+  {
+    content: <h2 className="text-xl">Let's learn new words!</h2>,
+    placement: "center",
+    target: "body",
+  },
+  {
+    content: <h2>Click Again if you dont know the word in the card above. It will come up again later.</h2>,
+    placement: "bottom",
+    target: "#again",
+    title: "Again = I dont know it at all",
+  },
+  {
+    content: <h2>Click Hard if it took you more than 1 minute to remember the word</h2>,
+    placement: "bottom",
+    target: "#hard",
+    title: "Hard = I know it only 10% of the time",
+  },
+  {
+    content: <h2>Click Good if it took you less than 1 minute to remember the word</h2>,
+    placement: "bottom",
+    target: "#good",
+    title: "Good = I know it 50% of the time",
+  },{
+    content: <h2>Click Easy if it took you less than 10 seconds to remember the word</h2>,
+    placement: "bottom",
+    target: "#easy",
+    title: "Easy = I know it 100% of the time",
+  },
+];
+
 export const stepsHome = [
   {
     content: <h2 className="text-xl">Let's begin our journey!</h2>,
@@ -2068,6 +2099,54 @@ export const stepsHome = [
 ];
 
 export const story1words = [
+  {
+    id: 1,
+    front: "Sin cabeza",
+    back: "without head / headless",
+    image: "/img/headless-small.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+  {
+    id: 2,
+    front: "Con cabeza",
+    back: "with a head",
+    image: "/img/headless-small.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+  {
+    id: 3,
+    front: "Yo soy",
+    back: "I am",
+    image: "/img/horseman.jpg",
+    difficulty: 0,
+    due: new Date().toLocaleString(),
+    elapsed_days: 0,
+    lapses: 0,
+    last_review: null,
+    reps: 0,
+    scheduled_days: 0,
+    stability: 0,
+    state: 0,
+  },
+];
+
+export const story1words1 = [
   {
     id: 1,
     front: "Sin cabeza",
