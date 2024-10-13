@@ -2101,8 +2101,11 @@ export const stepsWords = [
 export const story1words = [
   {
     id: 1,
-    front: "Sin cabeza",
-    back: "without head / headless",
+    text:   {
+      es: "Sin cabeza",
+      en: "without head / headless",
+      ar: "بدون رأس"
+    },
     image: "/img/headless-small.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2116,8 +2119,11 @@ export const story1words = [
   },
   {
     id: 2,
-    front: "Con cabeza",
-    back: "with a head",
+    text: {
+      es: "Con cabeza",
+      en: "with a head",
+      ar: "مع رأس"
+    },
     image: "/img/headless-small.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2131,8 +2137,11 @@ export const story1words = [
   },
   {
     id: 3,
-    front: "Yo soy",
-    back: "I am",
+    text:    {
+      es: "Yo soy",
+      en: "I am",
+      ar: "أنا"
+    },
     image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2146,8 +2155,11 @@ export const story1words = [
   },
   {
     id: 4,
-    front: "Tu eres",
-    back: "You are",
+    text: {
+      es: "Tu eres",
+      en: "You are",
+      ar: "أنت"
+    },
     image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2161,8 +2173,11 @@ export const story1words = [
   },
   {
     id: 5,
-    front: "Ella es",
-    back: "She is",
+    text:{
+      es: "Ella es",
+      en: "She is",
+      ar: "هي"
+    },
     image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2176,8 +2191,11 @@ export const story1words = [
   },
   {
     id: 6,
-    front: "El es",
-    back: "He is",
+    text:{
+      es: "El es",
+      en: "He is",
+      ar: "هو"
+    },
     image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2191,8 +2209,11 @@ export const story1words = [
   },
   {
     id: 7,
-    front: "Chica",
-    back: "Girl",
+    text:{
+      es: "Chica",
+      en: "Girl",
+      ar: "فتاة"
+    },
     image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2206,8 +2227,11 @@ export const story1words = [
   },
   {
     id: 8,
-    front: "Quién",
-    back: "who",
+    text:{
+      es: "Quién",
+      en: "who",
+      ar: "من"
+    },
     image: "/img/who.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2221,8 +2245,11 @@ export const story1words = [
   },
   {
     id: 9,
-    front: "Qué",
-    back: "What",
+    text:{
+      es: "Qué",
+      en: "What",
+      ar: "ماذا"
+    },
     image: "/img/what.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2236,8 +2263,11 @@ export const story1words = [
   },
   {
     id: 10,
-    front: "Cómo",
-    back: "How",
+    text:{
+      es: "Cómo",
+      en: "How",
+      ar: "كيف"
+    },
     image: "/img/what.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2251,8 +2281,11 @@ export const story1words = [
   },
   {
     id: 11,
-    front: "Hay",
-    back: "There is",
+    text:{
+      es: "Hay",
+      en: "There is",
+      ar: "هناك"
+    },
     image: "/img/there_is.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2266,8 +2299,11 @@ export const story1words = [
   },
   {
     id: 12,
-    front: "Él tiene un problema.",
-    back: "He has a problem.",
+    text:{
+      es: "Él tiene un problema.",
+      en: "He has a problem.",
+      ar: "لديه مشكلة"
+    },
     image: "/img/problem.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2281,8 +2317,11 @@ export const story1words = [
   },  
   {
     id: 13,
-    front: "Está en Nueva York",
-    back: "He is in New York",
+    text:{
+      es: "Está en Nueva York",
+      en: "He is in New York",
+      ar: "هو في نيويورك"
+    },
     image: "/img/nyc.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2296,8 +2335,11 @@ export const story1words = [
   },
   {
     id: 14,
-    front: "Él va a",
-    back: "He goes to",
+    text:{
+      es: "Él va a",
+      en: "He goes to",
+      ar: "هو يذهب إلى"
+    },
     image: "/img/he_goes.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2311,8 +2353,11 @@ export const story1words = [
   },
   {
     id: 15,
-    front: "Al doctor",
-    back: "The doctor",
+    text:{
+      es: "Al doctor",
+      en: "The doctor",
+      ar: "إلى الطبيب"
+    },
     image: "/img/doctor.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2326,8 +2371,11 @@ export const story1words = [
   },
   {
     id: 16,
-    front: "Pregunta",
-    back: "Ask(s)",
+    text:{
+      es: "Pregunta",
+      en: "Ask(s)",
+      ar: "يسأل"
+    },
     image: "/img/asks.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2341,8 +2389,11 @@ export const story1words = [
   },
   {
     id: 16,
-    front: "Tu",
-    back: "Your",
+    text:{
+      es: "Tu",
+      en: "Your",
+      ar: "لك"
+    },
     image: "/img/you.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2356,8 +2407,11 @@ export const story1words = [
   },
   {
     id: 17,
-    front: "Él dice",
-    back: "He says",
+    text:{
+      es: "Él dice",
+      en: "He says",
+      ar: "يقول"
+    },
     image: "/img/he_says.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2371,8 +2425,11 @@ export const story1words = [
   },
   {
     id: 18,
-    front: "Yo tengo",
-    back: "I have",
+    text: {
+      es: "Yo tengo",
+      en: "I have",
+      ar: "أنا لدي"
+    },
     image: "/img/i_have.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2386,8 +2443,11 @@ export const story1words = [
   },
   {
     id: 19,
-    front: "Dolor de",
-    back: "Pain of",
+    text:{
+      es: "Dolor de",
+      en: "Pain of",
+      ar: "ألم في"
+    },
     image: "/img/i_have.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2401,8 +2461,11 @@ export const story1words = [
   },
   {
     id: 20,
-    front: "Grande",
-    back: "Big",
+    text:{
+      es: "Grande",
+      en: "Big",
+      ar: "كبير"
+    },
     image: "/img/big.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2416,8 +2479,11 @@ export const story1words = [
   },
   {
     id: 21,
-    front: "Casa",
-    back: "House",
+    text:  {
+      es: "Casa",
+      en: "House",
+      ar: "بيت"
+    },
     image: "/img/house.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2431,8 +2497,11 @@ export const story1words = [
   },
   {
     id: 22,
-    front: "Hombre rico",
-    back: "Rich man",
+    text:{
+      es: "Hombre rico",
+      en: "Rich man",
+      ar: "رجل غني"
+    },
     image: "/img/rich_man.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2446,8 +2515,11 @@ export const story1words = [
   },
   {
     id: 23,
-    front: "Mil millones",
-    back: "Billion",
+    text:{
+      es: "Mil millones",
+      en: "Billion",
+      ar: "مليار"
+    },
     image: "/img/billion.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2461,8 +2533,11 @@ export const story1words = [
   },
   {
     id: 24,
-    front: "¿Puedes ayudarme?",
-    back: "Can you help me?",
+    text:{
+      es: "¿Puedes ayudarme?",
+      en: "Can you help me?",
+      ar: "هل يمكنك مساعدتي؟"
+    },
     image: "/img/you.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2476,8 +2551,11 @@ export const story1words = [
   },
   {
     id: 25,
-    front: "No puedo ayudar",
-    back: "I cannot help",
+    text:{
+      es: "No puedo ayudar",
+      en: "I cannot help",
+      ar: "لا أستطيع المساعدة"
+    },
     image: "/img/i_cant_help.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2491,8 +2569,11 @@ export const story1words = [
   },
   {
     id: 26,
-    front: "Puedo ayudar",
-    back: "I can help",
+    text: {
+      es: "Puedo ayudar",
+      en: "I can help",
+      ar: "أستطيع المساعدة"
+    },
     image: "/img/help.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2506,8 +2587,11 @@ export const story1words = [
   },
   {
     id: 27,
-    front: "Pequeño",
-    back: "Small",
+    text:{
+      es: "Pequeño",
+      en: "Small",
+      ar: "صغير"
+    },
     image: "/img/small.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
@@ -2521,57 +2605,12 @@ export const story1words = [
   },
   {
     id: 28,
-    front: "Animales",
-    back: "Animals",
+    text:{
+      es: "Animales",
+      en: "Animals",
+      ar: "حيوانات"
+    },
     image: "/img/animals.jpg",
-    difficulty: 0,
-    due: new Date().toLocaleString(),
-    elapsed_days: 0,
-    lapses: 0,
-    last_review: null,
-    reps: 0,
-    scheduled_days: 0,
-    stability: 0,
-    state: 0,
-  },
-];
-
-export const story1wordsTest = [
-  {
-    id: 1,
-    front: "Sin cabeza",
-    back: "without head / headless",
-    image: "/img/headless-small.jpg",
-    difficulty: 0,
-    due: new Date().toLocaleString(),
-    elapsed_days: 0,
-    lapses: 0,
-    last_review: null,
-    reps: 0,
-    scheduled_days: 0,
-    stability: 0,
-    state: 0,
-  },
-  {
-    id: 2,
-    front: "Con cabeza",
-    back: "with a head",
-    image: "/img/headless-small.jpg",
-    difficulty: 0,
-    due: new Date().toLocaleString(),
-    elapsed_days: 0,
-    lapses: 0,
-    last_review: null,
-    reps: 0,
-    scheduled_days: 0,
-    stability: 0,
-    state: 0,
-  },
-  {
-    id: 3,
-    front: "Yo soy",
-    back: "I am",
-    image: "/img/horseman.jpg",
     difficulty: 0,
     due: new Date().toLocaleString(),
     elapsed_days: 0,

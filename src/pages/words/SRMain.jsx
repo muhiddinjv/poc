@@ -131,28 +131,30 @@ const CardReview = ({
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const frontLanguage = 'es';
+  const backLanguage = 'en';
 
   return (
     <div className="w-full h-full flex flex-col justify-between p-4">
       <div>
         <div className="text-lg text-blue-500 font-semibold flex justify-center items-center">
           <Speech
-            text={currentCard.front}
+            text={currentCard.text[frontLanguage]}
             voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
             lang="es-US"
             rate={0.8}
             stopBtn={false}
-          />
-          <span className="ml-2">{currentCard.front}</span>
+          /> {/* CARD FRONT */}
+          <span className="ml-2">{currentCard.text[frontLanguage]}</span>
         </div>
         {showAnswer && (
           <div className="flex flex-col items-center">
             {!imageLoaded && !imageError && <Skeleton />}
 
             {currentCard.image && !imageError && (
-              <img
+              <img 
                 src={currentCard.image}
-                alt={currentCard.back}
+                alt={currentCard.text[backLanguage]}
                 className={`bg-gray-200 mt-4 text-center text-gray-700 object-fit w-11/12 aspect-square rounded-lg ${!imageLoaded && "hidden"}`}
                 onLoad={()=>setImageLoaded(true)}
                 onError={()=>setImageError(true)}
@@ -164,7 +166,7 @@ const CardReview = ({
             )}
 
             <div className="mt-4 text-center text-gray-700">
-              {currentCard.back}
+              {currentCard.text[backLanguage]}
             </div>
           </div>
         )}
@@ -227,10 +229,11 @@ const GradeButtons = ({ handleGrade, intervals }) => (
 );
 
 const SRMain = () => {
-  const [cards, setCards] = useState(CardStorage.loadCards());
+  const [cards, setCards] = useState([]);
   const [reviewComplete, setReviewComplete] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
   const getDueCards = (cards) => {
     const now = moment();
@@ -244,16 +247,28 @@ const SRMain = () => {
   };
 
   useEffect(() => {
-    CardStorage.saveCards(cards);
-    const dueCards = getDueCards(cards);
-    if (dueCards.length === 0) {
-      setReviewComplete(true);
-      setCurrentCard(null);
+    const storedCards = CardStorage.loadCards();
+    if (storedCards && storedCards.length > 0) {
+      setCards(storedCards);
     } else {
-      setReviewComplete(false);
-      setCurrentCard(dueCards[0]);
+      setCards(story1words); // Ensure the fallback story is used on first load
     }
-  }, [cards]);
+    setLoading(false); // Mark loading as complete after cards are loaded
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      CardStorage.saveCards(cards); 
+      const dueCards = getDueCards(cards);
+      if (dueCards.length === 0) {
+        setReviewComplete(true);
+        setCurrentCard(null);
+      } else {
+        setReviewComplete(false);
+        setCurrentCard(dueCards[0]);
+      }
+    }
+  }, [cards, loading]);
 
   const handleGrade = (rating) => {
     if (!currentCard) return;
@@ -266,6 +281,10 @@ const SRMain = () => {
     setCards(updatedCards);
     setShowAnswer(false);
   };
+
+  if (loading) {
+    return <div className="text-center">Loading...</div>;
+  }
 
   const allCardsSorted = getAllCardsSortedByDueDate(cards);
   const nextReviewDate = allCardsSorted.length > 0 ? moment(allCardsSorted[0].due).valueOf() : null;
