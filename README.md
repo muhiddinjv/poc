@@ -2,7 +2,8 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- [Web Speech API supported voices](https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages)
+- [speech-to-text-languages](https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages)
+- [web-speech-to-text-voices](https://github.com/HadrienGardeur/web-speech-recommended-voices?tab=readme-ov-file)
 - [react speech recognition docs](https://github.com/JamesBrill/react-speech-recognition/blob/HEAD/docs/API.md)
 
 Currently, two official plugins are available:
@@ -11,7 +12,6 @@ Currently, two official plugins are available:
 - [whisper_ai_asr_video](https://www.youtube.com/watch?v=_spinzpEeFM)
 - [open_ai_pricing](https://openai.com/api/pricing/)
 - [supabase_10k_singups_hack](https://www.youtube.com/watch?v=5T0SpSvptQ0)
-- [web-speech-voices](https://github.com/HadrienGardeur/web-speech-recommended-voices?tab=readme-ov-file)
 - https://stockcake.com/s/boy?ratio=square
 - https://www.npmjs.com/package/ts-fsrs
 - https://www.npmjs.com/package/fsrs.js

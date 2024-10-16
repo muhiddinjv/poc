@@ -131,7 +131,7 @@ const CardReview = ({
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const frontLanguage = 'es';
+  const frontLanguage = 'ar';
   const backLanguage = 'en';
 
   return (
@@ -140,8 +140,9 @@ const CardReview = ({
         <div className="text-lg text-blue-500 font-semibold flex justify-center items-center">
           <Speech
             text={currentCard.text[frontLanguage]}
-            voiceURI="Microsoft Paloma Online (Natural) - Spanish (United States)"
-            lang="es-US"
+            voiceURI="Microsoft Shakir Online (Natural) - Arabic (Egypt)"
+            //Microsoft Shakir Online (Natural) - Arabic (Egypt)
+            lang="ar-EG" //es-US
             rate={0.8}
             stopBtn={false}
           /> {/* CARD FRONT */}

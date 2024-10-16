@@ -15,15 +15,15 @@ export default function QuizzesPage() {
           <TopBar />
           <div className="p-6">
             <h1 className="text-2xl font-bold text-blue-600 mb-6 text-center">Select a Lesson</h1>
-            <div className="space-y-4">
+            <div className="space-y-4 flex flex-col">
               {lessons.map((lesson, index) => (
-                <div 
+                <button 
                   key={lesson.id}
                   onClick={() => handleLessonClick(lesson.id)}
                   className="p-2 text-lg font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-lg cursor-pointer transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   Lesson {index + 1}: {lesson.title['es']}
-                </div>
+                </button>
               ))}
             </div>
           </div>
